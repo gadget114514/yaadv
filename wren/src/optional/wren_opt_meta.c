@@ -75,7 +75,8 @@ WrenForeignMethodFn wrenMetaBindForeignMethod(WrenVM* vm,
                                               bool isStatic,
                                               const char* signature)
 {
-  // There is only one foreign method in the meta module.
+
+	// There is only one foreign method in the meta module.
   ASSERT(strcmp(className, "Meta") == 0, "Should be in Meta class.");
   ASSERT(isStatic, "Should be static.");
   

@@ -86,7 +86,7 @@ class ScriptReader {
 #include "SCX.h"
 #include "ScriptReaderJSON.h"
 #include "ScriptReaderWREN.h"
-#include "ScriptReaderYASL.h"
+//#include "ScriptReaderYASL.h"
 
 
 #endif

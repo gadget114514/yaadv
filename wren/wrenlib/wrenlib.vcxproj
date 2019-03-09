@@ -90,7 +90,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>../src/include;../src/optional;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../src/include;../src/optional;../src/vm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -158,6 +158,8 @@
     <ClInclude Include="..\src\mini\stat.h" />
     <ClInclude Include="..\src\mini\userev.h" />
     <ClInclude Include="..\src\mini\vm.h" />
+    <ClInclude Include="..\src\optional\wren_opt_meta.h" />
+    <ClInclude Include="..\src\optional\wren_opt_random.h" />
     <ClInclude Include="..\src\vm\wren_common.h" />
     <ClInclude Include="..\src\vm\wren_compiler.h" />
     <ClInclude Include="..\src\vm\wren_core.h" />
@@ -182,6 +184,8 @@
     <ClCompile Include="..\src\mini\timer.c" />
     <ClCompile Include="..\src\mini\userev.c" />
     <ClCompile Include="..\src\mini\vm.c" />
+    <ClCompile Include="..\src\optional\wren_opt_meta.c" />
+    <ClCompile Include="..\src\optional\wren_opt_random.c" />
     <ClCompile Include="..\src\vm\wren_compiler.c" />
     <ClCompile Include="..\src\vm\wren_core.c" />
     <ClCompile Include="..\src\vm\wren_debug.c" />
@@ -209,6 +213,10 @@
     <None Include="..\src\mini\scheduler.wren.inc" />
     <None Include="..\src\mini\test.wren" />
     <None Include="..\src\mini\timer.wren.inc" />
+    <None Include="..\src\optional\wren_opt_meta.wren" />
+    <None Include="..\src\optional\wren_opt_meta.wren.inc" />
+    <None Include="..\src\optional\wren_opt_random.wren" />
+    <None Include="..\src\optional\wren_opt_random.wren.inc" />
     <None Include="..\src\vm\wren_core.wren" />
     <None Include="..\src\vm\wren_core.wren.inc" />
   </ItemGroup>

@@ -113,7 +113,8 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
       <Inputs>$(TargetFileName)</Inputs>
     </CustomBuildStep>
     <Link>
-      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"c:\workspace\cocos\adv\proj.win32\Debug\yasl.lib" "C:\workspace\cocos\adv\proj.win32\Debug\wrenlib.lib" %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\workspace\cocos\yaadv\proj.win32\Debug\wrenlib.lib
+ %(AdditionalOptions)</AdditionalOptions>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">

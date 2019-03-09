@@ -54,10 +54,10 @@ bool AppDelegate::applicationDidFinishLaunching() {
     (CC_TARGET_PLATFORM == CC_PLATFORM_MAC) ||   \
     (CC_TARGET_PLATFORM == CC_PLATFORM_LINUX)
     glview = GLViewImpl::createWithRect(
-        "ADV-PROGRAM", cocos2d::Rect(0, 0, designResolutionSize.width,
+        "YAADV", cocos2d::Rect(0, 0, designResolutionSize.width,
                                      designResolutionSize.height));
 #else
-    glview = GLViewImpl::create("ADV-PROGRAM");
+    glview = GLViewImpl::create("YAADV");
 #endif
     director->setOpenGLView(glview);
   }

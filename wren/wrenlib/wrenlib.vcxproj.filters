@@ -78,6 +78,12 @@
     <ClInclude Include="..\src\vm\wren_vm.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
+    <ClInclude Include="..\src\optional\wren_opt_meta.h">
+      <Filter>ソース ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\optional\wren_opt_random.h">
+      <Filter>ソース ファイル</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -137,6 +143,12 @@
     <ClCompile Include="..\src\vm\wren_vm.c">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\optional\wren_opt_meta.c">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\optional\wren_opt_random.c">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\src\mini\example.wren" />
@@ -166,6 +178,18 @@
     <None Include="..\src\vm\wren_core.wren" />
     <None Include="..\src\vm\wren_core.wren.inc">
       <Filter>ヘッダー ファイル</Filter>
+    </None>
+    <None Include="..\src\optional\wren_opt_meta.wren">
+      <Filter>ソース ファイル</Filter>
+    </None>
+    <None Include="..\src\optional\wren_opt_meta.wren.inc">
+      <Filter>ソース ファイル</Filter>
+    </None>
+    <None Include="..\src\optional\wren_opt_random.wren">
+      <Filter>ソース ファイル</Filter>
+    </None>
+    <None Include="..\src\optional\wren_opt_random.wren.inc">
+      <Filter>ソース ファイル</Filter>
     </None>
   </ItemGroup>
 </Project>
