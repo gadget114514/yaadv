@@ -33,3 +33,6 @@ C++, luaは直接cocos2d APIを叩くことを想定しています。
 
 - html5ではないのでブラウザでは動作しません。
 - android, iosへは移植が必要です。
+
+
+References https://git.oschina.net/SunnyRx/ADV-PROGRAM
