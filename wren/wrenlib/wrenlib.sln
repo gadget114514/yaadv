@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.168
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "wrenlib", "wrenlib.vcxproj", "{7D424F16-CB4C-4639-A4A9-5F36F5B23027}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7D424F16-CB4C-4639-A4A9-5F36F5B23027}.Debug|x64.ActiveCfg = Debug|x64
+		{7D424F16-CB4C-4639-A4A9-5F36F5B23027}.Debug|x64.Build.0 = Debug|x64
+		{7D424F16-CB4C-4639-A4A9-5F36F5B23027}.Debug|x86.ActiveCfg = Debug|Win32
+		{7D424F16-CB4C-4639-A4A9-5F36F5B23027}.Debug|x86.Build.0 = Debug|Win32
+		{7D424F16-CB4C-4639-A4A9-5F36F5B23027}.Release|x64.ActiveCfg = Release|x64
+		{7D424F16-CB4C-4639-A4A9-5F36F5B23027}.Release|x64.Build.0 = Release|x64
+		{7D424F16-CB4C-4639-A4A9-5F36F5B23027}.Release|x86.ActiveCfg = Release|Win32
+		{7D424F16-CB4C-4639-A4A9-5F36F5B23027}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0C19E05C-3D47-4B44-8BAD-81FC511B8F20}
+	EndGlobalSection
+EndGlobal
