@@ -1,0 +1,12 @@
+﻿  wren_opt_meta.c
+  wren_opt_random.c
+  wren_compiler.c
+c:\workspace\cocos\adv\wren\src\vm\wren_compiler.c(715): warning C4244: '関数': '__int64' から 'double' への変換です。データが失われる可能性があります。
+  wren_core.c
+  wren_debug.c
+  wren_primitive.c
+  wren_utils.c
+  wren_value.c
+  wren_vm.c
+  コードを生成中...
+  wren_lib.vcxproj -> C:\workspace\cocos\adv\wren\util\vs2017\lib\..\..\..\lib\wren_static_d.lib

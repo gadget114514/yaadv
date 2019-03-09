@@ -1,0 +1,15 @@
+[
+{"characterid":"boy1",
+"name":"hero1",
+"face":"std","filename":"f001",
+"anchorx":0.5,"anchory":0.0,
+"scalex":0.5,"scaley":0.5
+}
+,
+{"characterid":"boy2",
+"name":"hero2",
+"face":"std","filename":"f002",
+"anchorx":0.5,"anchory":0.0,
+"scalex":0.5,"scaley":0.5
+}
+]

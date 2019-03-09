@@ -1,0 +1,36 @@
+﻿  Cloning libuv...
+  Traceback (most recent call last):
+    File "../../update_deps.py", line 73, in <module>
+      main(sys.argv)
+    File "../../update_deps.py", line 27, in main
+      LIB_UV_DIR
+    File "C:\workspace\cocos\adv\wren\util\util.py", line 71, in run
+      subprocess.check_output(args, cwd=cwd, stderr=subprocess.STDOUT)
+    File "C:\Python27\lib\subprocess.py", line 216, in check_output
+      process = Popen(stdout=PIPE, *popenargs, **kwargs)
+    File "C:\Python27\lib\subprocess.py", line 394, in __init__
+      errread, errwrite)
+    File "C:\Python27\lib\subprocess.py", line 644, in _execute_child
+      startupinfo)
+  WindowsError: [Error 2] 指定されたファイルが見つかりません。
+  Traceback (most recent call last):
+    File "../../build_libuv.py", line 93, in <module>
+      main(sys.argv)
+    File "../../build_libuv.py", line 83, in main
+      build_libuv(arch, out)
+    File "../../build_libuv.py", line 64, in build_libuv
+      build_libuv_windows(arch)
+    File "../../build_libuv.py", line 55, in build_libuv_windows
+      run(args, cwd=LIB_UV_DIR)
+    File "C:\workspace\cocos\adv\wren\util\util.py", line 71, in run
+      subprocess.check_output(args, cwd=cwd, stderr=subprocess.STDOUT)
+    File "C:\Python27\lib\subprocess.py", line 216, in check_output
+      process = Popen(stdout=PIPE, *popenargs, **kwargs)
+    File "C:\Python27\lib\subprocess.py", line 394, in __init__
+      errread, errwrite)
+    File "C:\Python27\lib\subprocess.py", line 644, in _execute_child
+      startupinfo)
+  WindowsError: [Error 267] ディレクトリ名が無効です。
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.CppCommon.targets(128,5): error MSB3073: コマンド "python ../../update_deps.py
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.CppCommon.targets(128,5): error MSB3073: python ../../build_libuv.py -32
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.CppCommon.targets(128,5): error MSB3073: :VCEnd" はコード 1 で終了しました。
