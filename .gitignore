@@ -10,6 +10,7 @@
 # Precompiled Headers
 *.gch
 *.pch
+*.ipch
 
 # Compiled Dynamic libraries
 *.so
@@ -33,3 +34,6 @@
 
 .DS_Store
 Thumbs.db
+
+.vs/*
+*~
