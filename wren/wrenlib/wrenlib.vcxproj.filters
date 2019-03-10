@@ -86,9 +86,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="stdafx.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\mini\example.c">
       <Filter>ソース ファイル</Filter>
     </ClCompile>

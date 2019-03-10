@@ -43,6 +43,8 @@ Thumbs.db
 *.pdb
 
 proj.win32/Debug/*
+proj.win32/Debug.win32/*
+proj.win32/.vs/*
 wren/util/vs2017/lib/obj/Win32/Debug/*
 wren/util/vs2017/wren/obj/Win32/Debug/*
 ./wren/wrenlib/Debug
