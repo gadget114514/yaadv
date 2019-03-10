@@ -41,3 +41,10 @@ Thumbs.db
 *.log
 *.idb
 *.pdb
+
+proj.win32/Debug/*
+wren/util/vs2017/lib/obj/Win32/Debug/*
+wren/util/vs2017/wren/obj/Win32/Debug/*
+./wren/wrenlib/Debug
+
+cocos2d
