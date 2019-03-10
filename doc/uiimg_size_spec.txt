@@ -8,6 +8,7 @@ yaadv/bgimage/black.jpg 1280x720
 yaadv/ui/button_return_down.png 103x53
 yaadv/ui/button_return.png 103x53
 yaadv/ui/charbox_off.png 39x37
+yaadv/ui/config/txt_config.png 222x88
 yaadv/ui/config/bg_config.jpg 1136x640
 yaadv/ui/config/btn_back_normal.png 74x39
 yaadv/ui/config/btn_back_touch.png 77x43
@@ -39,7 +40,9 @@ yaadv/ui/dialog/wait_icon.png 23x12
 yaadv/ui/log/history_bg.png 1136x640
 yaadv/ui/log/history_dialog_box.png 1136x640
 yaadv/ui/popupwindow/bg_popup.png 479x235
-yaadv/ui/saveload/pic_bg.png 149x87
+yaadv/ui/sl/txt_load.png 222x88
+yaadv/ui/sl/txt_save.png 222x88
+yaadv/ui/sl/pic_bg.png 149x87
 yaadv/ui/sl/bg_load.jpg 1136x640
 yaadv/ui/sl/bg_save.jpg 1136x640
 yaadv/ui/sl/btn_button_normal.png 563x129
