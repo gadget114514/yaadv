@@ -15,7 +15,10 @@ class Config {
     //    log(key.c_str());
         return key;
   }
-  std::string operator[](char*key) { return (*this)[std::string(key)]; }
+  std::string operator[](char*key) {
+    std::string s(key);
+    return (*this)[s];
+  }
   std::map<std::string, std::string> vars;
   bool load(std::string data);
   bool loadFile(std::string filename);

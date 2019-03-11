@@ -50,7 +50,6 @@ SaveData::SaveData(int i)
     if (_stageLayer->getBoundingBox().containsPoint(
             this->convertTouchToNodeSpace(t))) {
       onTouchEnded(_number);
-      log("Wow!");
     } else {
     }
   };
@@ -71,7 +70,6 @@ SaveData *SaveData::create(int i) {
 
 void SaveData::updataData(bool isNeedReloadImage) {
   Config &vars = *Config::getInstance();
-  log("Savedata number = %d", _number);
   auto savedata = GameSystem::getInstance()->getGameSavedata(_number);
 
   if (_dataImage != nullptr) {
@@ -104,7 +102,6 @@ void SaveData::updataData(bool isNeedReloadImage) {
           DelayTime::create(0.1f), CallFunc::create([=]() {
             Director::getInstance()->getTextureCache()->reloadTexture(
                 imageFile);
-            log("reloadTexture:%s", imageFile.c_str());
             _dataImage->setTexture(imageFile);
           })));
     }

@@ -18,6 +18,13 @@
 
 USING_NS_CC;
 
+#ifndef CC_CALLBACK_4
+#define CC_CALLBACK_4(__selector__,__target__, ...) std::bind(&__selector__,__target__, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3,std::placeholders::_4, ##__VA_ARGS__)
+#endif
+#ifndef CC_CALLBACK_5
+#define CC_CALLBACK_5(__selector__,__target__, ...) std::bind(&__selector__,__target__, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3,std::placeholders::_4,std::placeholders::_5, ##__VA_ARGS__)
+#endif
+
 using namespace yaadv;
 namespace yaadv {
 
@@ -249,14 +256,12 @@ void GameScene::showImage(std::string &cName, std::string &loc,
                           std::string &face) {
   auto cha = YIM->getYaImg(cName);
   if (!cha) {
-    log("GameScene::displayCharacter: Not found character:%s", cName.c_str());
     return;
   }
   if (std::find(_yaimgs->begin(), _yaimgs->end(), cha) == _yaimgs->end()) {
     _yaimgs->push_back(cha);
   }
   if (cha->getFace(face)) {
-    log("showImage cName = %s, Name = %s", cName.c_str(), cha->name.c_str());
     bool isNeedShow = false;
     if (cha->_sprite) {
       if (cha->currentFace != face && face.compare("") != 0) {
@@ -284,7 +289,7 @@ void GameScene::showImage(std::string &cName, std::string &loc,
       _immediate = false;
     }
   } else {
-    log("GameScene::showImage: Not found face:%s", face.c_str());
+    ;
   }
 }
 
@@ -292,14 +297,12 @@ void GameScene::imageTween(std::string &cName, std::string &loc, float duration,
                            std::string &ease, std::string &face) {
   auto cha = YIM->getYaImg(cName);
   if (!cha) {
-    log("GameScene::displayCharacter: Not found character:%s", cName.c_str());
     return;
   }
   if (std::find(_yaimgs->begin(), _yaimgs->end(), cha) == _yaimgs->end()) {
     _yaimgs->push_back(cha);
   }
   if (cha->getFace(face)) {
-    log("showImage cName = %s, Name = %s", cName.c_str(), cha->name.c_str());
     bool isNeedShow = false;
     if (cha->_sprite) {
       if (cha->currentFace != face && face.compare("") != 0) {
@@ -328,7 +331,7 @@ void GameScene::imageTween(std::string &cName, std::string &loc, float duration,
       Between::to(cha->_sprite, loc, duration, Between::easing(ease));
     }
   } else {
-    log("GameScene::showImage: Not found face:%s", face.c_str());
+    ;
   }
 }
 
@@ -363,13 +366,12 @@ void GameScene::playBackgroundMusic(std::string &key) {
   stopBackgroundMusic();
   auto bgm = BMM->getBackgroundMusic(key);
   if (bgm.compare("") == 0) {
-    log("Undefine bgm %s", key.c_str());
     return;
   }
 
   AudioHelper::getAudioEngine()->playBackgroundMusic(bgm.c_str(), true);
   if (AudioHelper::getAudioEngine()->isBackgroundMusicPlaying()) {
-    log("Playing BGM %s", bgm.c_str());
+    ;
   }
   _isPlayingMusic = true;
   _backgroundMusicKey = key;
@@ -423,9 +425,7 @@ void GameScene::startSkipPlay() {
     _btnMenu->setOpacity(255);
   }
   if (true) {
-    log("start skip");
     if (ScriptReader::getInstance()->getIsHaveRead()) {
-      log("IsHaveRead");
       schedule(schedule_selector(GameScene::skipPlay), 0.01f);
     }
 

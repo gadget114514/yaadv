@@ -39,9 +39,9 @@ Slidebar *Slidebar::createSlidebar(std::string backgroundFile,
     return tmpSlidebar;
   } else {
     if (!tmpBackgroundSprite)
-      log("Sliderbar background file (%s) not found.", backgroundFile.c_str());
+      ;
     if (!tmpPointSprite)
-      log("Sliderbar point file (%s) not found.", pointFile.c_str());
+      ;
     return nullptr;
   }
 }
@@ -132,7 +132,6 @@ void Slidebar::setSlidebar() {
 
 void Slidebar::setFloat(float value) {
   if (value > _maxValue || value < _minValue) {
-    log("Bad value!");
     return;
   }
   _floatValue = value;

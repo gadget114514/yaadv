@@ -4,7 +4,6 @@
 
 
 namespace yaadv {
-enum ScriptCommandType;
 class ScriptReader;
 enum ScriptCommandType {
   PartSign,

@@ -105,7 +105,6 @@ SCIf::~SCIf() {}
 
 void SCIf::execute(cocos2d::Node *stage) {
   if (_expression.compare("") == 0) {
-    cocos2d::log("SC> If expressiong is null");
     reader->nextScript();
   }
   if (expressionJudge()) {
@@ -120,7 +119,6 @@ bool SCIf::expressionJudge() {
   std::string exp = _expression;
   pos = exp.find_first_of("><=", 0);
   if (pos < 0) {
-    cocos2d::log("SC> If expressiong do not have symbol");
     return true;
   } else {
     std::string sFirstValue;
@@ -203,9 +201,6 @@ bool SCIf::expressionJudge() {
       } else {
         iSecondValue = GameSystem::getInstance()->getDataValue(sSecondValue);
       }
-
-      log("SC#If> FirstValue = %d, SecondValue = %d", iFirstValue,
-          iSecondValue);
 
       if (iFirstValue == iSecondValue)
         return true;
@@ -323,7 +318,7 @@ SCPlaySound::~SCPlaySound() {}
 void SCPlaySound::execute(cocos2d::Node *stage) {
   auto sound = SM->getSound(key);
   if (sound.compare("") == 0) {
-    log("SC> unfine bgm %s", key.c_str());
+    ;
   } else {
     reader->playSound(sound);
   }
@@ -376,11 +371,9 @@ void SCSet::execute(cocos2d::Node *stage) {
       _value = getDataValue(_key) + _value;
       break;
     default:
-      log("SC>Set:Unknow Symbol.");
       break;
   }
   setDataValue(_key, _value);
-  log("SC>Set:%s=%d", _key.c_str(), _value);
 
   reader->nextScript();
 }

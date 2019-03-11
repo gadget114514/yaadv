@@ -99,8 +99,6 @@ bool HistoryScene::init() {
   int startY = 0;
   for (int i = 0; i < HistoryLogger::getInstance()->getLength(); i++) {
     auto record = HistoryLogger::getInstance()->getRecord(i);
-    log("Record[%d] = [%s , %s]", i, record->name.c_str(),
-        record->text.c_str());
     auto hm = HistoryMessage::create(record);
     hm->setPosition(0, startY);
     historyList->addChild(hm);

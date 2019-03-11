@@ -34,7 +34,6 @@ static int char_handler(void *user, const char *section, const char *name,
     std::string key(section);
     cm->addCharacter(key, character);
     character->name = value;
-    log("CM#addCharacter [%s][%s]", key.c_str(), character->name.c_str());
   } else {
     std::string key(section);
     Character *character = cm->getCharacter(key);
@@ -156,7 +155,6 @@ Character *CharacterManager::getCharacter(std::string &key) {
 void CharacterManager::addCharacter(std::string &key, Character *cha) {
   auto c = _pool->find(key);
   if (c != _pool->end()) {
-    log("!#### Repeat Character!!!.. ");
     _pool->erase(c);
     CC_SAFE_DELETE(c->second);
   }

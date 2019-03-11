@@ -45,8 +45,6 @@ PopupLayer::PopupLayer(const std::string &backgroundImage) {
   auto *backgroundTouch = EventListenerTouchOneByOne::create();
   backgroundTouch->onTouchBegan = [=](Touch *t, Event *e) { return true; };
   backgroundTouch->onTouchEnded = [=](Touch *t, Event *e) {
-    log("Background touched.");
-
     this->runAction(Sequence::create(
         CallFunc::create(CC_CALLBACK_0(Node::removeFromParent, this)), NULL));
   };

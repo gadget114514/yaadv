@@ -31,7 +31,6 @@ static int bg_handler(void* user, const char* section, const char* name,
   background = "yaadv/bgimage/" + background;
 
   bm->addBackground(key, background);
-  log("SCB#addBackground[%s]", key.c_str());
   return 0;
 }
 

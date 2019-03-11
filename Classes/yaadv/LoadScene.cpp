@@ -93,7 +93,6 @@ void LoadScene::popup() {
 
 void LoadScene::apply() {
   if (_currentSelectButton >= 0) {
-    log("Loading!");
     GameSystem::getInstance()->setIsLoadSuccess(true);
     if (GameSystem::getInstance()->getGameScene()) {
       Director::getInstance()->popScene();
@@ -105,7 +104,6 @@ void LoadScene::apply() {
 }
 
 void LoadScene::cancel() {
-  log("cancel.");
   _currentSelectButton = -1;
 }
 

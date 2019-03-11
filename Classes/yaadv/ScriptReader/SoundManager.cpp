@@ -28,7 +28,6 @@ static int snd_handler(void* user, const char* section, const char* name,
   snd = "yaadv/sound/" + snd + ".mp3";
 
   bm->addSound(key, snd);
-  log("SM#addSound[%s]", key.c_str());
   return 0;
 }
 
@@ -73,7 +72,6 @@ SoundManager::SoundManager() : _pool(nullptr) {
     ePos = ss.find('\n', sPos);
     temp = ss.substr(sPos, ePos - sPos - 1);
     if (temp.compare("") == 0) {
-      log("SM> Load Sound ending");
       break;
     }
     sPos = ePos + 1;
@@ -83,10 +81,7 @@ SoundManager::SoundManager() : _pool(nullptr) {
     sound = temp.substr(tempPos + 1, temp.length() - tempPos - 1);
     sound = "sound/" + sound + ".mp3";
 
-    log("soundkey = %s , soundPath = %s", key.c_str(), sound.c_str());
-
     addSound(key, sound);
-    log("SM> addSound[%s]", key.c_str());
   }
 #endif
   }
@@ -107,7 +102,6 @@ SoundManager::SoundManager() : _pool(nullptr) {
     if (result != _pool->end()) {
       return result->second;
     } else {
-      log("SM> Not found &s", key.c_str());
       defaultSound = "";
       return defaultSound;
     }

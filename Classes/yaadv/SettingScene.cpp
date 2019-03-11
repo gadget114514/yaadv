@@ -149,7 +149,6 @@ bool SettingScene::init() {
 void SettingScene::back() { Director::getInstance()->popScene(); }
 
 void SettingScene::changeMusicVolume() {
-  log("Music Value : %f", _musicVolumeSlidebar->getFloat());
   GameSystem::getInstance()->setMusicVolume(_musicVolumeSlidebar->getFloat());
   AudioHelper::getAudioEngine()->setBackgroundMusicVolume(
       GameSystem::getInstance()->getMusicVolume());
@@ -171,8 +170,6 @@ void SettingScene::changeAutoSpeed() {
 }
 
 void SettingScene::changeIsSkipAll() {
-  log("Skip changed!");
-  log("selected number = %d", _isSkipAll->getSelectedNumber());
   if (_isSkipAll->getSelectedNumber()) {
     GameSystem::getInstance()->setIsSkipAll(true);
   } else {

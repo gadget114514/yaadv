@@ -105,7 +105,6 @@ void SaveScene::popup() {
 
 void SaveScene::apply() {
   if (_currentSelectButton >= 0) {
-    log("Saving!Savedata number is = %d", _currentSelectButton);
     GameSystem::getInstance()->saveGameSceneInfo(_currentSelectButton);
     GameSystem::getInstance()->updateGameSavedata(_currentSelectButton);
     dataButtons[_currentSelectButton % 4]->updataData(true);
@@ -113,7 +112,6 @@ void SaveScene::apply() {
 }
 
 void SaveScene::cancel() {
-  log("cancel.");
   _currentSelectButton = -1;
 }
 
@@ -140,7 +138,6 @@ void SaveScene::loadList(int page) {
     eventTouch[i]->onTouchEnded = [=](Touch *t, Event *e) {
       if (dataButtons[i]->getStageLayer()->getBoundingBox().containsPoint(
               dataButtons[i]->convertTouchToNodeSpace(t))) {
-        log("_currentSelectbutton = %d", _currentSelectButton);
         _currentSelectButton = 4 * (page - 1) + i;
         popup();
       } else {

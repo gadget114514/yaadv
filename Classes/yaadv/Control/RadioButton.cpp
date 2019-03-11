@@ -80,7 +80,7 @@ int RadioButton::getSelectedNumber() { return _selectedNumber; }
 
 void RadioButton::setSelectedNumber(int selectedNumber) {
   if (selectedNumber > _radios->size() - 1 || selectedNumber < 0) {
-    log("Bad SelectedNumber!");
+
     return;
   }
   if (_selectedButton) _selectedButton->onTouchEnded(nullptr, nullptr, false);

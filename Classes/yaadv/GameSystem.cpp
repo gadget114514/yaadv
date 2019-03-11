@@ -200,13 +200,9 @@ void GameSystem::stringToDataValue(const std::string &dataValueStr) {
 
     std::string key;
     std::string value;
-    log("temp = %s", temp.c_str());
     key = temp.substr(0, temp.find('=', 0));
     value = temp.substr(key.length() + 1, temp.length() - (key.length() + 1));
-    log("key = %s, value = %s", key.c_str(), value.c_str());
-
     setDataValue(value, atoi(value.c_str()));
-
     sPos = ePos + 1;
   }
 }
@@ -254,14 +250,11 @@ bool GameSystem::saveGameSceneInfo(int i) {
   const char *path = "savedata/savedata";
   char *ch = new char[13];
   sprintf(ch, "%d", i + 1);
-  cocos2d::log("ch = %s", ch);
   char *file = new char[500];
   sprintf(file, "%s%s%s.sav",
           FileUtils::getInstance()->getWritablePath().c_str(), path, ch);
   char *image = new char[100];
-  sprintf(image, "%s%d.jpg", path, i + 1);
-  cocos2d::log("Savedata file path = %s", file);
-  cocos2d::log("Savedata image path = %s", image);
+  snprintf(image, 100, "%s%d.jpg", path, i + 1);
   FILE *savedata = fopen(file, "wb");
   if (savedata) {
     bool result = _screenShoot->saveToFile(

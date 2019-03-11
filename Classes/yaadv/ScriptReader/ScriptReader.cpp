@@ -113,8 +113,6 @@ void ScriptReader::loadScriptFile(std::string path) {
   _scripts.insert(
       std::pair<std::string, std::vector<ScriptCommand *> *>(currentSign, cms));
 
-  log("LoadScript::>");
-
   SCSelect *currentSelect = nullptr;
 
   while (sPos >= 0) {
@@ -140,7 +138,7 @@ void ScriptReader::loadScriptFile(std::string path) {
           _scripts.insert(
               std::pair<std::string, std::vector<ScriptCommand *> *>(
                   currentSign, cms));
-          log("SC> Add sign[%s]", currentSign.c_str());
+
         } else {
           if (command[0] == '#') {
             std::string cmd = command.substr(1, command.length() - 1);
@@ -151,8 +149,7 @@ void ScriptReader::loadScriptFile(std::string path) {
                                      cmd.length() - scriptNamePos - 1);
               cmd = cmd.substr(0, scriptNamePos);
             }
-            log("SC> Add command[%s] params[%s] Sign[%s]", cmd.c_str(),
-                cmdParams.c_str(), currentSign.c_str());
+
 
             if (cmd.compare("Select") == 0) {
               SCSelect *selectCMD = new SCSelect(this);
@@ -233,8 +230,7 @@ void ScriptReader::loadScriptFile(std::string path) {
               SCIf *ifCMD = new SCIf(this, expression, trueTag, falseTag);
               cms->push_back(ifCMD);
             } else {
-              log("Unknow Script Command> [%s]:[%s]", cmd.c_str(),
-                  cmdParams.c_str());
+	      ;
             }
 
           } else {
@@ -248,8 +244,6 @@ void ScriptReader::loadScriptFile(std::string path) {
                                          cmd.length() - scriptNamePos - 1);
                   cmd = cmd.substr(0, scriptNamePos);
                 }
-                log("SC> options Sign[%s] text[%s]", cmd.c_str(),
-                    cmdParams.c_str());
                 currentSelect->addOption(cmd, cmdParams);
               }
             } else {
@@ -258,9 +252,9 @@ void ScriptReader::loadScriptFile(std::string path) {
               std::string cmdParams = "";
               std::string face = "";
               if (scriptNamePos < 0) {
-                log("SC Csay Text[%s]", cmd.c_str());
+		std::string empty("");
                 SCCharacterSpeak *csCMD =
-                    new SCCharacterSpeak(this, face, std::string(""), cmd, face);
+                    new SCCharacterSpeak(this, face, empty, cmd, face);
                 cms->push_back(csCMD);
               } else {
                 cmdParams = cmd.substr(scriptNamePos + 1,
@@ -272,10 +266,9 @@ void ScriptReader::loadScriptFile(std::string path) {
                                     cmd.length() - scriptNamePos - 1);
                   cmd = cmd.substr(0, scriptNamePos);
                 }
-                log("SC Csay CHA[%s] Face[%s] Text[%s]", cmd.c_str(),
-                    face.c_str(), cmdParams.c_str());
+		std::string empty("");
                 SCCharacterSpeak *csCMD =
-                    new SCCharacterSpeak(this, std::string(""), cmd, cmdParams, face);
+                    new SCCharacterSpeak(this, empty, cmd, cmdParams, face);
                 cms->push_back(csCMD);
               }
             }
@@ -287,15 +280,12 @@ void ScriptReader::loadScriptFile(std::string path) {
 }
 
 void ScriptReader::jumpToSign(const std::string &sign) {
-  log("sign: %s", sign.c_str());
   if (sign.compare("") == 0) {
-    log("Sign is null");
     return;
   }
   isWaitingForSelection = false;
   auto list = _scripts.find(sign);
   if (list == _scripts.end()) {
-    log("Sign [%s] not found", sign.c_str());
     return;
   }
   _currentSignName = sign;
@@ -305,14 +295,12 @@ void ScriptReader::jumpToSign(const std::string &sign) {
 
 void ScriptReader::nextScript() {
   if (isWaitingForSelection) {
-    log("waiting");
     return;
   }
   _currentCommandIndex++;
 
   auto list = _scripts.find(_currentSignName);
   if (list == _scripts.end()) {
-    log("No Sign of currentSign [%s]", _currentSignName.c_str());
     return;
   }
 
@@ -328,20 +316,16 @@ void ScriptReader::nextScript() {
 
   auto cmdList = list->second;
   if (_currentCommandIndex - 1 >= (int)cmdList->size()) {
-    log("End of Script..! CurrentScript");
-
     if (returnToMenu) {
       returnToMenu();
     } else {
-      log("returnToMenu >>> CallBack not linked!!.");
+      ;
     }
     return;
   }
 
   auto cmd = cmdList->at(_currentCommandIndex - 1);
 
-  log("sign = %s, commandIndex = %d", _currentSignName.c_str(),
-      _currentCommandIndex);
 
   switch (cmd->type) {
     case ScriptCommandType::CharacterSpeak:
@@ -381,7 +365,7 @@ void ScriptReader::nextScript() {
       ((SCGameOver *)cmd)->execute(stage);
       break;
     default:
-      log("Unhandle ScriptCommandType [%d]", cmd->type);
+      break;
   }
 }
 
@@ -395,13 +379,11 @@ void ScriptReader::setCurrentCommandIndex(int value) {
 
 void ScriptReader::jumpToSign(const std::string &sign, int index) {
   if (sign.compare("") == 0) {
-    log("Sign is null");
     return;
   }
   isWaitingForSelection = false;
   auto list = _scripts.find(sign);
   if (list == _scripts.end()) {
-    log("Sign [%s] not found", sign.c_str());
     return;
   }
   _currentSignName = sign;

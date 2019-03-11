@@ -35,7 +35,9 @@ set(CMAKE_MODULE_PATH ${COCOS2DX_ROOT_PATH}/cmake/Modules/)
 include(CocosBuildSet)
 if(NOT USE_COCOS_PREBUILT)
     add_subdirectory(${COCOS2DX_ROOT_PATH}/cocos ${ENGINE_BINARY_PATH}/cocos/core)
-endif()
+  endif()
+
+  add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/wren")
 
 # record sources, headers, resources...
 set(GAME_SOURCE)
@@ -51,91 +53,71 @@ endif()
 include_directories(
         Classes
         ${COCOS2DX_ROOT_PATH}/cocos/audio/include/
-	${COCOS2DX_ROOT_PATH}/../yasl
+	${COCOS2DX_ROOT_PATH}/../lwf/cplusplus/core
+	${COCOS2DX_ROOT_PATH}/../wren/src/include
+
 )
 # add cross-platforms source files and header files 
 list(APPEND GAME_SOURCE
      Classes/AppDelegate.cpp
      Classes/HelloWorldScene.cpp
-Classes/LoadScene.cpp
-Classes/MainMenuScene.cpp
-Classes/HelloWorldScene.cpp
-Classes/AppDelegate.cpp
-Classes/ScriptReader/BackgroundManager.cpp
-Classes/ScriptReader/SCStopSound.cpp
-Classes/ScriptReader/SCStopBGM.cpp
-Classes/ScriptReader/ScriptReader.cpp
-Classes/ScriptReader/SCCharacterSpeak.cpp
-Classes/ScriptReader/BackgroundMusicManager.cpp
-Classes/ScriptReader/SCIf.cpp
-Classes/ScriptReader/SCLeave.cpp
-Classes/ScriptReader/SCSelect.cpp
-Classes/ScriptReader/SCSet.cpp
-Classes/ScriptReader/SoundManager.cpp
-Classes/ScriptReader/SCJump.cpp
-Classes/ScriptReader/SCPlaySound.cpp
-Classes/ScriptReader/SCPlayBGM.cpp
-Classes/ScriptReader/CharacterManager.cpp
-Classes/ScriptReader/SCShowFg.cpp
-Classes/ScriptReader/SCBackground.cpp
-Classes/ScriptReader/SCGameOver.cpp
-Classes/ScriptReader/ScriptCommand.cpp
-Classes/HistoryScene.cpp
-Classes/SaveData.cpp
-Classes/CharLabel.cpp
-Classes/TestLayer.cpp
-Classes/SaveScene.cpp
-Classes/Control/RadioButton.cpp
-Classes/Control/EasyButton.cpp
-Classes/Control/Slidebar.cpp
-Classes/Control/PopupLayer.cpp
-Classes/TestFolder/TestInFolder.cpp
-Classes/SettingScene.cpp
-Classes/GameScene.cpp
-Classes/AudioHelper.cpp
-Classes/GameSystem.cpp
-Classes/History.cpp
-Classes/ini.c
+Classes/AudioHelper.cpp     
+Classes/yaadv/LoadScene.cpp
+Classes/yaadv/MainMenuScene.cpp
+Classes/yaadv/ScriptReader/BackgroundManager.cpp
+Classes/yaadv/ScriptReader/SCX.cpp
+Classes/yaadv/ScriptReader/ScriptReader.cpp
+Classes/yaadv/ScriptReader/BackgroundMusicManager.cpp
+Classes/yaadv/ScriptReader/SoundManager.cpp
+Classes/yaadv/ScriptReader/CharacterManager.cpp
+Classes/yaadv/ScriptReader/ScriptCommand.cpp
+Classes/yaadv/HistoryScene.cpp
+Classes/yaadv/SaveData.cpp
+Classes/yaadv/CharLabel.cpp
+Classes/yaadv/SaveScene.cpp
+Classes/yaadv/Control/RadioButton.cpp
+Classes/yaadv/Control/EasyButton.cpp
+Classes/yaadv/Control/Slidebar.cpp
+Classes/yaadv/Control/PopupLayer.cpp
+Classes/yaadv/SettingScene.cpp
+Classes/yaadv/GameScene.cpp
+Classes/yaadv/GameSystem.cpp
+Classes/yaadv/History.cpp
+Classes/yaadv/ScriptReader/ini.c
+Classes/yaadv/ScriptReader/yaadvConfig.cpp
+Classes/yaadv/ScriptReader/ScriptReaderWREN.cpp
+Classes/yaadv/Control/Between.cpp
+Classes/yaadv/Control/StringUtil.cpp
      )
 list(APPEND GAME_HEADER
      Classes/AppDelegate.h
      Classes/HelloWorldScene.h
-Classes/MainMenuScene.h
-Classes/GameScene.h
-Classes/ScriptReader/SCLeave.h
-Classes/ScriptReader/CharacterManager.h
-Classes/ScriptReader/BackgroundManager.h
-Classes/ScriptReader/ScriptReader.h
-Classes/ScriptReader/SCPlaySound.h
-Classes/ScriptReader/SCPlayBGM.h
-Classes/ScriptReader/SCSet.h
-Classes/ScriptReader/ScriptCommand.h
-Classes/ScriptReader/SoundManager.h
-Classes/ScriptReader/SCStopBGM.h
-Classes/ScriptReader/SCStopSound.h
-Classes/ScriptReader/BackgroundMusicManager.h
-Classes/ScriptReader/SCBackground.h
-Classes/ScriptReader/SCCharacterSpeak.h
-Classes/ScriptReader/SCJump.h
-Classes/ScriptReader/SCSelect.h
-Classes/ScriptReader/SCIf.h
-Classes/ScriptReader/SCGameOver.h
+Classes/yaadv/MainMenuScene.h
+Classes/yaadv/GameScene.h
+Classes/yaadv/ScriptReader/CharacterManager.h
+Classes/yaadv/ScriptReader/BackgroundManager.h
+Classes/yaadv/ScriptReader/ScriptReader.h
+Classes/yaadv/ScriptReader/SCX.h
+Classes/yaadv/ScriptReader/ScriptCommand.h
+Classes/yaadv/ScriptReader/SoundManager.h
+Classes/yaadv/ScriptReader/BackgroundMusicManager.h
 Classes/AudioHelper.h
-Classes/GameSystem.h
+Classes/yaadv/GameSystem.h
 Classes/HelloWorldScene.h
-Classes/SettingScene.h
-Classes/Control/RadioButton.h
-Classes/Control/Slidebar.h
-Classes/Control/EasyButton.h
-Classes/TestFolder/TestInFolder.h
-Classes/HistoryScene.h
-Classes/TestLayer.h
-Classes/SaveData.h
-Classes/SaveScene.h
-Classes/CharLabel.h
+Classes/yaadv/SettingScene.h
+Classes/yaadv/Control/RadioButton.h
+Classes/yaadv/Control/Slidebar.h
+Classes/yaadv/Control/EasyButton.h
+Classes/yaadv/Control/Between.h
+Classes/yaadv/HistoryScene.h
+Classes/yaadv/SaveData.h
+Classes/yaadv/SaveScene.h
+Classes/yaadv/CharLabel.h
 Classes/AppDelegate.h
-Classes/LoadScene.h
-Classes/ini.h
+Classes/yaadv/LoadScene.h
+Classes/yaadv/ScriptReader/ini.h
+Classes/yaadv/ScriptReader/yaadvConfig.h
+Classes/yaadv/ScriptReader/ScriptReaderWREN.h
 )
 
 if(ANDROID)
@@ -192,9 +174,9 @@ endif()
 
 # mark app complie info and libs info
 
-add_library(yasllib STATIC IMPORTED)
-set_target_properties(yasllib PROPERTIES IMPORTED_LOCATION
-  "${COCOS2DX_ROOT_PATH}/../yasl/build/libyaslapi.a")
+
+#set_target_properties(libwren PROPERTIES IMPORTED_LOCATION
+#  "${COCOS2DX_ROOT_PATH}/../wren/build/libwren.a")
 
 
 set(APP_SRC
@@ -203,7 +185,7 @@ set(APP_SRC
     )
 cocos_build_app(${APP_NAME}
                 APP_SRC "${APP_SRC}"
-                DEPEND_COMMON_LIBS "cocos2d" "yasllib"
+                DEPEND_COMMON_LIBS "cocos2d" "libwren"
                 DEPEND_ANDROID_LIBS "cocos2d_android"
                 )
 

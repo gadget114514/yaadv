@@ -543,8 +543,6 @@ void ScriptReaderYASL::loadScriptFile(std::string path) {
 
   std::string currentSign = "default";
 
-  log("LoadScript::>");
-
   SCSelect *currentSelect = nullptr;
 
   if (this->_yaslstate != 0) abort();
@@ -556,15 +554,12 @@ void ScriptReaderYASL::loadScriptFile(std::string path) {
 }
 
 void ScriptReaderYASL::jumpToSign(const std::string &sign) {
-  log("sign: %s", sign.c_str());
   if (sign.compare("") == 0) {
-    log("Sign is null");
     return;
   }
   isWaitingForSelection = false;
   auto list = _scripts.find(sign);
   if (list == _scripts.end()) {
-    log("Sign [%s] not found", sign.c_str());
     return;
   }
   _currentSignName = sign;
@@ -588,7 +583,6 @@ void ScriptReaderYASL::runTick() {
 
 void ScriptReaderYASL::nextScript() {
   if (isWaitingForSelection) {
-    log("waiting");
     return;
   }
   if (this->_currentAction) stage->stopAction(this->_currentAction);
@@ -599,84 +593,6 @@ void ScriptReaderYASL::nextScript() {
   auto seq = Sequence::create(repeat, nullptr);
   this->_currentAction = seq;
   stage->runAction(seq);
-
-#if 0
-  _currentCommandIndex++;
-
-  auto list = _scripts.find(_currentSignName);
-  if (list == _scripts.end()) {
-    log("No Sign of currentSign [%s]", _currentSignName.c_str());
-    return;
-  }
-
-  std::string readedSign = "readed_" + _currentSignName;
-
-  if (_currentCommandIndex >
-      GameSystem::getInstance()->getHaveRead(readedSign)) {
-    GameSystem::getInstance()->setHaveRead(readedSign, _currentCommandIndex);
-    _isHaveRead = false;
-  } else {
-    _isHaveRead = true;
-  }
-
-  auto cmdList = list->second;
-  if (_currentCommandIndex - 1 >= (int)cmdList->size()) {
-    log("End of Script..! CurrentScript");
-
-    if (returnToMenu) {
-      returnToMenu();
-    } else {
-      log("returnToMenu >>> CallBack not linked!!.");
-    }
-    return;
-  }
-
-  auto cmd = cmdList->at(_currentCommandIndex - 1);
-
-  log("sign = %s, commandIndex = %d", _currentSignName.c_str(),
-      _currentCommandIndex);
-
-  switch (cmd->type) {
-    case ScriptCommandType::CharacterSpeak:
-      ((SCCharacterSpeak *)cmd)->execute(stage);
-      break;
-    case ScriptCommandType::Leave:
-      ((SCLeave *)cmd)->execute(stage);
-      break;
-    case ScriptCommandType::Jump:
-      ((SCJump *)cmd)->execute(stage);
-      break;
-    case ScriptCommandType::Select:
-      ((SCSelect *)cmd)->execute(stage);
-      break;
-    case ScriptCommandType::Background:
-      ((SCBackground *)cmd)->execute(stage);
-      break;
-    case ScriptCommandType::PlayBGM:
-      ((SCPlayBGM *)cmd)->execute(stage);
-      break;
-    case ScriptCommandType::StopBGM:
-      ((SCStopBGM *)cmd)->execute(stage);
-      break;
-    case ScriptCommandType::PlaySd:
-      ((SCPlaySound *)cmd)->execute(stage);
-      break;
-    case ScriptCommandType::StopSd:
-      ((SCStopSound *)cmd)->execute(stage);
-      break;
-    case ScriptCommandType::Set:
-      ((SCSet *)cmd)->execute(stage);
-      break;
-    case ScriptCommandType::If:
-      ((SCIf *)cmd)->execute(stage);
-      break;
-    case ScriptCommandType::GameOver:
-      ((SCGameOver *)cmd)->execute(stage);
-      break;
-    default:
-      log("Unhandle ScriptCommandType [%d]", cmd->type);
-  }
-#endif
 }
 
 std::string ScriptReaderYASL::getCurrentSignName() { return _currentSignName; }
@@ -689,14 +605,12 @@ void ScriptReaderYASL::setCurrentCommandIndex(int value) {
 
 void ScriptReaderYASL::jumpToSign(const std::string &sign, int index) {
   if (sign.compare("") == 0) {
-    log("Sign is null");
     return;
   }
 #if 0
   isWaitingForSelection = false;
   auto list = _scripts.find(sign);
   if (list == _scripts.end()) {
-    log("Sign [%s] not found", sign.c_str());
     return;
   }
 #endif
