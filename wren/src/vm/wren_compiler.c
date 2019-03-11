@@ -2238,7 +2238,11 @@ static void name(Compiler* compiler, bool canAssign)
     if (isLocalName(token->start))
     {
       char msg[256];
+      #if MSC_VER
       strncpy_s(msg, 256, token->start, token->length);
+      #else
+      strncpy(msg, token->start, token->length);
+      #endif
       error(compiler, "Undefined variable. %s", msg);
       return;
     }

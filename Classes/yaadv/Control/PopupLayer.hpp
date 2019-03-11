@@ -10,53 +10,49 @@ USING_NS_CC;
 #define DEFAULT_TEXT_SIZE 20
 
 namespace yaadv {
-struct PopupButton
-{
-    MenuItem* button;
-    enum ButtonType
-    {
-        FONT,
-        IMAGE
-    } buttonType;
+struct PopupButton {
+  MenuItem *button;
+  enum ButtonType { FONT, IMAGE } buttonType;
 };
 
-class PopupLayer : public Node
-{
+class PopupLayer : public Node {
   Sprite *_backgroundSprite;
-    LayerColor* _backgroundLayer;
+  LayerColor *_backgroundLayer;
 
-    int _buttonCounter;
+  int _buttonCounter;
 
-    int _buttonPositionY;
+  int _buttonPositionY;
 
-    Menu* _buttonMenu;
+  Menu *_buttonMenu;
 
-    Label* _popupText;
-    int _popupTextSize;
-    float _popupTextPositionX;
-    float _popupTextPositionY;
-    std::string _popupTextFont;
-    std::vector<PopupButton *> *_buttonList;
+  Label *_popupText;
+  int _popupTextSize;
+  float _popupTextPositionX;
+  float _popupTextPositionY;
+  std::string _popupTextFont;
+  std::vector<PopupButton *> *_buttonList;
 
-    void arrange();
-    
-    PopupLayer(const std::string &backgroundImage);
-public:
-    ~PopupLayer();
-    
-   
-    static PopupLayer* create(const std::string &backgroundImage);
+  void arrange();
 
-    void addButton(const std::string &normalImage, std::function<void(Ref*)> &callback);
+  PopupLayer(const std::string &backgroundImage);
 
-    void addButton(const std::string &normalImage, const std::string &selectedImage, std::function<void(Ref*)> &callback);
+ public:
+  ~PopupLayer();
 
-    void addButton(const std::string &normalImage, const std::string &touchImage, const std::string &selectedImage, std::function<void(Ref*)> &callback);
+  static PopupLayer *create(const std::string &backgroundImage);
 
-    void addLabelButton(const std::string &buttonText, const ccMenuCallback& callback);
+  void addButton(const std::string &normalImage, std::function<void(Ref *)> &callback);
 
-    void setString(const std::string &text);
+  void addButton(const std::string &normalImage, const std::string &selectedImage,
+                 std::function<void(Ref *)> &callback);
+
+  void addButton(const std::string &normalImage, const std::string &touchImage, const std::string &selectedImage,
+                 std::function<void(Ref *)> &callback);
+
+  void addLabelButton(const std::string &buttonText, const ccMenuCallback &callback);
+
+  void setString(const std::string &text);
 };
-};     // namespace yaadv
+};  // namespace yaadv
 
 #endif /* PopuLayer_hpp */

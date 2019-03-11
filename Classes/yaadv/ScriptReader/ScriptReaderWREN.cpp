@@ -57,9 +57,11 @@ extern "C" void WREN_ns_say(WrenVM *vm) {
   //    const char* d = wrenGetSlotString(vm, 4);
 
   ScriptReader *reader = ScriptReader::getInstance();
-  SCCharacterSpeak sc(reader, std::string(a), std::string(b),
-                                    std::string(c), std::string(d));
-
+  std::string _1(a);
+  std::string _2(b);
+  std::string _3(c);
+  std::string _4(d);
+  SCCharacterSpeak sc(reader, _1, _2, _3, _4);
   sc.execute(reader->stage);
   wrenSetSlotNull(vm, 0);
 
@@ -69,7 +71,8 @@ extern "C" void WREN_ns_say(WrenVM *vm) {
 extern "C" void WREN_ns_leave(WrenVM *vm) {
   const char *name_str = wrenGetSlotString(vm, 1);
   ScriptReader *reader = ScriptReader::getInstance();
-  SCLeave sc(reader, std::string(name_str));
+  std::string _1(name_str);
+  SCLeave sc(reader, _1);
 
   sc.execute(reader->stage);
   wrenSetSlotNull(vm, 0);
@@ -79,8 +82,8 @@ extern "C" void WREN_ns_leave(WrenVM *vm) {
 extern "C" void WREN_ns_bg(WrenVM *vm) {
   const char *name_str = wrenGetSlotString(vm, 1);
   ScriptReader *reader = ScriptReader::getInstance();
-  SCBackground sc(reader, std::string(name_str));
-
+  std::string _1(name_str);
+  SCBackground sc(reader, _1);
   sc.execute(reader->stage);
   wrenSetSlotNull(vm, 0);
   return;
@@ -90,8 +93,9 @@ extern "C" void WREN_ns_fg(WrenVM *vm) {
   const char *face_str = wrenGetSlotString(vm, 1);
   const char *name_str = wrenGetSlotString(vm, 2);
   ScriptReader *reader = ScriptReader::getInstance();
-  SCShowFg sc(reader, std::string(name_str),
-                            std::string(face_str));
+  std::string _1(name_str);
+  std::string _2(face_str);
+  SCShowFg sc(reader, _1, _2);
 
   sc.execute(reader->stage);
   wrenSetSlotNull(vm, 0);
@@ -101,7 +105,8 @@ extern "C" void WREN_ns_fg(WrenVM *vm) {
 extern "C" void WREN_ns_jump(WrenVM *vm) {
   const char *name_str = wrenGetSlotString(vm, 1);
   ScriptReader *reader = ScriptReader::getInstance();
-  SCJump sc(reader, std::string(name_str));
+  std::string _1(name_str);
+  SCJump sc(reader, _1);
 
   sc.execute(reader->stage);
   wrenSetSlotNull(vm, 0);
@@ -111,7 +116,8 @@ extern "C" void WREN_ns_jump(WrenVM *vm) {
 extern "C" void WREN_ns_bgm(WrenVM *vm) {
   const char *name_str = wrenGetSlotString(vm, 1);
   ScriptReader *reader = ScriptReader::getInstance();
-  SCPlayBGM sc(reader, std::string(name_str));
+  std::string _1(name_str);
+  SCPlayBGM sc(reader, _1);
 
   sc.execute(reader->stage);
   wrenSetSlotNull(vm, 0);
@@ -128,7 +134,8 @@ extern "C" void WREN_ns_stopbgm(WrenVM *vm) {
 extern "C" void WREN_ns_sound(WrenVM *vm) {
   const char *name_str = wrenGetSlotString(vm, 1);
   ScriptReader *reader = ScriptReader::getInstance();
-  SCPlaySound sc(reader, std::string(name_str));
+  std::string _1(name_str);
+  SCPlaySound sc(reader, _1);
 
   sc.execute(reader->stage);
   wrenSetSlotNull(vm, 0);
@@ -158,7 +165,8 @@ extern "C" void WREN_ns_set(WrenVM *vm) {
   ival = wrenGetSlotDouble(vm, 3);
 
   ScriptReader *reader = ScriptReader::getInstance();
-  SCSet sc(reader, std::string(name_str), imark, ival);
+  std::string _1(name_str);
+  SCSet sc(reader, _1, imark, ival);
 
   sc.execute(reader->stage);
   wrenSetSlotNull(vm, 0);
@@ -177,15 +185,17 @@ extern "C" void WREN_ns_select(WrenVM *vm) {
 extern "C" void WREN_ns_select_add_option(WrenVM *vm) {
   ScriptReader *reader = ScriptReader::getInstance();
   const char *name_str = wrenGetSlotString(vm, 1);
-  SCSelect *sc = reader->_selects[std::string(name_str)];
+  std::string i(name_str);
+  SCSelect *sc = reader->_selects[i];
   if (!sc) {
     wrenSetSlotNull(vm, -1);
     return;
   }
   const char *key = wrenGetSlotString(vm, 1);
   const char *value = wrenGetSlotString(vm, 2);
-
-  sc->addOption(std::string(key), std::string(value));
+  std::string a(key);
+  std::string b(value);
+  sc->addOption(a, b);
 
   wrenSetSlotNull(vm, 0);
   return;
@@ -193,7 +203,8 @@ extern "C" void WREN_ns_select_add_option(WrenVM *vm) {
 extern "C" void WREN_ns_select_exec(WrenVM *vm) {
   ScriptReader *reader = ScriptReader::getInstance();
   const char *name_str = wrenGetSlotString(vm, 1);
-  SCSelect *sc = reader->_selects[std::string(name_str)];
+  std::string i(name_str);
+  SCSelect *sc = reader->_selects[i];
   if (!sc) {
     wrenSetSlotNull(vm, -1);
     return;
@@ -208,7 +219,7 @@ extern "C" void WREN_ns_print(WrenVM *vm) {
 #ifdef _MSC_VER
   OutputDebugStringA(name_str);
 #else
-  printf("%s\n", name_str)
+  printf("%s\n", name_str);
 #endif
 
   wrenSetSlotNull(vm, 0);
@@ -229,7 +240,8 @@ extern "C" void WREN_ns_clear(WrenVM *vm) {
 extern "C" void WREN_ns_leaveimg(WrenVM *vm) {
   const char *name_str = wrenGetSlotString(vm, 1);
   ScriptReader *reader = ScriptReader::getInstance();
-  SCLeaveImg sc(reader, std::string(name_str));
+  std::string s(name_str);
+  SCLeaveImg sc(reader, s);
 
   sc.execute(reader->stage);
   wrenSetSlotNull(vm, 0);
@@ -248,9 +260,11 @@ extern "C" void WREN_ns_imgtween(WrenVM *vm) {
 
   const char *name_str = wrenGetSlotString(vm, 4);
   ScriptReader *reader = ScriptReader::getInstance();
-  SCImgTween sc(reader, std::string(name_str),
-                              std::string(text_str), duration,
-                              std::string(ease_str), std::string(face_str));
+  std::string a(name_str);
+  std::string b(text_str);
+  std::string c(ease_str);
+  std::string d(face_str);
+  SCImgTween sc(reader, a, b, duration, c, d);
 
   sc.execute(reader->stage);
   wrenSetSlotNull(vm, 0);
@@ -264,8 +278,10 @@ extern "C" void WREN_ns_img(WrenVM *vm) {
   const char *c = wrenGetSlotString(vm, 3);
 
   ScriptReader *reader = ScriptReader::getInstance();
-  SCImg sc(reader, std::string(a), std::string(b),
-                         std::string(c));
+  std::string _1(a);
+  std::string _2(b);
+  std::string _3(c);
+  SCImg sc(reader, _1, _2, _3);
 
   sc.execute(reader->stage);
   wrenSetSlotNull(vm, 0);
@@ -280,7 +296,8 @@ extern "C" void WREN_ns__s(WrenVM *vm) {
   ScriptReader *reader = ScriptReader::getInstance();
 
   if (!strcmp(cmd, "leaveimg")) {
-    SCLeaveImg sc(reader, std::string(a));
+    std::string s(a);
+    SCLeaveImg sc(reader, s);
     sc.execute(reader->stage);
   }
   if (!strcmp(cmd, "select")) {
@@ -288,34 +305,39 @@ extern "C" void WREN_ns__s(WrenVM *vm) {
     sc->setName(a);
   }
   if (!strcmp(cmd, "leave")) {
-    SCLeave sc(reader, std::string(a));
+    std::string s(a);
+    SCLeave sc(reader, s);
 
     sc.execute(reader->stage);
   }
   if (!strcmp(cmd, "bg")) {
-    SCBackground sc(reader, std::string(a));
+    std::string s(a);
+    SCBackground sc(reader, s);
 
     sc.execute(reader->stage);
   }
   if (!strcmp(cmd, "bgm")) {
-    SCPlayBGM sc(reader, std::string(a));
+    std::string s(a);
+    SCPlayBGM sc(reader, s);
 
     sc.execute(reader->stage);
   }
   if (!strcmp(cmd, "sound")) {
-    SCPlaySound sc(reader, std::string(a));
+    std::string s(a);
+    SCPlaySound sc(reader, s);
 
     sc.execute(reader->stage);
   }
   if (!strcmp(cmd, "selectshow")) {
-    SCSelect *sc = reader->_selects[std::string(a)];
+    std::string s(a);
+    SCSelect *sc = reader->_selects[s];
     if (!sc) {
       wrenSetSlotNull(vm, -1);
       return;
     }
     sc->execute(reader->stage);
   }
-wrenSetSlotNull(vm, 0);
+  wrenSetSlotNull(vm, 0);
 }
 extern "C" void WREN_ns__ss(WrenVM *vm) {
   const char *cmd = wrenGetSlotString(vm, 1);
@@ -333,11 +355,13 @@ extern "C" void WREN_ns__sss(WrenVM *vm) {
   const char *a = wrenGetSlotString(vm, 2);
   const char *b = wrenGetSlotString(vm, 3);
   const char *c = wrenGetSlotString(vm, 4);
+  std::string _1(a);
+  std::string _2(b);
+  std::string _3(c);
 
   ScriptReader *reader = ScriptReader::getInstance();
   if (!strcmp(cmd, "img")) {
-    SCImg sc(reader, std::string(a), std::string(b),
-                           std::string(c));
+    SCImg sc(reader, _1, _2, _3);
     sc.execute(reader->stage);
   }
 
@@ -349,12 +373,15 @@ extern "C" void WREN_ns__ssss(WrenVM *vm) {
   const char *b = wrenGetSlotString(vm, 3);
   const char *c = wrenGetSlotString(vm, 4);
   const char *d = wrenGetSlotString(vm, 5);
+  std::string _1(a);
+  std::string _2(b);
+  std::string _3(c);
+  std::string _4(d);
 
   ScriptReader *reader = ScriptReader::getInstance();
 
   if (!strcmp(cmd, "say_")) {
-    SCCharacterSpeak sc(reader, std::string(a), std::string(b),
-                                      std::string(c), std::string(d));
+    SCCharacterSpeak sc(reader, _1, _2, _3, _4);
 
     sc.execute(reader->stage);
   }
@@ -389,8 +416,6 @@ void ScriptReaderWREN::loadScriptFile(std::string path) {
 
   std::string currentSign = "default";
 
-  log("LoadScript::>");
-
   SCSelect *currentSelect = nullptr;
 
   const char *src = (ss.c_str());
@@ -402,15 +427,12 @@ void ScriptReaderWREN::loadScriptFile(std::string path) {
 }
 
 void ScriptReaderWREN::jumpToSign(const std::string &sign) {
-  log("sign: %s", sign.c_str());
   if (sign.compare("") == 0) {
-    log("Sign is null");
     return;
   }
   isWaitingForSelection = false;
   auto list = _scripts.find(sign);
   if (list == _scripts.end()) {
-    log("Sign [%s] not found", sign.c_str());
     return;
   }
   _currentSignName = sign;
@@ -424,7 +446,6 @@ void ScriptReaderWREN::runTick() {
 
 void ScriptReaderWREN::nextScript() {
   if (isWaitingForSelection) {
-    log("waiting");
     return;
   }
   if (this->_currentAction) stage->stopAction(this->_currentAction);
@@ -448,20 +469,16 @@ std::string ScriptReaderWREN::getCurrentSignName() { return _currentSignName; }
 
 int ScriptReaderWREN::getCurrentCommandIndex() { return _currentCommandIndex; }
 
-void ScriptReaderWREN::setCurrentCommandIndex(int value) {
-  _currentCommandIndex = value;
-}
+void ScriptReaderWREN::setCurrentCommandIndex(int value) { _currentCommandIndex = value; }
 
 void ScriptReaderWREN::jumpToSign(const std::string &sign, int index) {
   if (sign.compare("") == 0) {
-    log("Sign is null");
     return;
   }
 #if 0
   isWaitingForSelection = false;
   auto list = _scripts.find(sign);
   if (list == _scripts.end()) {
-    log("Sign [%s] not found", sign.c_str());
     return;
   }
 #endif
@@ -472,4 +489,4 @@ void ScriptReaderWREN::jumpToSign(const std::string &sign, int index) {
 
 bool ScriptReaderWREN::getIsHaveRead() { return _isHaveRead; }
 
-} // namespace yaadv
+}  // namespace yaadv

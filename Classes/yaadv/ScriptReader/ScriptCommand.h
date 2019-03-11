@@ -1,10 +1,7 @@
 #pragma once
 #include "cocos2d.h"
 
-
-
 namespace yaadv {
-enum ScriptCommandType;
 class ScriptReader;
 enum ScriptCommandType {
   PartSign,

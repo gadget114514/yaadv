@@ -14,14 +14,11 @@ class EasyButton : public Node {
   EventListenerTouchOneByOne *_eventTouch;
 
  public:
-  EasyButton(Sprite *_normalSprite, Sprite *_touchSprite,
-             Sprite *_selectedSprite);
+  EasyButton(Sprite *_normalSprite, Sprite *_touchSprite, Sprite *_selectedSprite);
   ~EasyButton();
   static EasyButton *createEasyButton(const std::string &_normalFile);
-  static EasyButton *createEasyButton(const std::string &_normalFile,
-                                      const std::string &_touchFile);
-  static EasyButton *createEasyButton(const std::string &_normalFile,
-                                      const std::string &_touchFile,
+  static EasyButton *createEasyButton(const std::string &_normalFile, const std::string &_touchFile);
+  static EasyButton *createEasyButton(const std::string &_normalFile, const std::string &_touchFile,
                                       const std::string &_selectedFile);
 
   void onTouchBegan(Touch *t, Event *e);

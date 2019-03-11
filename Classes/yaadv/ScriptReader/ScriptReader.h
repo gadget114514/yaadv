@@ -1,19 +1,14 @@
 #ifndef __SCRIPT_READER_H__
 #define __SCRIPT_READER_H__
-#include "cocos2d.h"
 #include "ScriptCommand.h"
+#include "cocos2d.h"
 USING_NS_CC;
-
 
 namespace yaadv {
 struct Character;
 
-
-
 class ScriptReader {
  public:
-
-
   std::map<std::string, std::vector<ScriptCommand *> *> _scripts;
   std::map<std::string, SCSelect *> _selects;
 
@@ -47,12 +42,9 @@ class ScriptReader {
 
   virtual void initWithStage(Node *stage);
 
-  std::function<void(std::string &text, std::string &loc, std::string &face)>
-      showImage;
+  std::function<void(std::string &text, std::string &loc, std::string &face)> showImage;
 
-  std::function<void(std::string &text, std::string &loc, float dur,
-                     std::string &ease, std::string &face)>
-      imageTween;
+  std::function<void(std::string &text, std::string &loc, float dur, std::string &ease, std::string &face)> imageTween;
   std::function<void(std::string &text)> showText;
   std::function<void(std::string &text)> showName;
   std::function<void(std::string &background)> changeBackground;
@@ -87,6 +79,5 @@ class ScriptReader {
 #include "ScriptReaderJSON.h"
 #include "ScriptReaderWREN.h"
 //#include "ScriptReaderYASL.h"
-
 
 #endif

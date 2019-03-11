@@ -25,7 +25,6 @@ class BackgroundMusicManager {
 
   void addBackgroundMusic(std::string key, std::string bgm);
 };
-}
-;
+};
 
 #endif

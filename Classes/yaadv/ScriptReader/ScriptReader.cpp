@@ -1,10 +1,9 @@
 #include "ScriptReader.h"
 
-#include "CharacterManager.h"
 #include "../GameSystem.h"
 #include "../MainMenuScene.h"
+#include "CharacterManager.h"
 #include "SCX.h"
-
 
 USING_NS_CC;
 using namespace yaadv;
@@ -110,10 +109,7 @@ void ScriptReader::loadScriptFile(std::string path) {
 
   std::string currentSign = "default";
   auto cms = new std::vector<ScriptCommand *>();
-  _scripts.insert(
-      std::pair<std::string, std::vector<ScriptCommand *> *>(currentSign, cms));
-
-  log("LoadScript::>");
+  _scripts.insert(std::pair<std::string, std::vector<ScriptCommand *> *>(currentSign, cms));
 
   SCSelect *currentSelect = nullptr;
 
@@ -137,22 +133,17 @@ void ScriptReader::loadScriptFile(std::string path) {
         if (command[0] == '@') {
           currentSign = command.substr(1, command.length() - 1);
           cms = new std::vector<ScriptCommand *>();
-          _scripts.insert(
-              std::pair<std::string, std::vector<ScriptCommand *> *>(
-                  currentSign, cms));
-          log("SC> Add sign[%s]", currentSign.c_str());
+          _scripts.insert(std::pair<std::string, std::vector<ScriptCommand *> *>(currentSign, cms));
+
         } else {
           if (command[0] == '#') {
             std::string cmd = command.substr(1, command.length() - 1);
             int scriptNamePos = cmd.find_first_of(':', 0);
             std::string cmdParams = "";
             if (scriptNamePos > 0) {
-              cmdParams = cmd.substr(scriptNamePos + 1,
-                                     cmd.length() - scriptNamePos - 1);
+              cmdParams = cmd.substr(scriptNamePos + 1, cmd.length() - scriptNamePos - 1);
               cmd = cmd.substr(0, scriptNamePos);
             }
-            log("SC> Add command[%s] params[%s] Sign[%s]", cmd.c_str(),
-                cmdParams.c_str(), currentSign.c_str());
 
             if (cmd.compare("Select") == 0) {
               SCSelect *selectCMD = new SCSelect(this);
@@ -233,8 +224,7 @@ void ScriptReader::loadScriptFile(std::string path) {
               SCIf *ifCMD = new SCIf(this, expression, trueTag, falseTag);
               cms->push_back(ifCMD);
             } else {
-              log("Unknow Script Command> [%s]:[%s]", cmd.c_str(),
-                  cmdParams.c_str());
+              ;
             }
 
           } else {
@@ -244,12 +234,9 @@ void ScriptReader::loadScriptFile(std::string path) {
                 int scriptNamePos = cmd.find_first_of(':', 0);
                 std::string cmdParams = "";
                 if (scriptNamePos > 0) {
-                  cmdParams = cmd.substr(scriptNamePos + 1,
-                                         cmd.length() - scriptNamePos - 1);
+                  cmdParams = cmd.substr(scriptNamePos + 1, cmd.length() - scriptNamePos - 1);
                   cmd = cmd.substr(0, scriptNamePos);
                 }
-                log("SC> options Sign[%s] text[%s]", cmd.c_str(),
-                    cmdParams.c_str());
                 currentSelect->addOption(cmd, cmdParams);
               }
             } else {
@@ -258,24 +245,19 @@ void ScriptReader::loadScriptFile(std::string path) {
               std::string cmdParams = "";
               std::string face = "";
               if (scriptNamePos < 0) {
-                log("SC Csay Text[%s]", cmd.c_str());
-                SCCharacterSpeak *csCMD =
-                    new SCCharacterSpeak(this, face, std::string(""), cmd, face);
+                std::string empty("");
+                SCCharacterSpeak *csCMD = new SCCharacterSpeak(this, face, empty, cmd, face);
                 cms->push_back(csCMD);
               } else {
-                cmdParams = cmd.substr(scriptNamePos + 1,
-                                       cmd.length() - scriptNamePos - 1);
+                cmdParams = cmd.substr(scriptNamePos + 1, cmd.length() - scriptNamePos - 1);
                 cmd = cmd.substr(0, scriptNamePos);
                 scriptNamePos = cmd.find_first_of('#', 0);
                 if (scriptNamePos > 0) {
-                  face = cmd.substr(scriptNamePos + 1,
-                                    cmd.length() - scriptNamePos - 1);
+                  face = cmd.substr(scriptNamePos + 1, cmd.length() - scriptNamePos - 1);
                   cmd = cmd.substr(0, scriptNamePos);
                 }
-                log("SC Csay CHA[%s] Face[%s] Text[%s]", cmd.c_str(),
-                    face.c_str(), cmdParams.c_str());
-                SCCharacterSpeak *csCMD =
-                    new SCCharacterSpeak(this, std::string(""), cmd, cmdParams, face);
+                std::string empty("");
+                SCCharacterSpeak *csCMD = new SCCharacterSpeak(this, empty, cmd, cmdParams, face);
                 cms->push_back(csCMD);
               }
             }
@@ -287,15 +269,12 @@ void ScriptReader::loadScriptFile(std::string path) {
 }
 
 void ScriptReader::jumpToSign(const std::string &sign) {
-  log("sign: %s", sign.c_str());
   if (sign.compare("") == 0) {
-    log("Sign is null");
     return;
   }
   isWaitingForSelection = false;
   auto list = _scripts.find(sign);
   if (list == _scripts.end()) {
-    log("Sign [%s] not found", sign.c_str());
     return;
   }
   _currentSignName = sign;
@@ -305,21 +284,18 @@ void ScriptReader::jumpToSign(const std::string &sign) {
 
 void ScriptReader::nextScript() {
   if (isWaitingForSelection) {
-    log("waiting");
     return;
   }
   _currentCommandIndex++;
 
   auto list = _scripts.find(_currentSignName);
   if (list == _scripts.end()) {
-    log("No Sign of currentSign [%s]", _currentSignName.c_str());
     return;
   }
 
   std::string readedSign = "readed_" + _currentSignName;
 
-  if (_currentCommandIndex >
-      GameSystem::getInstance()->getHaveRead(readedSign)) {
+  if (_currentCommandIndex > GameSystem::getInstance()->getHaveRead(readedSign)) {
     GameSystem::getInstance()->setHaveRead(readedSign, _currentCommandIndex);
     _isHaveRead = false;
   } else {
@@ -328,20 +304,15 @@ void ScriptReader::nextScript() {
 
   auto cmdList = list->second;
   if (_currentCommandIndex - 1 >= (int)cmdList->size()) {
-    log("End of Script..! CurrentScript");
-
     if (returnToMenu) {
       returnToMenu();
     } else {
-      log("returnToMenu >>> CallBack not linked!!.");
+      ;
     }
     return;
   }
 
   auto cmd = cmdList->at(_currentCommandIndex - 1);
-
-  log("sign = %s, commandIndex = %d", _currentSignName.c_str(),
-      _currentCommandIndex);
 
   switch (cmd->type) {
     case ScriptCommandType::CharacterSpeak:
@@ -381,7 +352,7 @@ void ScriptReader::nextScript() {
       ((SCGameOver *)cmd)->execute(stage);
       break;
     default:
-      log("Unhandle ScriptCommandType [%d]", cmd->type);
+      break;
   }
 }
 
@@ -389,19 +360,15 @@ std::string ScriptReader::getCurrentSignName() { return _currentSignName; }
 
 int ScriptReader::getCurrentCommandIndex() { return _currentCommandIndex; }
 
-void ScriptReader::setCurrentCommandIndex(int value) {
-  _currentCommandIndex = value;
-}
+void ScriptReader::setCurrentCommandIndex(int value) { _currentCommandIndex = value; }
 
 void ScriptReader::jumpToSign(const std::string &sign, int index) {
   if (sign.compare("") == 0) {
-    log("Sign is null");
     return;
   }
   isWaitingForSelection = false;
   auto list = _scripts.find(sign);
   if (list == _scripts.end()) {
-    log("Sign [%s] not found", sign.c_str());
     return;
   }
   _currentSignName = sign;
@@ -410,4 +377,4 @@ void ScriptReader::jumpToSign(const std::string &sign, int index) {
 
 bool ScriptReader::getIsHaveRead() { return _isHaveRead; }
 
-} // namespace yaadv
+}  // namespace yaadv

@@ -1,10 +1,9 @@
 #include "ScriptReader.h"
 
-#include "CharacterManager.h"
 #include "../GameSystem.h"
 #include "../MainMenuScene.h"
+#include "CharacterManager.h"
 #include "SCX.h"
-
 
 USING_NS_CC;
 using namespace yaadv;
@@ -100,13 +99,9 @@ void ScriptReaderYASL::clearScript() {
   isWaitingForSelection = false;
 }
 
-
-
-
-
 int YASL_ns_say(struct YASL_State *st) {
   struct YASL_Object *face = YASL_popobject(st);
-  char * face_str;
+  char *face_str;
   if (YASL_isundef(face) == YASL_SUCCESS) {
     face_str = "";
   } else if (YASL_isstring(face) == YASL_SUCCESS) {
@@ -120,8 +115,7 @@ int YASL_ns_say(struct YASL_State *st) {
     return -1;
   }
 
-  char * text_str = YASL_getcstring(text);
-
+  char *text_str = YASL_getcstring(text);
 
   struct YASL_Object *dname = YASL_popobject(st);
   if (YASL_isstring(dname) != YASL_SUCCESS) {
@@ -130,7 +124,7 @@ int YASL_ns_say(struct YASL_State *st) {
 
   char *dname_str = YASL_getcstring(dname);
 
-    struct YASL_Object *name = YASL_popobject(st);
+  struct YASL_Object *name = YASL_popobject(st);
   if (YASL_isstring(name) != YASL_SUCCESS) {
     return -1;
   }
@@ -138,11 +132,8 @@ int YASL_ns_say(struct YASL_State *st) {
   char *name_str = YASL_getcstring(name);
 
   ScriptReader *reader = ScriptReader::getInstance();
-SCCharacterSpeak sc(reader, 
-			std::string(name_str),		
-	  	std::string(dname_str),		
-			std::string(text_str),
-			std::string(face_str));
+  SCCharacterSpeak sc(reader, std::string(name_str), std::string(dname_str), std::string(text_str),
+                      std::string(face_str));
 
   sc.execute(reader->stage);
   YASL_pushobject(st, YASL_Undef());
@@ -181,8 +172,7 @@ int YASL_ns_fg(struct YASL_State *st) {
   struct YASL_Object *name = YASL_popobject(st);
   char *name_str = YASL_getcstring(name);
   ScriptReader *reader = ScriptReader::getInstance();
-  SCShowFg sc(reader, std::string(name_str),
-                                std::string(face_str));
+  SCShowFg sc(reader, std::string(name_str), std::string(face_str));
 
   sc.execute(reader->stage);
   YASL_pushobject(st, YASL_Undef());
@@ -206,16 +196,15 @@ int YASL_ns_bgm(struct YASL_State *st) {
 
   char *name_str = YASL_getcstring(name);
   ScriptReader *reader = ScriptReader::getInstance();
- SCPlayBGM sc(reader, std::string(name_str));
+  SCPlayBGM sc(reader, std::string(name_str));
 
   sc.execute(reader->stage);
   YASL_pushobject(st, YASL_Undef());
   return 0;
 }
 int YASL_ns_stopbgm(struct YASL_State *st) {
-  
   ScriptReader *reader = ScriptReader::getInstance();
-SCStopBGM sc(reader);
+  SCStopBGM sc(reader);
 
   sc.execute(reader->stage);
   YASL_pushobject(st, YASL_Undef());
@@ -268,10 +257,7 @@ int YASL_ns_set(struct YASL_State *st) {
   }
   char *name_str = YASL_getcstring(name);
   ScriptReader *reader = ScriptReader::getInstance();
-  SCSet sc(reader, 
-									std::string(name_str),
-                                    imark,
-                                    ival);
+  SCSet sc(reader, std::string(name_str), imark, ival);
 
   sc.execute(reader->stage);
   YASL_pushobject(st, YASL_Undef());
@@ -283,20 +269,12 @@ int YASL_ns_select(struct YASL_State *st) {
     return -1;
   }
 
-
-
-
   ScriptReader *reader = ScriptReader::getInstance();
   SCSelect sc(reader);
 
-
-
-  char *key="abc";
-  char *value="def";
-  sc.addOption(std::string(key),
-	  std::string(value));
-
-
+  char *key = "abc";
+  char *value = "def";
+  sc.addOption(std::string(key), std::string(value));
 
   sc.execute(reader->stage);
   YASL_pushobject(st, YASL_Undef());
@@ -318,7 +296,7 @@ int YASL_ns_print(struct YASL_State *st) {
 int YASL_ns_clear(struct YASL_State *st) {
   ScriptReader *reader = ScriptReader::getInstance();
 
-    struct YASL_Object *name = YASL_popobject(st);
+  struct YASL_Object *name = YASL_popobject(st);
 
   int sw = YASL_getinteger(name);
 
@@ -329,10 +307,7 @@ int YASL_ns_clear(struct YASL_State *st) {
   return 0;
 }
 
-
-
 int YASL_ns_leaveimg(struct YASL_State *st) {
-
   struct YASL_Object *name = YASL_popobject(st);
   if (YASL_isstring(name) != YASL_SUCCESS) {
     return -1;
@@ -343,7 +318,7 @@ int YASL_ns_leaveimg(struct YASL_State *st) {
 
   sc.execute(reader->stage);
   YASL_pushobject(st, YASL_Undef());
- // YASL_suspend(st);
+  // YASL_suspend(st);
   return 0;
 }
 
@@ -370,9 +345,6 @@ int YASL_ns_imgtween(struct YASL_State *st) {
   }
   float duration = YASL_getdouble(durtext);
 
-
-
-
   struct YASL_Object *text = YASL_popobject(st);
   if (YASL_isstring(text) != YASL_SUCCESS) {
     return -1;
@@ -384,10 +356,8 @@ int YASL_ns_imgtween(struct YASL_State *st) {
   }
   char *name_str = YASL_getcstring(name);
   ScriptReader *reader = ScriptReader::getInstance();
-  SCImgTween sc(reader, std::string(name_str), std::string(text_str),
-	  duration,
-                              std::string(ease_str),
-                         std::string(face_str));
+  SCImgTween sc(reader, std::string(name_str), std::string(text_str), duration, std::string(ease_str),
+                std::string(face_str));
 
   sc.execute(reader->stage);
   YASL_pushobject(st, YASL_Undef());
@@ -416,8 +386,7 @@ int YASL_ns_img(struct YASL_State *st) {
   }
   char *name_str = YASL_getcstring(name);
   ScriptReader *reader = ScriptReader::getInstance();
-  SCImg sc(reader, std::string(name_str), std::string(text_str),
-                         std::string(face_str));
+  SCImg sc(reader, std::string(name_str), std::string(text_str), std::string(face_str));
 
   sc.execute(reader->stage);
   YASL_pushobject(st, YASL_Undef());
@@ -425,8 +394,7 @@ int YASL_ns_img(struct YASL_State *st) {
   return 0;
 }
 
-static int YASL_load_ns(struct YASL_State *state) 
-{
+static int YASL_load_ns(struct YASL_State *state) {
   struct YASL_Object *ns = YASL_Table();
 
   struct YASL_Object *method1_str = YASL_CString("say");
@@ -453,7 +421,7 @@ static int YASL_load_ns(struct YASL_State *state)
   struct YASL_Object *method6_fn = YASL_CFunction(YASL_ns_stopbgm, 0);
   YASL_Table_set(ns, method6_str, method6_fn);
 
-   struct YASL_Object *method7_str = YASL_CString("jump");
+  struct YASL_Object *method7_str = YASL_CString("jump");
   struct YASL_Object *method7_fn = YASL_CFunction(YASL_ns_jump, 0);
   YASL_Table_set(ns, method7_str, method7_fn);
 
@@ -469,12 +437,11 @@ static int YASL_load_ns(struct YASL_State *state)
   struct YASL_Object *method10_fn = YASL_CFunction(YASL_ns_print, 1);
   YASL_Table_set(ns, method10_str, method10_fn);
 
-   struct YASL_Object *method11_str = YASL_CString("clear");
+  struct YASL_Object *method11_str = YASL_CString("clear");
   struct YASL_Object *method11_fn = YASL_CFunction(YASL_ns_clear, 1);
   YASL_Table_set(ns, method11_str, method11_fn);
 
-
-     struct YASL_Object *method12_str = YASL_CString("img");
+  struct YASL_Object *method12_str = YASL_CString("img");
   struct YASL_Object *method12_fn = YASL_CFunction(YASL_ns_img, 3);
   YASL_Table_set(ns, method12_str, method12_fn);
 
@@ -482,14 +449,13 @@ static int YASL_load_ns(struct YASL_State *state)
   struct YASL_Object *method13_fn = YASL_CFunction(YASL_ns_imgtween, 5);
   YASL_Table_set(ns, method13_str, method13_fn);
 
-  
-     struct YASL_Object *method14_str = YASL_CString("leaveimg");
+  struct YASL_Object *method14_str = YASL_CString("leaveimg");
   struct YASL_Object *method14_fn = YASL_CFunction(YASL_ns_leaveimg, 1);
   YASL_Table_set(ns, method14_str, method12_fn);
- // struct YASL_Object *read_str = YASL_CString("read");
- // struct YASL_Object *read_fn = YASL_CFunction(YASL_io_read, 2);
+  // struct YASL_Object *read_str = YASL_CString("read");
+  // struct YASL_Object *read_fn = YASL_CFunction(YASL_io_read, 2);
 
- // YASL_Table_set(ns, read_str, read_fn);
+  // YASL_Table_set(ns, read_str, read_fn);
 
   YASL_declglobal(state, "ns");
   YASL_pushobject(state, ns);
@@ -500,7 +466,6 @@ static int YASL_load_ns(struct YASL_State *state)
   free(method2_str);
   free(method2_fn);
 
-  
   free(method3_str);
   free(method3_fn);
   free(method4_str);
@@ -528,7 +493,7 @@ static int YASL_load_ns(struct YASL_State *state)
   free(method14_str);
   free(method14_fn);
   //  free(read_str);
-//  free(read_fn);
+  //  free(read_fn);
 
   return (int)YASL_SUCCESS;
 }
@@ -543,28 +508,23 @@ void ScriptReaderYASL::loadScriptFile(std::string path) {
 
   std::string currentSign = "default";
 
-  log("LoadScript::>");
-
   SCSelect *currentSelect = nullptr;
 
   if (this->_yaslstate != 0) abort();
   const char *src = (ss.c_str());
   this->_yaslstate = YASL_newstate_bb((char *)src, strlen(src));
-  //YASL_load_io(this->_yaslstate);
+  // YASL_load_io(this->_yaslstate);
   YASL_load_ns(this->_yaslstate);
   YASL_load(this->_yaslstate);
 }
 
 void ScriptReaderYASL::jumpToSign(const std::string &sign) {
-  log("sign: %s", sign.c_str());
   if (sign.compare("") == 0) {
-    log("Sign is null");
     return;
   }
   isWaitingForSelection = false;
   auto list = _scripts.find(sign);
   if (list == _scripts.end()) {
-    log("Sign [%s] not found", sign.c_str());
     return;
   }
   _currentSignName = sign;
@@ -588,7 +548,6 @@ void ScriptReaderYASL::runTick() {
 
 void ScriptReaderYASL::nextScript() {
   if (isWaitingForSelection) {
-    log("waiting");
     return;
   }
   if (this->_currentAction) stage->stopAction(this->_currentAction);
@@ -599,104 +558,22 @@ void ScriptReaderYASL::nextScript() {
   auto seq = Sequence::create(repeat, nullptr);
   this->_currentAction = seq;
   stage->runAction(seq);
-
-#if 0
-  _currentCommandIndex++;
-
-  auto list = _scripts.find(_currentSignName);
-  if (list == _scripts.end()) {
-    log("No Sign of currentSign [%s]", _currentSignName.c_str());
-    return;
-  }
-
-  std::string readedSign = "readed_" + _currentSignName;
-
-  if (_currentCommandIndex >
-      GameSystem::getInstance()->getHaveRead(readedSign)) {
-    GameSystem::getInstance()->setHaveRead(readedSign, _currentCommandIndex);
-    _isHaveRead = false;
-  } else {
-    _isHaveRead = true;
-  }
-
-  auto cmdList = list->second;
-  if (_currentCommandIndex - 1 >= (int)cmdList->size()) {
-    log("End of Script..! CurrentScript");
-
-    if (returnToMenu) {
-      returnToMenu();
-    } else {
-      log("returnToMenu >>> CallBack not linked!!.");
-    }
-    return;
-  }
-
-  auto cmd = cmdList->at(_currentCommandIndex - 1);
-
-  log("sign = %s, commandIndex = %d", _currentSignName.c_str(),
-      _currentCommandIndex);
-
-  switch (cmd->type) {
-    case ScriptCommandType::CharacterSpeak:
-      ((SCCharacterSpeak *)cmd)->execute(stage);
-      break;
-    case ScriptCommandType::Leave:
-      ((SCLeave *)cmd)->execute(stage);
-      break;
-    case ScriptCommandType::Jump:
-      ((SCJump *)cmd)->execute(stage);
-      break;
-    case ScriptCommandType::Select:
-      ((SCSelect *)cmd)->execute(stage);
-      break;
-    case ScriptCommandType::Background:
-      ((SCBackground *)cmd)->execute(stage);
-      break;
-    case ScriptCommandType::PlayBGM:
-      ((SCPlayBGM *)cmd)->execute(stage);
-      break;
-    case ScriptCommandType::StopBGM:
-      ((SCStopBGM *)cmd)->execute(stage);
-      break;
-    case ScriptCommandType::PlaySd:
-      ((SCPlaySound *)cmd)->execute(stage);
-      break;
-    case ScriptCommandType::StopSd:
-      ((SCStopSound *)cmd)->execute(stage);
-      break;
-    case ScriptCommandType::Set:
-      ((SCSet *)cmd)->execute(stage);
-      break;
-    case ScriptCommandType::If:
-      ((SCIf *)cmd)->execute(stage);
-      break;
-    case ScriptCommandType::GameOver:
-      ((SCGameOver *)cmd)->execute(stage);
-      break;
-    default:
-      log("Unhandle ScriptCommandType [%d]", cmd->type);
-  }
-#endif
 }
 
 std::string ScriptReaderYASL::getCurrentSignName() { return _currentSignName; }
 
 int ScriptReaderYASL::getCurrentCommandIndex() { return _currentCommandIndex; }
 
-void ScriptReaderYASL::setCurrentCommandIndex(int value) {
-  _currentCommandIndex = value;
-}
+void ScriptReaderYASL::setCurrentCommandIndex(int value) { _currentCommandIndex = value; }
 
 void ScriptReaderYASL::jumpToSign(const std::string &sign, int index) {
   if (sign.compare("") == 0) {
-    log("Sign is null");
     return;
   }
 #if 0
   isWaitingForSelection = false;
   auto list = _scripts.find(sign);
   if (list == _scripts.end()) {
-    log("Sign [%s] not found", sign.c_str());
     return;
   }
 #endif

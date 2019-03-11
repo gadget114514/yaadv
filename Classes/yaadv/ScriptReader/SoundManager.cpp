@@ -18,8 +18,7 @@ namespace yaadv {
 
 SoundManager* SoundManager::_instance = nullptr;
 
-static int snd_handler(void* user, const char* section, const char* name,
-                       const char* value, int lineno)
+static int snd_handler(void* user, const char* section, const char* name, const char* value, int lineno)
 
 {
   SoundManager* bm = (SoundManager*)user;
@@ -28,7 +27,6 @@ static int snd_handler(void* user, const char* section, const char* name,
   snd = "yaadv/sound/" + snd + ".mp3";
 
   bm->addSound(key, snd);
-  log("SM#addSound[%s]", key.c_str());
   return 0;
 }
 
@@ -53,7 +51,7 @@ SoundManager::SoundManager() : _pool(nullptr) {
     snd = "sound/" + snd + ".mp3";
 
     bm->addSound(key, snd);
-	}
+  }
 
 #elif USEINI
 
@@ -73,7 +71,6 @@ SoundManager::SoundManager() : _pool(nullptr) {
     ePos = ss.find('\n', sPos);
     temp = ss.substr(sPos, ePos - sPos - 1);
     if (temp.compare("") == 0) {
-      log("SM> Load Sound ending");
       break;
     }
     sPos = ePos + 1;
@@ -83,44 +80,39 @@ SoundManager::SoundManager() : _pool(nullptr) {
     sound = temp.substr(tempPos + 1, temp.length() - tempPos - 1);
     sound = "sound/" + sound + ".mp3";
 
-    log("soundkey = %s , soundPath = %s", key.c_str(), sound.c_str());
-
     addSound(key, sound);
-    log("SM> addSound[%s]", key.c_str());
   }
 #endif
+}
+
+SoundManager::~SoundManager() {
+  if (_pool) {
+    _pool->clear();
+    CC_SAFE_DELETE(_pool);
   }
+}
 
-  SoundManager::~SoundManager() {
-    if (_pool) {
-      _pool->clear();
-      CC_SAFE_DELETE(_pool);
-    }
+void SoundManager::addSound(std::string key, std::string sound) {
+  _pool->insert(std::pair<std::string, std::string>(key, sound));
+}
+
+std::string SoundManager::getSound(std::string key) {
+  auto result = _pool->find(key);
+  if (result != _pool->end()) {
+    return result->second;
+  } else {
+    defaultSound = "";
+    return defaultSound;
   }
+}
 
-  void SoundManager::addSound(std::string key, std::string sound) {
-    _pool->insert(std::pair<std::string, std::string>(key, sound));
+SoundManager* SoundManager::getInstance() {
+  if (_instance == nullptr) {
+    _instance = new SoundManager();
   }
+  return _instance;
+}
 
-  std::string SoundManager::getSound(std::string key) {
-    auto result = _pool->find(key);
-    if (result != _pool->end()) {
-      return result->second;
-    } else {
-      log("SM> Not found &s", key.c_str());
-      defaultSound = "";
-      return defaultSound;
-    }
-  }
+void SoundManager::destoryInstance() { CC_SAFE_DELETE(_instance); }
 
-  SoundManager* SoundManager::getInstance() {
-    if (_instance == nullptr) {
-      _instance = new SoundManager();
-    }
-    return _instance;
-  }
-
-  void SoundManager::destoryInstance() { CC_SAFE_DELETE(_instance); }
-
-  
 }  // namespace yaadv

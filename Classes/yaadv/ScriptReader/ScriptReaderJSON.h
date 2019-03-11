@@ -5,25 +5,21 @@
 USING_NS_CC;
 struct Character;
 
-
 #include "ScriptReader.h"
 #include "json.hpp"
 
 namespace yaadv {
 class ScriptReaderJSON : public ScriptReader {
  public:
-
-
   //  std::map<std::string, std::vector<ScriptCommand *> *> _scripts;
 
   //  std::map<std::string, int> _record;
   //  bool _isHaveRead;
 
-  //std::string _currentSignName;
-//   int _currentCommandIndex;
+  // std::string _currentSignName;
+  //   int _currentCommandIndex;
 
   static ScriptReaderJSON *_instance;
-
 
   cocos2d::FiniteTimeAction *_currentAction;
 

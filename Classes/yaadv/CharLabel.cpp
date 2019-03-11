@@ -20,8 +20,7 @@ CharLabel::CharLabel()
 
 CharLabel::~CharLabel() {}
 
-CharLabel *CharLabel::create(const std::string text, int fontSize,
-                             std::function<void()> callback) {
+CharLabel *CharLabel::create(const std::string text, int fontSize, std::function<void()> callback) {
   CharLabel *ret = new CharLabel();
   if (ret && ret->init(text, fontSize)) {
     ret->_showFinishCallback = callback;
@@ -55,8 +54,7 @@ void CharLabel::setString(const std::string text) {
 void CharLabel::finishShow() {
   removeAllChildren();
   _charLabel = Label::createWithSystemFont(_text, "arial", _defaultFontSize);
-  _charLabel->setDimensions(this->getContentSize().width,
-                            this->getContentSize().height);
+  _charLabel->setDimensions(this->getContentSize().width, this->getContentSize().height);
   _charLabel->setAnchorPoint(Vec2::ANCHOR_TOP_LEFT);
   _charLabel->setColor(_defaultFontColor);
 
@@ -71,8 +69,7 @@ void CharLabel::finishShow() {
 }
 
 void CharLabel::showNextChar() {
-  if ((_text.length() > 0 && _text[_text.length() - 1] == 13) ||
-      _pos >= (int)_text.length()) {
+  if ((_text.length() > 0 && _text[_text.length() - 1] == 13) || _pos >= (int)_text.length()) {
     _isRunning = false;
     if (_showFinishCallback) {
       _showFinishCallback();
@@ -93,8 +90,7 @@ void CharLabel::showNextChar() {
     charString = getNextChar(_text, _pos);
   }
 
-  auto tmpLabel =
-      Label::createWithSystemFont(charString, "arial", _defaultFontSize);
+  auto tmpLabel = Label::createWithSystemFont(charString, "arial", _defaultFontSize);
   tmpLabel->setAnchorPoint(Vec2::ANCHOR_TOP_LEFT);
   Node::addChild(tmpLabel);
   tmpLabel->setColor(_defaultFontColor);
@@ -110,9 +106,8 @@ void CharLabel::showNextChar() {
     _x += tmpLabel->getContentSize().width;
   }
 
-  tmpLabel->runAction(Sequence::createWithTwoActions(
-      DelayTime::create(_defaultDelayTime),
-      CallFunc::create(CC_CALLBACK_0(CharLabel::showNextChar, this))));
+  tmpLabel->runAction(Sequence::createWithTwoActions(DelayTime::create(_defaultDelayTime),
+                                                     CallFunc::create(CC_CALLBACK_0(CharLabel::showNextChar, this))));
   _charLabel = tmpLabel;
 }
 

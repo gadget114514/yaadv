@@ -34,7 +34,6 @@ class HistoryScene : public Layer {
   void back();
 };
 
-
 }  // namespace yaadv
 
 #endif

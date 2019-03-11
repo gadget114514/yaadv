@@ -9,8 +9,7 @@
 #include "AudioHelper.h"
 
 #if USE_AUDIO_ENGINE && USE_SIMPLE_AUDIO_ENGINE
-#error \
-    "Don't use AudioEngine and SimpleAudioEngine at the same time. Please just select one in your game!"
+#error "Don't use AudioEngine and SimpleAudioEngine at the same time. Please just select one in your game!"
 #endif
 
 #if USE_AUDIO_ENGINE
@@ -50,12 +49,10 @@ bool AppDelegate::applicationDidFinishLaunching() {
   auto director = Director::getInstance();
   auto glview = director->getOpenGLView();
   if (!glview) {
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32) || \
-    (CC_TARGET_PLATFORM == CC_PLATFORM_MAC) ||   \
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32) || (CC_TARGET_PLATFORM == CC_PLATFORM_MAC) || \
     (CC_TARGET_PLATFORM == CC_PLATFORM_LINUX)
-    glview = GLViewImpl::createWithRect(
-        "YAADV", cocos2d::Rect(0, 0, designResolutionSize.width,
-                                     designResolutionSize.height));
+    glview = GLViewImpl::createWithRect("YAADV",
+                                        cocos2d::Rect(0, 0, designResolutionSize.width, designResolutionSize.height));
 #else
     glview = GLViewImpl::create("YAADV");
 #endif
@@ -66,27 +63,22 @@ bool AppDelegate::applicationDidFinishLaunching() {
 
   director->setAnimationInterval(1.0f / 60);
 
-  glview->setDesignResolutionSize(designResolutionSize.width,
-                                  designResolutionSize.height,
-                                  ResolutionPolicy::SHOW_ALL);
+  glview->setDesignResolutionSize(designResolutionSize.width, designResolutionSize.height, ResolutionPolicy::SHOW_ALL);
   auto frameSize = glview->getFrameSize();
 
   if (frameSize.height > mediumResolutionSize.height) {
-    director->setContentScaleFactor(
-        MIN(largeResolutionSize.height / designResolutionSize.height,
-            largeResolutionSize.width / designResolutionSize.width));
+    director->setContentScaleFactor(MIN(largeResolutionSize.height / designResolutionSize.height,
+                                        largeResolutionSize.width / designResolutionSize.width));
   }
 
   else if (frameSize.height > smallResolutionSize.height) {
-    director->setContentScaleFactor(
-        MIN(mediumResolutionSize.height / designResolutionSize.height,
-            mediumResolutionSize.width / designResolutionSize.width));
+    director->setContentScaleFactor(MIN(mediumResolutionSize.height / designResolutionSize.height,
+                                        mediumResolutionSize.width / designResolutionSize.width));
   }
 
   else {
-    director->setContentScaleFactor(
-        MIN(smallResolutionSize.height / designResolutionSize.height,
-            smallResolutionSize.width / designResolutionSize.width));
+    director->setContentScaleFactor(MIN(smallResolutionSize.height / designResolutionSize.height,
+                                        smallResolutionSize.width / designResolutionSize.width));
   }
 
   register_all_packages();

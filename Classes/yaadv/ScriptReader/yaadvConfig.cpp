@@ -17,56 +17,44 @@ using namespace yaadv;
 #define BGLISTPATH "yaadvconfig.txt"
 #endif
 
-
 USING_NS_CC;
 
 namespace yaadv {
 
- Config *Config::_instance = nullptr;
+Config* Config::_instance = nullptr;
 
-
- Config *Config::getInstance()
-{
+Config* Config::getInstance() {
   if (_instance == nullptr) {
     _instance = new Config();
   }
   return _instance;
 }
 
-
-static int config_handler(void* user, const char* section, const char* name,
-                        const char* value, int lineno)
+static int config_handler(void* user, const char* section, const char* name, const char* value, int lineno)
 
 {
-
- Config* c = (Config*)user;
+  Config* c = (Config*)user;
   std::string key(name);
   std::string v(value);
   c->vars[key] = v;
-  
+
   return 0;
 }
 
 bool Config::load(std::string data) {
-	#if USEJSON	
-	#elif USEINI
-    ini_parse_string(data.c_str(), config_handler, this);
+#if USEJSON
+#elif USEINI
+  ini_parse_string(data.c_str(), config_handler, this);
 #else
 #endif
-	
-	return true;
+
+  return true;
 }
 
 bool Config::loadFile(std::string data) {
-	  std::string ss = FileUtils::getInstance()->getStringFromFile(data);
-	  load(ss);
-	return true;
+  std::string ss = FileUtils::getInstance()->getStringFromFile(data);
+  load(ss);
+  return true;
 }
 
-
-
-
-
 }  // namespace yaadv
-
-

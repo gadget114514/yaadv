@@ -26,17 +26,14 @@ class Between {
   const static int UNDEFINED_POSITION;
   const static int MAX_OPACITY;
 
-  static cocos2d::ActionInterval* getEasing(cocos2d::ActionInterval* action,
-                                            float duration, Easing easing);
+  static cocos2d::ActionInterval* getEasing(cocos2d::ActionInterval* action, float duration, Easing easing);
 
  public:
-  static cocos2d::Spawn* to(cocos2d::Node* node, std::string to, float duration,
-                            Easing easing,
-	  bool relative=false);
-  static cocos2d::Spawn* from(cocos2d::Node* node, std::string from,
-                              float duration, Easing easing, bool relative=false);
-  static cocos2d::Spawn* tween(cocos2d::Node* node, std::string to,
-                               std::string from, float duration, Easing easing, bool relative=false);
-  static Easing easing(std::string&s);
+  static cocos2d::Spawn* to(cocos2d::Node* node, std::string to, float duration, Easing easing, bool relative = false);
+  static cocos2d::Spawn* from(cocos2d::Node* node, std::string from, float duration, Easing easing,
+                              bool relative = false);
+  static cocos2d::Spawn* tween(cocos2d::Node* node, std::string to, std::string from, float duration, Easing easing,
+                               bool relative = false);
+  static Easing easing(std::string& s);
 };
 };  // namespace yaadv

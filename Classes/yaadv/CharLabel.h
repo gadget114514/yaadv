@@ -32,8 +32,7 @@ class CharLabel : public cocos2d::Node {
   CharLabel();
   ~CharLabel();
 
-  static CharLabel *create(const std::string text, int fontSize = 24,
-                           std::function<void()> callback = nullptr);
+  static CharLabel *create(const std::string text, int fontSize = 24, std::function<void()> callback = nullptr);
   bool init(const std::string text, int fontSize);
 
   void setString(const std::string text);
@@ -42,9 +41,7 @@ class CharLabel : public cocos2d::Node {
 
   static std::string getNextChar(const std::string src, int pos);
 
-  void setShowFinishCallback(std::function<void()> callback) {
-    _showFinishCallback = callback;
-  }
+  void setShowFinishCallback(std::function<void()> callback) { _showFinishCallback = callback; }
 
   void setColor(Color3B color) { _defaultFontColor = color; }
 
