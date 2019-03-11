@@ -156,7 +156,7 @@ void SaveData::updataData(bool isNeedReloadImage) {
     dataNumber->setPosition(Vec2(25, 105));
     _stageLayer->addChild(dataNumber);
 
-    _dataImage = Sprite::create(vars["yaadv/ui/saveload/pic_bg.png"]);
+    _dataImage = Sprite::create(vars["yaadv/ui/sl/pic_bg.png"]);
     _dataImage->setAnchorPoint(Vec2::ANCHOR_MIDDLE_LEFT);
     _dataImage->setPosition(70, _stageLayer->getContentSize().height / 2);
 

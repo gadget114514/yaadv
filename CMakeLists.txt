@@ -50,8 +50,10 @@ endif()
 
 include_directories(
         Classes
-        ${COCOS2DX_ROOT_PATH}/cocos/audio/include/
-	${COCOS2DX_ROOT_PATH}/../yasl
+        ${COCOS2DX_ROOT_PATH}/cocos/audio/include
+	${COCOS2DX_ROOT_PATH}/../wren/src/include
+	${COCOS2DX_ROOT_PATH}/../wren/src/vm
+	${COCOS2DX_ROOT_PATH}/../wren/src/optional
 )
 # add cross-platforms source files and header files 
 list(APPEND GAME_SOURCE
@@ -62,23 +64,11 @@ Classes/MainMenuScene.cpp
 Classes/HelloWorldScene.cpp
 Classes/AppDelegate.cpp
 Classes/ScriptReader/BackgroundManager.cpp
-Classes/ScriptReader/SCStopSound.cpp
-Classes/ScriptReader/SCStopBGM.cpp
 Classes/ScriptReader/ScriptReader.cpp
-Classes/ScriptReader/SCCharacterSpeak.cpp
+Classes/ScriptReader/SCX.cpp
 Classes/ScriptReader/BackgroundMusicManager.cpp
-Classes/ScriptReader/SCIf.cpp
-Classes/ScriptReader/SCLeave.cpp
-Classes/ScriptReader/SCSelect.cpp
-Classes/ScriptReader/SCSet.cpp
 Classes/ScriptReader/SoundManager.cpp
-Classes/ScriptReader/SCJump.cpp
-Classes/ScriptReader/SCPlaySound.cpp
-Classes/ScriptReader/SCPlayBGM.cpp
 Classes/ScriptReader/CharacterManager.cpp
-Classes/ScriptReader/SCShowFg.cpp
-Classes/ScriptReader/SCBackground.cpp
-Classes/ScriptReader/SCGameOver.cpp
 Classes/ScriptReader/ScriptCommand.cpp
 Classes/HistoryScene.cpp
 Classes/SaveData.cpp
@@ -106,20 +96,10 @@ Classes/ScriptReader/SCLeave.h
 Classes/ScriptReader/CharacterManager.h
 Classes/ScriptReader/BackgroundManager.h
 Classes/ScriptReader/ScriptReader.h
-Classes/ScriptReader/SCPlaySound.h
-Classes/ScriptReader/SCPlayBGM.h
-Classes/ScriptReader/SCSet.h
 Classes/ScriptReader/ScriptCommand.h
 Classes/ScriptReader/SoundManager.h
-Classes/ScriptReader/SCStopBGM.h
-Classes/ScriptReader/SCStopSound.h
+Classes/ScriptReader/SCX.h
 Classes/ScriptReader/BackgroundMusicManager.h
-Classes/ScriptReader/SCBackground.h
-Classes/ScriptReader/SCCharacterSpeak.h
-Classes/ScriptReader/SCJump.h
-Classes/ScriptReader/SCSelect.h
-Classes/ScriptReader/SCIf.h
-Classes/ScriptReader/SCGameOver.h
 Classes/AudioHelper.h
 Classes/GameSystem.h
 Classes/HelloWorldScene.h
@@ -192,9 +172,9 @@ endif()
 
 # mark app complie info and libs info
 
-add_library(yasllib STATIC IMPORTED)
-set_target_properties(yasllib PROPERTIES IMPORTED_LOCATION
-  "${COCOS2DX_ROOT_PATH}/../yasl/build/libyaslapi.a")
+add_library(wrenlib STATIC IMPORTED)
+set_target_properties(wrenlib PROPERTIES IMPORTED_LOCATION
+  "${COCOS2DX_ROOT_PATH}/../wren/build/libwren.a")
 
 
 set(APP_SRC
@@ -203,7 +183,7 @@ set(APP_SRC
     )
 cocos_build_app(${APP_NAME}
                 APP_SRC "${APP_SRC}"
-                DEPEND_COMMON_LIBS "cocos2d" "yasllib"
+                DEPEND_COMMON_LIBS "cocos2d" "wrenlib"
                 DEPEND_ANDROID_LIBS "cocos2d_android"
                 )
 

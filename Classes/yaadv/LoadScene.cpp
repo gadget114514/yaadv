@@ -45,6 +45,12 @@ bool LoadScene::init() {
                                      visibleSize.height / 2 + origin.y));
   stageLayer->addChild(backgroundWindow);
 
+  auto titletxt = Sprite::create(vars["yaadv/ui/sl/txt_load.png"]);
+  titletxt->setPosition(Vec2(
+	  origin.x + 170,
+	  visibleSize.height + origin.y - 90));
+  stageLayer->addChild(titletxt);
+
   _savedataLayer = Node::create();
   stageLayer->addChild(_savedataLayer);
 

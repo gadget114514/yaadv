@@ -43,20 +43,26 @@ bool SettingScene::init() {
                                   visibleSize.height / 2 + origin.y));
   stageLayer->addChild(backgroundBox);
 
+  auto titletxt = Sprite::create(vars["yaadv/ui/config/txt_config.png"]);
+  titletxt->setPosition(Vec2(
+	  origin.x + 170,
+	  visibleSize.height + origin.y - 90));
+  stageLayer->addChild(titletxt);
+
   auto textSpeedTxtPh = Sprite::create(vars["yaadv/ui/config/txt_textspeed.jpg"]);
-  textSpeedTxtPh->setPosition(Vec2(325 + origin.x, 510 + origin.y));
+  textSpeedTxtPh->setPosition(Vec2(430 + origin.x, 510 + origin.y));
   stageLayer->addChild(textSpeedTxtPh);
   auto autoSpeedTxtPh =
       Sprite::create(vars["yaadv/ui/config/txt_autospeed.jpg"]);
-  autoSpeedTxtPh->setPosition(Vec2(325 + origin.x, 442 + origin.y));
+  autoSpeedTxtPh->setPosition(Vec2(430 + origin.x, 442 + origin.y));
   stageLayer->addChild(autoSpeedTxtPh);
   auto bgmvolTxtPh =
       Sprite::create(vars["yaadv/ui/config/txt_bgmvol.jpg"]);
-  bgmvolTxtPh->setPosition(Vec2(325 + origin.x, 374 + origin.y));
+  bgmvolTxtPh->setPosition(Vec2(430 + origin.x, 374 + origin.y));
   stageLayer->addChild(bgmvolTxtPh);
   auto sevolTxtPh =
       Sprite::create(vars["yaadv/ui/config/txt_sevol.jpg"]);
-  sevolTxtPh->setPosition(Vec2(325 + origin.x, 306 + origin.y));
+  sevolTxtPh->setPosition(Vec2(430 + origin.x, 306 + origin.y));
   stageLayer->addChild(sevolTxtPh);
   auto skipreadonlyTxtPh =
       Sprite::create(vars["yaadv/ui/config/txt_skipreadonly.jpg"]);
