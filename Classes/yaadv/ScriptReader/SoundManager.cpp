@@ -18,8 +18,7 @@ namespace yaadv {
 
 SoundManager* SoundManager::_instance = nullptr;
 
-static int snd_handler(void* user, const char* section, const char* name,
-                       const char* value, int lineno)
+static int snd_handler(void* user, const char* section, const char* name, const char* value, int lineno)
 
 {
   SoundManager* bm = (SoundManager*)user;
@@ -52,7 +51,7 @@ SoundManager::SoundManager() : _pool(nullptr) {
     snd = "sound/" + snd + ".mp3";
 
     bm->addSound(key, snd);
-	}
+  }
 
 #elif USEINI
 
@@ -84,37 +83,36 @@ SoundManager::SoundManager() : _pool(nullptr) {
     addSound(key, sound);
   }
 #endif
+}
+
+SoundManager::~SoundManager() {
+  if (_pool) {
+    _pool->clear();
+    CC_SAFE_DELETE(_pool);
   }
+}
 
-  SoundManager::~SoundManager() {
-    if (_pool) {
-      _pool->clear();
-      CC_SAFE_DELETE(_pool);
-    }
+void SoundManager::addSound(std::string key, std::string sound) {
+  _pool->insert(std::pair<std::string, std::string>(key, sound));
+}
+
+std::string SoundManager::getSound(std::string key) {
+  auto result = _pool->find(key);
+  if (result != _pool->end()) {
+    return result->second;
+  } else {
+    defaultSound = "";
+    return defaultSound;
   }
+}
 
-  void SoundManager::addSound(std::string key, std::string sound) {
-    _pool->insert(std::pair<std::string, std::string>(key, sound));
+SoundManager* SoundManager::getInstance() {
+  if (_instance == nullptr) {
+    _instance = new SoundManager();
   }
+  return _instance;
+}
 
-  std::string SoundManager::getSound(std::string key) {
-    auto result = _pool->find(key);
-    if (result != _pool->end()) {
-      return result->second;
-    } else {
-      defaultSound = "";
-      return defaultSound;
-    }
-  }
+void SoundManager::destoryInstance() { CC_SAFE_DELETE(_instance); }
 
-  SoundManager* SoundManager::getInstance() {
-    if (_instance == nullptr) {
-      _instance = new SoundManager();
-    }
-    return _instance;
-  }
-
-  void SoundManager::destoryInstance() { CC_SAFE_DELETE(_instance); }
-
-  
 }  // namespace yaadv

@@ -1,8 +1,6 @@
 #pragma once
 #include "cocos2d.h"
 
-
-
 namespace yaadv {
 class ScriptReader;
 enum ScriptCommandType {

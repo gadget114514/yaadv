@@ -22,20 +22,17 @@ using namespace std;
 static HINSTANCE s_hInstance;
 static MCIERROR s_mciError;
 
-LRESULT WINAPI _SoundPlayProc(HWND hWnd, UINT Msg, WPARAM wParam,
-                              LPARAM lParam);
+LRESULT WINAPI _SoundPlayProc(HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam);
 
 class MMPlayer {
-  void _SendGenericCommand(int nCommand, DWORD_PTR param1 = 0,
-                           DWORD_PTR parma2 = 0) {
+  void _SendGenericCommand(int nCommand, DWORD_PTR param1 = 0, DWORD_PTR parma2 = 0) {
     if (!_dev) {
       return;
     }
     mciSendCommand(_dev, nCommand, param1, parma2);
   }
 
-  friend LRESULT WINAPI _SoundPlayProc(HWND hWnd, UINT Msg, WPARAM wParam,
-                                       LPARAM lParam) {
+  friend LRESULT WINAPI _SoundPlayProc(HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam) {
     MMPlayer *pPlayer = NULL;
     if (MM_MCINOTIFY == Msg && MCI_NOTIFY_SUCCESSFUL == wParam &&
         (pPlayer = (MMPlayer *)GetWindowLongPtr(hWnd, GWLP_USERDATA))) {
@@ -48,8 +45,7 @@ class MMPlayer {
 
         MCI_PLAY_PARMS mciPlay = {0};
         mciPlay.dwCallback = reinterpret_cast<DWORD_PTR>(hWnd);
-        mciSendCommand(lParam, MCI_PLAY, MCI_NOTIFY,
-                       reinterpret_cast<DWORD_PTR>(&mciPlay));
+        mciSendCommand(lParam, MCI_PLAY, MCI_NOTIFY, reinterpret_cast<DWORD_PTR>(&mciPlay));
       } else {
         pPlayer->_playing = false;
       }
@@ -66,13 +62,7 @@ class MMPlayer {
   std::string strExt;
 
  public:
-  MMPlayer()
-      : _wnd(NULL),
-        _dev(0L),
-        _soundID(0),
-        _times(0),
-        _playing(false),
-        strExt("") {
+  MMPlayer() : _wnd(NULL), _dev(0L), _soundID(0), _times(0), _playing(false), strExt("") {
     if (!s_hInstance) {
       s_hInstance = GetModuleHandle(NULL);
 
@@ -94,9 +84,8 @@ class MMPlayer {
       }
     }
 
-    _wnd = CreateWindowEx(WS_EX_APPWINDOW, _T(WIN_CLASS_NAME), NULL,
-                          WS_POPUPWINDOW, 0, 0, 0, 0, NULL, NULL, s_hInstance,
-                          NULL);
+    _wnd = CreateWindowEx(WS_EX_APPWINDOW, _T(WIN_CLASS_NAME), NULL, WS_POPUPWINDOW, 0, 0, 0, 0, NULL, NULL,
+                          s_hInstance, NULL);
     if (_wnd) {
       SetWindowLongPtr(_wnd, GWLP_USERDATA, (LONG_PTR) this);
     }
@@ -118,10 +107,7 @@ class MMPlayer {
 
     MCI_PLAY_PARMS mciPlay = {0};
     mciPlay.dwCallback = reinterpret_cast<DWORD_PTR>(_wnd);
-    _playing = mciSendCommand(_dev, MCI_PLAY, MCI_NOTIFY,
-                              reinterpret_cast<DWORD_PTR>(&mciPlay))
-                   ? false
-                   : true;
+    _playing = mciSendCommand(_dev, MCI_PLAY, MCI_NOTIFY, reinterpret_cast<DWORD_PTR>(&mciPlay)) ? false : true;
   }
 
   void Stop() {
@@ -135,11 +121,9 @@ class MMPlayer {
       MCI_STATUS_PARMS mciStatusParms;
       MCI_PLAY_PARMS mciPlayParms;
       mciStatusParms.dwItem = MCI_STATUS_POSITION;
-      _SendGenericCommand(MCI_STATUS, MCI_STATUS_ITEM,
-                          reinterpret_cast<DWORD_PTR>(&mciStatusParms));
+      _SendGenericCommand(MCI_STATUS, MCI_STATUS_ITEM, reinterpret_cast<DWORD_PTR>(&mciStatusParms));
       mciPlayParms.dwFrom = mciStatusParms.dwReturn;
-      _SendGenericCommand(MCI_PLAY, MCI_FROM,
-                          reinterpret_cast<DWORD_PTR>(&mciPlayParms));
+      _SendGenericCommand(MCI_PLAY, MCI_FROM, reinterpret_cast<DWORD_PTR>(&mciPlayParms));
     } else {
       _SendGenericCommand(MCI_RESUME);
       _playing = true;
@@ -168,8 +152,7 @@ class MMPlayer {
     }
     MCI_PLAY_PARMS mciPlay = {0};
     mciPlay.dwCallback = reinterpret_cast<DWORD_PTR>(_wnd);
-    s_mciError = mciSendCommand(_dev, MCI_PLAY, MCI_FROM | MCI_NOTIFY,
-                                reinterpret_cast<DWORD_PTR>(&mciPlay));
+    s_mciError = mciSendCommand(_dev, MCI_PLAY, MCI_FROM | MCI_NOTIFY, reinterpret_cast<DWORD_PTR>(&mciPlay));
     if (!s_mciError) {
       _playing = true;
       _times = uTimes;
@@ -191,12 +174,10 @@ class MMPlayer {
       mciOpen.lpstrDeviceType = (LPCTSTR)MCI_ALL_DEVICE_ID;
       WCHAR *fileNameWideChar = new WCHAR[nLen + 1];
       BREAK_IF(!fileNameWideChar);
-      MultiByteToWideChar(CP_ACP, 0, pFileName, nLen + 1, fileNameWideChar,
-                          nLen + 1);
+      MultiByteToWideChar(CP_ACP, 0, pFileName, nLen + 1, fileNameWideChar, nLen + 1);
       mciOpen.lpstrElementName = fileNameWideChar;
 
-      mciError = mciSendCommand(0, MCI_OPEN, MCI_OPEN_ELEMENT,
-                                reinterpret_cast<DWORD_PTR>(&mciOpen));
+      mciError = mciSendCommand(0, MCI_OPEN, MCI_OPEN_ELEMENT, reinterpret_cast<DWORD_PTR>(&mciOpen));
       CC_SAFE_DELETE_ARRAY(mciOpen.lpstrElementName);
       BREAK_IF(mciError);
 
@@ -211,9 +192,7 @@ class MMPlayer {
     MCI_DGV_SETAUDIO_PARMS mciParams = {0};
     mciParams.dwItem = MCI_DGV_SETAUDIO_VOLUME;
     mciParams.dwValue = volume;
-    mciSendCommand(_dev, MCI_SETAUDIO,
-                   MCI_DGV_SETAUDIO_ITEM | MCI_DGV_SETAUDIO_VALUE,
-                   (DWORD)&mciParams);
+    mciSendCommand(_dev, MCI_SETAUDIO, MCI_DGV_SETAUDIO_ITEM | MCI_DGV_SETAUDIO_VALUE, (DWORD)&mciParams);
   }
 
   UINT GetVolume() const {
@@ -304,8 +283,7 @@ class CustomAudioEngine : public CocosDenshion::SimpleAudioEngine {
 
   bool isBackgroundMusicPlaying() { return sharedMusic().IsPlaying(); }
 
-  unsigned int playEffect(const char *pszFilePath, bool bLoop, float pitch,
-                          float pan, float gain) {
+  unsigned int playEffect(const char *pszFilePath, bool bLoop, float pitch, float pan, float gain) {
     unsigned int nRet = _Hash(pszFilePath);
 
     preloadEffect(pszFilePath);
@@ -395,9 +373,7 @@ class CustomAudioEngine : public CocosDenshion::SimpleAudioEngine {
     }
   }
 
-  float getBackgroundMusicVolume() {
-    return sharedMusic().GetVolume() / 1000.0f;
-  }
+  float getBackgroundMusicVolume() { return sharedMusic().GetVolume() / 1000.0f; }
 
   void setBackgroundMusicVolume(float volume) {
     log("setBackgroupMusicVolume: %.2f", volume);
@@ -415,9 +391,7 @@ class CustomAudioEngine : public CocosDenshion::SimpleAudioEngine {
     }
   }
 
-  static std::string _FullPath(const char *szPath) {
-    return FileUtils::getInstance()->fullPathForFilename(szPath);
-  }
+  static std::string _FullPath(const char *szPath) { return FileUtils::getInstance()->fullPathForFilename(szPath); }
 
   unsigned int _Hash(const char *key) {
     unsigned int len = strlen(key);
@@ -434,9 +408,7 @@ class CustomAudioEngine : public CocosDenshion::SimpleAudioEngine {
 
 CustomAudioEngine *CustomAudioEngine::_instance = nullptr;
 
-CocosDenshion::SimpleAudioEngine *AudioHelper::getAudioEngine() {
-  return CustomAudioEngine::getInstance();
-}
+CocosDenshion::SimpleAudioEngine *AudioHelper::getAudioEngine() { return CustomAudioEngine::getInstance(); }
 
 #else
 CocosDenshion::SimpleAudioEngine *AudioHelper::getAudioEngine() {

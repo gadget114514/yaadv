@@ -9,8 +9,6 @@
 #include "ScriptReader/CharacterManager.h"
 #include "ScriptReader/ScriptReader.h"
 
-
-
 #define MAX_character_NUMBER 5
 
 #define TEXTLABEL_SIZE_WIDTH 800
@@ -64,7 +62,6 @@ class GameScene : public cocos2d::Layer {
   void showMenuSceneYes();
   void showMenuSceneNo();
 
-  
   void updateDisplayYaImg();
   void updateDisplayCharacter();
 
@@ -84,7 +81,7 @@ class GameScene : public cocos2d::Layer {
 
   void showName(std::string &name);
 
-  void showImage(std::string &text, std::string&loc, std::string &face);
+  void showImage(std::string &text, std::string &loc, std::string &face);
   void imageTween(std::string &text, std::string &loc, float dur, std::string &ease, std::string &face);
 
   void showText(std::string &text);
@@ -132,7 +129,7 @@ class GameScene : public cocos2d::Layer {
 
   void ScreenShoot();
 
-  void clear(int sw=1);
+  void clear(int sw = 1);
   void reloadScene();
 
   void showSelect(std::map<std::string, std::string> &options);

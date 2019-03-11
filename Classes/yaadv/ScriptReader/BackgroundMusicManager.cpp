@@ -8,20 +8,17 @@ using namespace yaadv;
 #define BGMLISTPATH "yaadv/bgm/bgmList.json"
 #elif USEINI
 #define INI_HANDLER_LINENO 1
-#include "ini.h" 
+#include "ini.h"
 #define BGMLISTPATH "yaadv/bgm/bgmList.ini"
 #else
 #define BGMLISTPATH "yaadv/bgm/bgmList.txt"
 #endif
 
-
 namespace yaadv {
 
-BackgroundMusicManager *BackgroundMusicManager::_instance = nullptr;
+BackgroundMusicManager* BackgroundMusicManager::_instance = nullptr;
 
-
-static int bgm_handler(void* user, const char* section, const char* name,
-                      const char* value, int lineno)
+static int bgm_handler(void* user, const char* section, const char* name, const char* value, int lineno)
 
 {
   BackgroundMusicManager* bm = (BackgroundMusicManager*)user;
@@ -35,7 +32,6 @@ static int bgm_handler(void* user, const char* section, const char* name,
   return 0;
 }
 
-
 BackgroundMusicManager::BackgroundMusicManager() : _pool(nullptr) {
   _pool = new std::map<std::string, std::string>();
 
@@ -45,7 +41,7 @@ BackgroundMusicManager::BackgroundMusicManager() : _pool(nullptr) {
 
 #if USEJSON
 
-    BackgroundMusicManager* bm = (BackgroundMusicManager*)this;
+  BackgroundMusicManager* bm = (BackgroundMusicManager*)this;
   json::JSON data = json::JSON::Load(ss);
   for (int i = 0; i < data.length(); i++) {
     // { characterid: "", name: "", face: "", anchorx: "", ...}
@@ -63,7 +59,6 @@ BackgroundMusicManager::BackgroundMusicManager() : _pool(nullptr) {
 
 #else
 
-
 #endif
 }
 
@@ -74,8 +69,7 @@ BackgroundMusicManager::~BackgroundMusicManager() {
   }
 }
 
-void BackgroundMusicManager::addBackgroundMusic(std::string key,
-                                                std::string background) {
+void BackgroundMusicManager::addBackgroundMusic(std::string key, std::string background) {
   _pool->insert(std::pair<std::string, std::string>(key, background));
 }
 
@@ -89,7 +83,7 @@ std::string BackgroundMusicManager::getBackgroundMusic(std::string key) {
   }
 }
 
-BackgroundMusicManager *BackgroundMusicManager::getInstance() {
+BackgroundMusicManager* BackgroundMusicManager::getInstance() {
   if (_instance == nullptr) {
     _instance = new BackgroundMusicManager();
   }
@@ -97,6 +91,5 @@ BackgroundMusicManager *BackgroundMusicManager::getInstance() {
 }
 
 void BackgroundMusicManager::destoryInstance() { CC_SAFE_DELETE(_instance); }
-
 
 }  // namespace yaadv

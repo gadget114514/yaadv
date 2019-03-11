@@ -61,7 +61,7 @@ extern "C" void WREN_ns_say(WrenVM *vm) {
   std::string _2(b);
   std::string _3(c);
   std::string _4(d);
-  SCCharacterSpeak sc(reader, _1,_2,_3,_4);
+  SCCharacterSpeak sc(reader, _1, _2, _3, _4);
   sc.execute(reader->stage);
   wrenSetSlotNull(vm, 0);
 
@@ -94,8 +94,8 @@ extern "C" void WREN_ns_fg(WrenVM *vm) {
   const char *name_str = wrenGetSlotString(vm, 2);
   ScriptReader *reader = ScriptReader::getInstance();
   std::string _1(name_str);
-  std::string _2(face_str)  ;
-  SCShowFg sc(reader, _1,_2);
+  std::string _2(face_str);
+  SCShowFg sc(reader, _1, _2);
 
   sc.execute(reader->stage);
   wrenSetSlotNull(vm, 0);
@@ -195,7 +195,7 @@ extern "C" void WREN_ns_select_add_option(WrenVM *vm) {
   const char *value = wrenGetSlotString(vm, 2);
   std::string a(key);
   std::string b(value);
-  sc->addOption(a,b);
+  sc->addOption(a, b);
 
   wrenSetSlotNull(vm, 0);
   return;
@@ -264,9 +264,7 @@ extern "C" void WREN_ns_imgtween(WrenVM *vm) {
   std::string b(text_str);
   std::string c(ease_str);
   std::string d(face_str);
-  SCImgTween sc(reader, a,
-		b, duration,
-		c, d);
+  SCImgTween sc(reader, a, b, duration, c, d);
 
   sc.execute(reader->stage);
   wrenSetSlotNull(vm, 0);
@@ -283,7 +281,7 @@ extern "C" void WREN_ns_img(WrenVM *vm) {
   std::string _1(a);
   std::string _2(b);
   std::string _3(c);
-  SCImg sc(reader,_1,_2,_3);
+  SCImg sc(reader, _1, _2, _3);
 
   sc.execute(reader->stage);
   wrenSetSlotNull(vm, 0);
@@ -313,25 +311,25 @@ extern "C" void WREN_ns__s(WrenVM *vm) {
     sc.execute(reader->stage);
   }
   if (!strcmp(cmd, "bg")) {
-        std::string s(a);
-	SCBackground sc(reader,s);
+    std::string s(a);
+    SCBackground sc(reader, s);
 
     sc.execute(reader->stage);
   }
   if (!strcmp(cmd, "bgm")) {
-            std::string s(a);
-	    SCPlayBGM sc(reader, s);
+    std::string s(a);
+    SCPlayBGM sc(reader, s);
 
     sc.execute(reader->stage);
   }
   if (!strcmp(cmd, "sound")) {
-            std::string s(a);    
-	    SCPlaySound sc(reader, s);
+    std::string s(a);
+    SCPlaySound sc(reader, s);
 
     sc.execute(reader->stage);
   }
   if (!strcmp(cmd, "selectshow")) {
-std::string s(a);    
+    std::string s(a);
     SCSelect *sc = reader->_selects[s];
     if (!sc) {
       wrenSetSlotNull(vm, -1);
@@ -339,7 +337,7 @@ std::string s(a);
     }
     sc->execute(reader->stage);
   }
-wrenSetSlotNull(vm, 0);
+  wrenSetSlotNull(vm, 0);
 }
 extern "C" void WREN_ns__ss(WrenVM *vm) {
   const char *cmd = wrenGetSlotString(vm, 1);
@@ -363,7 +361,7 @@ extern "C" void WREN_ns__sss(WrenVM *vm) {
 
   ScriptReader *reader = ScriptReader::getInstance();
   if (!strcmp(cmd, "img")) {
-    SCImg sc(reader, _1,_2,_3);
+    SCImg sc(reader, _1, _2, _3);
     sc.execute(reader->stage);
   }
 
@@ -378,12 +376,12 @@ extern "C" void WREN_ns__ssss(WrenVM *vm) {
   std::string _1(a);
   std::string _2(b);
   std::string _3(c);
-  std::string _4(d);  
+  std::string _4(d);
 
   ScriptReader *reader = ScriptReader::getInstance();
 
   if (!strcmp(cmd, "say_")) {
-    SCCharacterSpeak sc(reader, _1,_2,_3,_4);
+    SCCharacterSpeak sc(reader, _1, _2, _3, _4);
 
     sc.execute(reader->stage);
   }
@@ -471,9 +469,7 @@ std::string ScriptReaderWREN::getCurrentSignName() { return _currentSignName; }
 
 int ScriptReaderWREN::getCurrentCommandIndex() { return _currentCommandIndex; }
 
-void ScriptReaderWREN::setCurrentCommandIndex(int value) {
-  _currentCommandIndex = value;
-}
+void ScriptReaderWREN::setCurrentCommandIndex(int value) { _currentCommandIndex = value; }
 
 void ScriptReaderWREN::jumpToSign(const std::string &sign, int index) {
   if (sign.compare("") == 0) {
@@ -493,4 +489,4 @@ void ScriptReaderWREN::jumpToSign(const std::string &sign, int index) {
 
 bool ScriptReaderWREN::getIsHaveRead() { return _isHaveRead; }
 
-} // namespace yaadv
+}  // namespace yaadv

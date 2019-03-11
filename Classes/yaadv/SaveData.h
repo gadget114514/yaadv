@@ -22,8 +22,7 @@ class SaveData : public Node {
   Sprite *_stageLayer;
 
  public:
-  SaveData(int number, std::string imageFile, std::string text,
-           std::string date);
+  SaveData(int number, std::string imageFile, std::string text, std::string date);
   SaveData(int number);
   ~SaveData();
   void setOther();

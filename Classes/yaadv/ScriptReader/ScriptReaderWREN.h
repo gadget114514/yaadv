@@ -5,7 +5,6 @@
 USING_NS_CC;
 struct Character;
 
-
 #include "../../wren/src/include/wren.hpp"
 #include "../../wren/src/vm/wren_common.h"
 #include "ScriptReader.h"
@@ -13,8 +12,6 @@ struct Character;
 namespace yaadv {
 class ScriptReaderWREN : public ScriptReader {
  public:
- 
-
   //  std::map<std::string, std::vector<ScriptCommand *> *> _scripts;
 
   //  std::map<std::string, int> _record;

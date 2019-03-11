@@ -1,8 +1,6 @@
 // yaadv.h
 #pragma once
 
-namespace yaadv {
-
-};
+namespace yaadv {};
 
 #include "ScriptReader/yaadvConfig.h"

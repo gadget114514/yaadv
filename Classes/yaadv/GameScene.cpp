@@ -19,10 +19,14 @@
 USING_NS_CC;
 
 #ifndef CC_CALLBACK_4
-#define CC_CALLBACK_4(__selector__,__target__, ...) std::bind(&__selector__,__target__, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3,std::placeholders::_4, ##__VA_ARGS__)
+#define CC_CALLBACK_4(__selector__, __target__, ...)                                                        \
+  std::bind(&__selector__, __target__, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, \
+            std::placeholders::_4, ##__VA_ARGS__)
 #endif
 #ifndef CC_CALLBACK_5
-#define CC_CALLBACK_5(__selector__,__target__, ...) std::bind(&__selector__,__target__, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3,std::placeholders::_4,std::placeholders::_5, ##__VA_ARGS__)
+#define CC_CALLBACK_5(__selector__, __target__, ...)                                                        \
+  std::bind(&__selector__, __target__, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, \
+            std::placeholders::_4, std::placeholders::_5, ##__VA_ARGS__)
 #endif
 
 using namespace yaadv;
@@ -91,14 +95,12 @@ bool GameScene::init() {
   _dialogWindow->setPosition(Vec2(visibleSize.width / 2, 150));
   this->addChild(_dialogWindow, 10);
 
-  _textLabel = CharLabel::create(
-      "", 30, CC_CALLBACK_0(GameScene::showWaitingPrompt, this));
+  _textLabel = CharLabel::create("", 30, CC_CALLBACK_0(GameScene::showWaitingPrompt, this));
   _textLabel->setPosition(100, _dialogWindow->getContentSize().height - 10);
   _textLabel->setColor(Color3B::WHITE);
 
   _textLabel->setContentSize(
-      Size(_dialogWindow->getContentSize().width - 100 * 2,
-           _dialogWindow->getContentSize().height - 10 * 2));
+      Size(_dialogWindow->getContentSize().width - 100 * 2, _dialogWindow->getContentSize().height - 10 * 2));
   _dialogWindow->addChild(_textLabel, 12);
 
   _wtIcon = Sprite::create(vars["yaadv/ui/dialog/wait_icon.png"]);
@@ -114,34 +116,29 @@ bool GameScene::init() {
   _nameLabel = Label::createWithSystemFont("", vars["arial"], 30);
   _nameLabel->setColor(Color3B::WHITE);
   _nameLabel->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
-  _nameLabel->setPosition(Vec2(_nameWindow->getContentSize().width / 2,
-                               _nameWindow->getContentSize().height / 2));
+  _nameLabel->setPosition(Vec2(_nameWindow->getContentSize().width / 2, _nameWindow->getContentSize().height / 2));
   _nameWindow->addChild(_nameLabel, 11);
 
   _nameLabel->enableShadow(Color4B(0, 0, 0, 200), Size(2, -2), 1);
 
   _btnMenu =
-      MenuItemImage::create(vars["yaadv/ui/dialog/btn_menu_normal.png"],
-                            vars["yaadv/ui/dialog/btn_menu_touch.png"],
+      MenuItemImage::create(vars["yaadv/ui/dialog/btn_menu_normal.png"], vars["yaadv/ui/dialog/btn_menu_touch.png"],
                             CC_CALLBACK_0(GameScene::showMenuLayer, this));
   _btnMenu->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
-  _btnMenu->setPosition(visibleSize.width + origin.x - 50,
-                        visibleSize.height + origin.y - 50);
+  _btnMenu->setPosition(visibleSize.width + origin.x - 50, visibleSize.height + origin.y - 50);
   auto menu = Menu::create(_btnMenu, NULL);
   menu->setPosition(Vec2::ZERO);
   this->addChild(menu, 13);
 
   _autoIcon = Sprite::create(vars["yaadv/ui/dialog/dialog_auto.png"]);
   _autoIcon->setAnchorPoint(Vec2::ANCHOR_BOTTOM_RIGHT);
-  _autoIcon->setPosition(Vec2(_dialogWindow->getContentSize().width,
-                              _dialogWindow->getContentSize().height + 10));
+  _autoIcon->setPosition(Vec2(_dialogWindow->getContentSize().width, _dialogWindow->getContentSize().height + 10));
   _autoIcon->setOpacity(0);
   _dialogWindow->addChild(_autoIcon);
 
   _skipIcon = Sprite::create(vars["yaadv/ui/dialog/dialog_skip.png"]);
   _skipIcon->setAnchorPoint(Vec2::ANCHOR_BOTTOM_RIGHT);
-  _skipIcon->setPosition(Vec2(_dialogWindow->getContentSize().width,
-                              _dialogWindow->getContentSize().height + 10));
+  _skipIcon->setPosition(Vec2(_dialogWindow->getContentSize().width, _dialogWindow->getContentSize().height + 10));
   _skipIcon->setOpacity(0);
   _dialogWindow->addChild(_skipIcon);
 
@@ -153,13 +150,11 @@ bool GameScene::init() {
     this->screenClicked();
     return false;
   };
-  stageLayer->getEventDispatcher()->addEventListenerWithSceneGraphPriority(
-      clickEvent, stageLayer);
+  stageLayer->getEventDispatcher()->addEventListenerWithSceneGraphPriority(clickEvent, stageLayer);
 
   auto dialogClickEvent = EventListenerTouchOneByOne::create();
   dialogClickEvent->onTouchBegan = [=](Touch *t, Event *e) {
-    if (_dialogWindow->getBoundingBox().containsPoint(
-            _dialogWindow->convertTouchToNodeSpace(t))) {
+    if (_dialogWindow->getBoundingBox().containsPoint(_dialogWindow->convertTouchToNodeSpace(t))) {
       this->dialogClicked();
     }
     return true;
@@ -167,35 +162,21 @@ bool GameScene::init() {
 
   ScriptReader::getInstance()->initWithStage(stageLayer);
 
-  ScriptReader::getInstance()->showImage =
-      CC_CALLBACK_3(GameScene::showImage, this);
-  ScriptReader::getInstance()->imageTween =
-      CC_CALLBACK_5(GameScene::imageTween, this);
-  ScriptReader::getInstance()->hideImage =
-      CC_CALLBACK_1(GameScene::hideImage, this);
+  ScriptReader::getInstance()->showImage = CC_CALLBACK_3(GameScene::showImage, this);
+  ScriptReader::getInstance()->imageTween = CC_CALLBACK_5(GameScene::imageTween, this);
+  ScriptReader::getInstance()->hideImage = CC_CALLBACK_1(GameScene::hideImage, this);
 
-  ScriptReader::getInstance()->showText =
-      CC_CALLBACK_1(GameScene::showText, this);
-  ScriptReader::getInstance()->showName =
-      CC_CALLBACK_1(GameScene::showName, this);
-  ScriptReader::getInstance()->changeBackground =
-      CC_CALLBACK_1(GameScene::changeBackground, this);
-  ScriptReader::getInstance()->playBackgroundMusic =
-      CC_CALLBACK_1(GameScene::playBackgroundMusic, this);
-  ScriptReader::getInstance()->stopBackgroundMusic =
-      CC_CALLBACK_0(GameScene::stopBackgroundMusic, this);
-  ScriptReader::getInstance()->playSound =
-      CC_CALLBACK_1(GameScene::playSound, this);
-  ScriptReader::getInstance()->stopSound =
-      CC_CALLBACK_0(GameScene::stopSound, this);
-  ScriptReader::getInstance()->showCharacter =
-      CC_CALLBACK_2(GameScene::displayCharacter, this);
-  ScriptReader::getInstance()->hideCharacter =
-      CC_CALLBACK_1(GameScene::hideCharacter, this);
-  ScriptReader::getInstance()->showSelect =
-      CC_CALLBACK_1(GameScene::showSelect, this);
-  ScriptReader::getInstance()->returnToMenu =
-      CC_CALLBACK_0(GameScene::showMenuSceneYes, this);
+  ScriptReader::getInstance()->showText = CC_CALLBACK_1(GameScene::showText, this);
+  ScriptReader::getInstance()->showName = CC_CALLBACK_1(GameScene::showName, this);
+  ScriptReader::getInstance()->changeBackground = CC_CALLBACK_1(GameScene::changeBackground, this);
+  ScriptReader::getInstance()->playBackgroundMusic = CC_CALLBACK_1(GameScene::playBackgroundMusic, this);
+  ScriptReader::getInstance()->stopBackgroundMusic = CC_CALLBACK_0(GameScene::stopBackgroundMusic, this);
+  ScriptReader::getInstance()->playSound = CC_CALLBACK_1(GameScene::playSound, this);
+  ScriptReader::getInstance()->stopSound = CC_CALLBACK_0(GameScene::stopSound, this);
+  ScriptReader::getInstance()->showCharacter = CC_CALLBACK_2(GameScene::displayCharacter, this);
+  ScriptReader::getInstance()->hideCharacter = CC_CALLBACK_1(GameScene::hideCharacter, this);
+  ScriptReader::getInstance()->showSelect = CC_CALLBACK_1(GameScene::showSelect, this);
+  ScriptReader::getInstance()->returnToMenu = CC_CALLBACK_0(GameScene::showMenuSceneYes, this);
   ScriptReader::getInstance()->clear = CC_CALLBACK_1(GameScene::clear, this);
 
   // ScriptReader::getInstance()->loadScriptFile(SCRIPT_FILE);
@@ -252,8 +233,7 @@ void GameScene::showName(std::string &name) {
 
 #define YIM YaImgManager::getInstance()
 
-void GameScene::showImage(std::string &cName, std::string &loc,
-                          std::string &face) {
+void GameScene::showImage(std::string &cName, std::string &loc, std::string &face) {
   auto cha = YIM->getYaImg(cName);
   if (!cha) {
     return;
@@ -293,8 +273,7 @@ void GameScene::showImage(std::string &cName, std::string &loc,
   }
 }
 
-void GameScene::imageTween(std::string &cName, std::string &loc, float duration,
-                           std::string &ease, std::string &face) {
+void GameScene::imageTween(std::string &cName, std::string &loc, float duration, std::string &ease, std::string &face) {
   auto cha = YIM->getYaImg(cName);
   if (!cha) {
     return;
@@ -349,15 +328,14 @@ void GameScene::changeBackground(std::string &key) {
   backgroundSprite->setOpacity(0);
   _backgroundLayer->addChild(backgroundSprite);
 
-  auto mtAction = Sequence::createWithTwoActions(
-      FadeIn::create(0.8f), CallFunc::create([&]() {
-        if (_backgroundSprite) {
-          _backgroundSprite = backgroundSprite;
+  auto mtAction = Sequence::createWithTwoActions(FadeIn::create(0.8f), CallFunc::create([&]() {
+                                                   if (_backgroundSprite) {
+                                                     _backgroundSprite = backgroundSprite;
 
-        } else {
-          _backgroundSprite = backgroundSprite;
-        }
-      }));
+                                                   } else {
+                                                     _backgroundSprite = backgroundSprite;
+                                                   }
+                                                 }));
   mtAction->setTag(1);
   backgroundSprite->runAction(mtAction);
 }
@@ -399,15 +377,13 @@ void GameScene::stopSound() { AudioHelper::getAudioEngine()->stopAllEffects(); }
 void GameScene::startAutoPlay() {
   _isAutoPlaying = true;
   _autoIcon->setOpacity(255);
-  
+
   _menuLayer->removeAllChildren();
   _btnMenu->setOpacity(255);
 
-
   if (!_textLabel->isRunning()) {
-    this->runAction(Sequence::create(
-        DelayTime::create(GameSystem::getInstance()->getAutoSpeed()),
-        CallFunc::create(CC_CALLBACK_0(GameScene::dialogClicked, this)), NULL));
+    this->runAction(Sequence::create(DelayTime::create(GameSystem::getInstance()->getAutoSpeed()),
+                                     CallFunc::create(CC_CALLBACK_0(GameScene::dialogClicked, this)), NULL));
   }
 }
 
@@ -444,7 +420,6 @@ void GameScene::stopSkipPlay() {
 void GameScene::autoPlay(float dt) { dialogClicked(); }
 
 void GameScene::skipPlay(float dt) {
-
   if (!ScriptReader::getInstance()->getIsHaveRead()) {
     stopSkipPlay();
   }
@@ -469,10 +444,8 @@ void GameScene::createGameDate() {
     }
     tmpGameData->fgCharacters[n].number = n;
   }
-  tmpGameData->currentCommandIndex =
-      ScriptReader::getInstance()->getCurrentCommandIndex();
-  tmpGameData->currentSignName =
-      ScriptReader::getInstance()->getCurrentSignName();
+  tmpGameData->currentCommandIndex = ScriptReader::getInstance()->getCurrentCommandIndex();
+  tmpGameData->currentSignName = ScriptReader::getInstance()->getCurrentSignName();
   tmpGameData->currentName = _currentName;
   tmpGameData->currentText = _currentText;
   tmpGameData->optionsNumber = _optionsNumber;
@@ -489,8 +462,7 @@ void GameScene::displayCharacter(std::string cName, std::string face) {
   if (!cha) {
     return;
   }
-  if (std::find(_characters->begin(), _characters->end(), cha) ==
-      _characters->end()) {
+  if (std::find(_characters->begin(), _characters->end(), cha) == _characters->end()) {
     _characters->push_back(cha);
   }
   if (cha->getCharacterFace(face)) {
@@ -528,7 +500,6 @@ void GameScene::displayCharacter(std::string cName, std::string face) {
       updateDisplayCharacter();
     }
   } else {
-
   }
 }
 
@@ -547,16 +518,15 @@ void GameScene::hideYaImg(std::string cName) {
     return;
   }
   if (cha->_sprite) {
-    auto mtAction = Sequence::createWithTwoActions(
-        FadeOut::create(0.8f), CallFunc::create([=]() {
-          auto i = std::find(_yaimgs->begin(), _yaimgs->end(), cha);
-          if (i != _yaimgs->end()) {
-            _yaimgs->erase(i);
-          }
-          updateDisplayYaImg();
-          cha->leave();
-          return;
-        }));
+    auto mtAction = Sequence::createWithTwoActions(FadeOut::create(0.8f), CallFunc::create([=]() {
+                                                     auto i = std::find(_yaimgs->begin(), _yaimgs->end(), cha);
+                                                     if (i != _yaimgs->end()) {
+                                                       _yaimgs->erase(i);
+                                                     }
+                                                     updateDisplayYaImg();
+                                                     cha->leave();
+                                                     return;
+                                                   }));
     mtAction->setTag(1);
     cha->_sprite->runAction(mtAction);
   }
@@ -584,8 +554,7 @@ void GameScene::updateDisplayCharacter() {
 
       if (showCount == 1) {
       } else if (showCount == 2) {
-        pt = index == 0 ? CMPositionType::LEFT_CENTER
-                        : CMPositionType::RIGHT_CENTER;
+        pt = index == 0 ? CMPositionType::LEFT_CENTER : CMPositionType::RIGHT_CENTER;
       } else if (showCount == 3) {
         if (index == 0) {
           pt = CMPositionType::LEFT;
@@ -639,16 +608,15 @@ void GameScene::hideCharacter(std::string cName) {
     return;
   }
   if (cha->_sprite) {
-    auto mtAction = Sequence::createWithTwoActions(
-        FadeOut::create(0.8f), CallFunc::create([=]() {
-          auto i = std::find(_characters->begin(), _characters->end(), cha);
-          if (i != _characters->end()) {
-            _characters->erase(i);
-          }
-          updateDisplayCharacter();
-          cha->leave();
-          return;
-        }));
+    auto mtAction = Sequence::createWithTwoActions(FadeOut::create(0.8f), CallFunc::create([=]() {
+                                                     auto i = std::find(_characters->begin(), _characters->end(), cha);
+                                                     if (i != _characters->end()) {
+                                                       _characters->erase(i);
+                                                     }
+                                                     updateDisplayCharacter();
+                                                     cha->leave();
+                                                     return;
+                                                   }));
     mtAction->setTag(1);
     cha->_sprite->runAction(mtAction);
   }
@@ -662,16 +630,15 @@ void GameScene::hideImage(std::string cName) {
     return;
   }
   if (cha->_sprite) {
-    auto mtAction = Sequence::createWithTwoActions(
-        FadeOut::create(0.8f), CallFunc::create([=]() {
-          auto i = std::find(_yaimgs->begin(), _yaimgs->end(), cha);
-          if (i != _yaimgs->end()) {
-            _yaimgs->erase(i);
-          }
-          updateDisplayYaImg();
-          cha->leave();
-          return;
-        }));
+    auto mtAction = Sequence::createWithTwoActions(FadeOut::create(0.8f), CallFunc::create([=]() {
+                                                     auto i = std::find(_yaimgs->begin(), _yaimgs->end(), cha);
+                                                     if (i != _yaimgs->end()) {
+                                                       _yaimgs->erase(i);
+                                                     }
+                                                     updateDisplayYaImg();
+                                                     cha->leave();
+                                                     return;
+                                                   }));
     mtAction->setTag(1);
     cha->_sprite->runAction(mtAction);
   }
@@ -684,9 +651,7 @@ void GameScene::showSaveScene() {
   Director::getInstance()->pushScene(SaveScene::createScene());
 }
 
-void GameScene::showConfigScene() {
-  Director::getInstance()->pushScene(SettingScene::createScene());
-}
+void GameScene::showConfigScene() { Director::getInstance()->pushScene(SettingScene::createScene()); }
 
 void GameScene::ScreenShoot() {
   float screenShootWidth = SCREEN_SHOOT_WIDTH;
@@ -694,8 +659,7 @@ void GameScene::ScreenShoot() {
 
   float scale = SCREEN_SHOOT_HEIGHT / getContentSize().height;
   this->setAnchorPoint(Vec2::ANCHOR_BOTTOM_LEFT);
-  auto render = RenderTexture::create(getContentSize().width * scale,
-                                      getContentSize().height * scale);
+  auto render = RenderTexture::create(getContentSize().width * scale, getContentSize().height * scale);
 
   render->begin();
   this->setScale(scale);
@@ -742,14 +706,11 @@ void GameScene::clear(int sw) {
   }
 }
 
-void GameScene::showLoadScene() {
-  Director::getInstance()->pushScene(LoadScene::createScene());
-}
+void GameScene::showLoadScene() { Director::getInstance()->pushScene(LoadScene::createScene()); }
 
 void GameScene::reloadScene() {
   if (GameSystem::getInstance()->getIsLoadSuccess()) {
-    auto background = BM->getBackground(
-        GameSystem::getInstance()->getGameSceneInfo()->backgroundKey);
+    auto background = BM->getBackground(GameSystem::getInstance()->getGameSceneInfo()->backgroundKey);
     if (background.compare("") == 0) {
       background = "black";
     }
@@ -762,20 +723,15 @@ void GameScene::reloadScene() {
 
     showText(GameSystem::getInstance()->getGameSceneInfo()->currentText);
 
-    int charNumber =
-        GameSystem::getInstance()->getGameSceneInfo()->characterCount;
+    int charNumber = GameSystem::getInstance()->getGameSceneInfo()->characterCount;
 
     for (int i = 0; i < charNumber; i++) {
-      auto name =
-          GameSystem::getInstance()->getGameSceneInfo()->fgCharacters[i].name;
-      auto face =
-          GameSystem::getInstance()->getGameSceneInfo()->fgCharacters[i].face;
-      auto number =
-          GameSystem::getInstance()->getGameSceneInfo()->fgCharacters[i].number;
+      auto name = GameSystem::getInstance()->getGameSceneInfo()->fgCharacters[i].name;
+      auto face = GameSystem::getInstance()->getGameSceneInfo()->fgCharacters[i].face;
+      auto number = GameSystem::getInstance()->getGameSceneInfo()->fgCharacters[i].number;
       auto cha = CM->getCharacter(name);
       if (cha) {
-        if (std::find(_characters->begin(), _characters->end(), cha) ==
-            _characters->end()) {
+        if (std::find(_characters->begin(), _characters->end(), cha) == _characters->end()) {
           _characters->push_back(cha);
         }
 
@@ -801,8 +757,7 @@ void GameScene::reloadScene() {
     }
 
     auto sign = GameSystem::getInstance()->getGameSceneInfo()->currentSignName;
-    auto commandIndex =
-        GameSystem::getInstance()->getGameSceneInfo()->currentCommandIndex;
+    auto commandIndex = GameSystem::getInstance()->getGameSceneInfo()->currentCommandIndex;
     ScriptReader::getInstance()->jumpToSign(sign, commandIndex);
   }
 }
@@ -837,9 +792,7 @@ void GameScene::showSelect(std::map<std::string, std::string> &options) {
   _selectLayer->addChild(menu, 13);
 }
 
-void GameScene::showHistoryScene() {
-  Director::getInstance()->pushScene(HistoryScene::createScene());
-}
+void GameScene::showHistoryScene() { Director::getInstance()->pushScene(HistoryScene::createScene()); }
 
 void GameScene::skipAction() {
   auto bgList = _backgroundLayer->getChildren();
@@ -861,13 +814,11 @@ void GameScene::showWaitingPrompt() {
   _wtIcon->setOpacity(255);
   auto action = FadeOut::create(0.8f);
   auto actionBack = action->reverse();
-  _wtIcon->runAction(
-      RepeatForever::create(Sequence::create(action, actionBack, NULL)));
+  _wtIcon->runAction(RepeatForever::create(Sequence::create(action, actionBack, NULL)));
 
   if (_isAutoPlaying) {
-    this->runAction(Sequence::create(
-        DelayTime::create(GameSystem::getInstance()->getAutoSpeed()),
-        CallFunc::create(CC_CALLBACK_0(GameScene::dialogClicked, this)), NULL));
+    this->runAction(Sequence::create(DelayTime::create(GameSystem::getInstance()->getAutoSpeed()),
+                                     CallFunc::create(CC_CALLBACK_0(GameScene::dialogClicked, this)), NULL));
   }
 }
 
@@ -892,8 +843,7 @@ void GameScene::selectEventOfSkip(Ref *pSender, CheckBox::EventType type) {
   }
 }
 
-void GameScene::selectEventOfAuto(cocos2d::Ref *pSender,
-                                  CheckBox::EventType type) {
+void GameScene::selectEventOfAuto(cocos2d::Ref *pSender, CheckBox::EventType type) {
   switch (type) {
     case CheckBox::EventType::SELECTED:
       startAutoPlay();
@@ -911,12 +861,9 @@ void GameScene::showMenuScene() {
   Config &vars = *Config::getInstance();
   Director::getInstance()->pause();
 
-  auto popupDialog =
-      PopupLayer::create(vars["yaadv/ui/popupwindow/bg_popup.png"]);
-  popupDialog->addLabelButton(vars["Yes"],
-                              CC_CALLBACK_0(GameScene::showMenuSceneYes, this));
-  popupDialog->addLabelButton(vars["No"],
-                              CC_CALLBACK_0(GameScene::showMenuSceneNo, this));
+  auto popupDialog = PopupLayer::create(vars["yaadv/ui/popupwindow/bg_popup.png"]);
+  popupDialog->addLabelButton(vars["Yes"], CC_CALLBACK_0(GameScene::showMenuSceneYes, this));
+  popupDialog->addLabelButton(vars["No"], CC_CALLBACK_0(GameScene::showMenuSceneNo, this));
 
   popupDialog->setString(vars["Do you want to return to menu?"]);
   this->addChild(popupDialog, 255);
@@ -949,55 +896,43 @@ void GameScene::showMenuLayer() {
   auto background = LayerColor::create(Color4B(30, 30, 30, 128));
   _menuLayer->addChild(background);
 
-  auto menuBackground =
-      Sprite::create(vars["yaadv/ui/dialog_menu/bg_menu.png"]);
+  auto menuBackground = Sprite::create(vars["yaadv/ui/dialog_menu/bg_menu.png"]);
   menuBackground->setAnchorPoint(Vec2::ANCHOR_TOP_RIGHT);
-  menuBackground->setPosition(visibleSize.width + origin.x,
-                              visibleSize.height + origin.y);
+  menuBackground->setPosition(visibleSize.width + origin.x, visibleSize.height + origin.y);
   _menuLayer->addChild(menuBackground);
 
-  auto btnSave = MenuItemImage::create(
-      vars["yaadv/ui/dialog_menu/btn_menu_save_normal.png"],
-      vars["yaadv/ui/dialog_menu/btn_menu_save_touch.png"],
-      CC_CALLBACK_0(GameScene::showSaveScene, this));
+  auto btnSave = MenuItemImage::create(vars["yaadv/ui/dialog_menu/btn_menu_save_normal.png"],
+                                       vars["yaadv/ui/dialog_menu/btn_menu_save_touch.png"],
+                                       CC_CALLBACK_0(GameScene::showSaveScene, this));
 
-  auto btnLoad = MenuItemImage::create(
-      vars["yaadv/ui/dialog_menu/btn_menu_load_normal.png"],
-      vars["yaadv/ui/dialog_menu/btn_menu_load_touch.png"],
-      CC_CALLBACK_0(GameScene::showLoadScene, this));
+  auto btnLoad = MenuItemImage::create(vars["yaadv/ui/dialog_menu/btn_menu_load_normal.png"],
+                                       vars["yaadv/ui/dialog_menu/btn_menu_load_touch.png"],
+                                       CC_CALLBACK_0(GameScene::showLoadScene, this));
 
-  auto btnAuto = MenuItemImage::create(
-      vars["yaadv/ui/dialog_menu/btn_menu_auto_normal.png"],
-      vars["yaadv/ui/dialog_menu/btn_menu_auto_touch.png"],
-      CC_CALLBACK_0(GameScene::startAutoPlay, this));
+  auto btnAuto = MenuItemImage::create(vars["yaadv/ui/dialog_menu/btn_menu_auto_normal.png"],
+                                       vars["yaadv/ui/dialog_menu/btn_menu_auto_touch.png"],
+                                       CC_CALLBACK_0(GameScene::startAutoPlay, this));
 
-  auto btnSkip = MenuItemImage::create(
-      vars["yaadv/ui/dialog_menu/btn_menu_skip_normal.png"],
-      vars["yaadv/ui/dialog_menu/btn_menu_skip_touch.png"],
-      CC_CALLBACK_0(GameScene::startSkipPlay, this));
+  auto btnSkip = MenuItemImage::create(vars["yaadv/ui/dialog_menu/btn_menu_skip_normal.png"],
+                                       vars["yaadv/ui/dialog_menu/btn_menu_skip_touch.png"],
+                                       CC_CALLBACK_0(GameScene::startSkipPlay, this));
 
-  auto btnLog = MenuItemImage::create(
-      vars["yaadv/ui/dialog_menu/btn_menu_log_normal.png"],
-      vars["yaadv/ui/dialog_menu/btn_menu_log_touch.png"],
-      CC_CALLBACK_0(GameScene::showHistoryScene, this));
+  auto btnLog = MenuItemImage::create(vars["yaadv/ui/dialog_menu/btn_menu_log_normal.png"],
+                                      vars["yaadv/ui/dialog_menu/btn_menu_log_touch.png"],
+                                      CC_CALLBACK_0(GameScene::showHistoryScene, this));
 
-  auto btnConfig = MenuItemImage::create(
-      vars["yaadv/ui/dialog_menu/btn_menu_config_normal.png"],
-      vars["yaadv/ui/dialog_menu/btn_menu_config_touch.png"],
-      CC_CALLBACK_0(GameScene::showConfigScene, this));
+  auto btnConfig = MenuItemImage::create(vars["yaadv/ui/dialog_menu/btn_menu_config_normal.png"],
+                                         vars["yaadv/ui/dialog_menu/btn_menu_config_touch.png"],
+                                         CC_CALLBACK_0(GameScene::showConfigScene, this));
 
-  auto btnTitle = MenuItemImage::create(
-      vars["yaadv/ui/dialog_menu/btn_menu_title_normal.png"],
-      vars["yaadv/ui/dialog_menu/btn_menu_title_touch.png"],
-      CC_CALLBACK_0(GameScene::showMenuScene, this));
+  auto btnTitle = MenuItemImage::create(vars["yaadv/ui/dialog_menu/btn_menu_title_normal.png"],
+                                        vars["yaadv/ui/dialog_menu/btn_menu_title_touch.png"],
+                                        CC_CALLBACK_0(GameScene::showMenuScene, this));
 
-  auto menu = Menu::create(btnSave, btnLoad, btnAuto, btnSkip, btnLog,
-                           btnConfig, btnTitle, NULL);
+  auto menu = Menu::create(btnSave, btnLoad, btnAuto, btnSkip, btnLog, btnConfig, btnTitle, NULL);
 
-  menu->setPosition(
-      visibleSize.width + origin.x - menuBackground->getContentSize().width / 2,
-      visibleSize.height + origin.y -
-          menuBackground->getContentSize().height / 2);
+  menu->setPosition(visibleSize.width + origin.x - menuBackground->getContentSize().width / 2,
+                    visibleSize.height + origin.y - menuBackground->getContentSize().height / 2);
   menu->alignItemsVerticallyWithPadding(0.0f);
   _menuLayer->addChild(menu);
 
@@ -1007,27 +942,21 @@ void GameScene::showMenuLayer() {
   backgroundTouch->onTouchBegan = [=](Touch *t, Event *e) { return true; };
   backgroundTouch->onTouchEnded = [=](Touch *t, Event *e) {
 
-    this->runAction(Sequence::create(
-        CallFunc::create(CC_CALLBACK_0(Node::removeFromParent, _menuLayer)),
-        CallFunc::create(
-            CC_CALLBACK_0(MenuItemImage::setOpacity, _btnMenu, 255)),
-        NULL));
+    this->runAction(Sequence::create(CallFunc::create(CC_CALLBACK_0(Node::removeFromParent, _menuLayer)),
+                                     CallFunc::create(CC_CALLBACK_0(MenuItemImage::setOpacity, _btnMenu, 255)), NULL));
   };
   backgroundTouch->setSwallowTouches(true);
-  _menuLayer->getEventDispatcher()->addEventListenerWithSceneGraphPriority(
-      backgroundTouch, background);
+  _menuLayer->getEventDispatcher()->addEventListenerWithSceneGraphPriority(backgroundTouch, background);
 
   auto backgroundSpriteTouch = EventListenerTouchOneByOne::create();
   backgroundSpriteTouch->onTouchBegan = [=](Touch *t, Event *e) {
-    if (menuBackground->getBoundingBox().containsPoint(
-            this->convertTouchToNodeSpace(t))) {
+    if (menuBackground->getBoundingBox().containsPoint(this->convertTouchToNodeSpace(t))) {
       return true;
     }
     return false;
   };
   backgroundSpriteTouch->setSwallowTouches(true);
-  menuBackground->getEventDispatcher()->addEventListenerWithSceneGraphPriority(
-      backgroundSpriteTouch, menuBackground);
+  menuBackground->getEventDispatcher()->addEventListenerWithSceneGraphPriority(backgroundSpriteTouch, menuBackground);
 }
 
 }  // namespace yaadv

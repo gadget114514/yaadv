@@ -14,14 +14,11 @@ using namespace yaadv;
 #define BGLISTPATH "yaadv/bgimage/bgList.txt"
 #endif
 
-
 namespace yaadv {
 
-BackgroundManager *BackgroundManager::_instance = nullptr;
+BackgroundManager* BackgroundManager::_instance = nullptr;
 
-
-static int bg_handler(void* user, const char* section, const char* name,
-                        const char* value, int lineno)
+static int bg_handler(void* user, const char* section, const char* name, const char* value, int lineno)
 
 {
   BackgroundManager* bm = (BackgroundManager*)user;
@@ -34,7 +31,6 @@ static int bg_handler(void* user, const char* section, const char* name,
   return 0;
 }
 
-
 BackgroundManager::BackgroundManager() : _pool(nullptr) {
   _pool = new std::map<std::string, std::string>();
 
@@ -42,8 +38,8 @@ BackgroundManager::BackgroundManager() : _pool(nullptr) {
 
   std::string ss = FileUtils::getInstance()->getStringFromFile(BGLISTPATH);
 
-  #if USEJSON 
-   
+#if USEJSON
+
   BackgroundManager* bm = (BackgroundManager*)this;
   json::JSON data = json::JSON::Load(ss);
   for (int i = 0; i < data.length(); i++) {
@@ -56,14 +52,12 @@ BackgroundManager::BackgroundManager() : _pool(nullptr) {
     std::string fn = line["filename"].ToString();
     fn = "yaadv/bgimage/" + fn + ".png";
     bm->addBackground(key, fn);
-   
   }
 
-  #elif USEINI
-    ini_parse_string(ss.c_str(), bg_handler, this);
+#elif USEINI
+  ini_parse_string(ss.c_str(), bg_handler, this);
 
-  #else
-
+#else
 
 #endif
 }
@@ -89,7 +83,7 @@ std::string BackgroundManager::getBackground(std::string key) {
   }
 }
 
-BackgroundManager *BackgroundManager::getInstance() {
+BackgroundManager* BackgroundManager::getInstance() {
   if (_instance == nullptr) {
     _instance = new BackgroundManager();
   }
@@ -97,6 +91,5 @@ BackgroundManager *BackgroundManager::getInstance() {
 }
 
 void BackgroundManager::destoryInstance() { CC_SAFE_DELETE(_instance); }
-
 
 }  // namespace yaadv

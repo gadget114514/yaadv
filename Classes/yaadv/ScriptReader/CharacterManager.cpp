@@ -23,8 +23,7 @@ using namespace yaadv;
 namespace yaadv {
 CharacterManager *CharacterManager::_instance = nullptr;
 
-static int char_handler(void *user, const char *section, const char *name,
-                        const char *value, int lineno)
+static int char_handler(void *user, const char *section, const char *name, const char *value, int lineno)
 
 {
   CharacterManager *cm = (CharacterManager *)user;
@@ -49,8 +48,7 @@ static int char_handler(void *user, const char *section, const char *name,
       char *cfacePath = new char[128];
       facePath.copy(cfacePath, facePath.length(), 0);
       *(cfacePath + facePath.length()) = '\0';
-      character->fgList->insert(
-          std::pair<std::string, char *>(face, cfacePath));
+      character->fgList->insert(std::pair<std::string, char *>(face, cfacePath));
       float anchorx = 0.5;
       float anchory = 0.0;
       float scalex = 1.0;
@@ -95,13 +93,11 @@ CharacterManager::CharacterManager()
     std::string face = line["face"].ToString();
     std::string filename = line["filename"].ToString();
 
-       
-	std::string facePath = "yaadv/character/" + filename + ".png";
+    std::string facePath = "yaadv/character/" + filename + ".png";
     char *cfacePath = new char[128];
     facePath.copy(cfacePath, facePath.length(), 0);
     *(cfacePath + facePath.length()) = '\0';
-    character->fgList->insert(
-            std::pair<std::string, char *>(face, cfacePath));
+    character->fgList->insert(std::pair<std::string, char *>(face, cfacePath));
     float anchorx = line["anchorx"].ToFloat();
     float anchory = line["anchory"].ToFloat();
     float scalex = line["scalex"].ToFloat();
@@ -111,7 +107,6 @@ CharacterManager::CharacterManager()
     std::string action = line["action"].ToString();
     Bamiri *b = new Bamiri(0, 0, anchorx, anchory, scalex, scaley, 0, 0, action);
     character->bamiriList->insert(std::pair<std::string, Bamiri *>(face, b));
-    
   }
 
 #elif USEINI
@@ -150,8 +145,6 @@ Character *CharacterManager::getCharacter(std::string &key) {
   }
 }
 
-
-
 void CharacterManager::addCharacter(std::string &key, Character *cha) {
   auto c = _pool->find(key);
   if (c != _pool->end()) {
@@ -164,8 +157,7 @@ void CharacterManager::addCharacter(std::string &key, Character *cha) {
 
 YaImgManager *YaImgManager::_instance = nullptr;
 
-static int yaimg_handler(void *user, const char *section, const char *name,
-                         const char *value, int lineno)
+static int yaimg_handler(void *user, const char *section, const char *name, const char *value, int lineno)
 
 {
   YaImgManager *cm = (YaImgManager *)user;
@@ -175,7 +167,7 @@ static int yaimg_handler(void *user, const char *section, const char *name,
     std::string key(section);
     cm->addYaImg(key, img);
     img->name = value;
-   
+
   } else {
     std::string key(section);
     YaImg *img = cm->getYaImg(key);
@@ -219,14 +211,13 @@ YaImgManager::YaImgManager()
       cm->addYaImg(key, yaimg);
       std::string value = line["name"].ToString();
       yaimg->name = value;
-      
+
     } else {
       std::string section = line["imageid"].ToString();
       std::string key(section);
       yaimg = cm->getYaImg(key);
     }
 
- 
     std::string filename = line["filename"].ToString();
     std::string face = line["face"].ToString();
     std::string facePath = "yaadv/img/" + filename + ".png";
@@ -281,13 +272,11 @@ YaImg *YaImgManager::getYaImg(std::string &key) {
 void YaImgManager::addYaImg(std::string &key, YaImg *cha) {
   auto c = _pool->find(key);
   if (c != _pool->end()) {
-   
     _pool->erase(c);
     CC_SAFE_DELETE(c->second);
   }
 
   _pool->insert(std::pair<std::string, YaImg *>(key, cha));
 }
-
 
 }  // namespace yaadv

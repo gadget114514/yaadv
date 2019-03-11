@@ -24,15 +24,12 @@ bool HelloWorld::init() {
   Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
   auto closeItem =
-      MenuItemImage::create("CloseNormal.png", "CloseSelected.png",
-                            CC_CALLBACK_1(HelloWorld::menuCloseCallback, this));
+      MenuItemImage::create("CloseNormal.png", "CloseSelected.png", CC_CALLBACK_1(HelloWorld::menuCloseCallback, this));
 
-  if (closeItem == nullptr || closeItem->getContentSize().width <= 0 ||
-      closeItem->getContentSize().height <= 0) {
+  if (closeItem == nullptr || closeItem->getContentSize().width <= 0 || closeItem->getContentSize().height <= 0) {
     problemLoading("'CloseNormal.png' and 'CloseSelected.png'");
   } else {
-    float x =
-        origin.x + visibleSize.width - closeItem->getContentSize().width / 2;
+    float x = origin.x + visibleSize.width - closeItem->getContentSize().width / 2;
     float y = origin.y + closeItem->getContentSize().height / 2;
     closeItem->setPosition(Vec2(x, y));
   }
@@ -46,8 +43,7 @@ bool HelloWorld::init() {
     problemLoading("'fonts/Marker Felt.ttf'");
   } else {
     label->setPosition(
-        Vec2(origin.x + visibleSize.width / 2,
-             origin.y + visibleSize.height - label->getContentSize().height));
+        Vec2(origin.x + visibleSize.width / 2, origin.y + visibleSize.height - label->getContentSize().height));
 
     this->addChild(label, 1);
   }
@@ -56,8 +52,7 @@ bool HelloWorld::init() {
   if (sprite == nullptr) {
     problemLoading("'HelloWorld.png'");
   } else {
-    sprite->setPosition(Vec2(visibleSize.width / 2 + origin.x,
-                             visibleSize.height / 2 + origin.y));
+    sprite->setPosition(Vec2(visibleSize.width / 2 + origin.x, visibleSize.height / 2 + origin.y));
 
     this->addChild(sprite, 0);
   }

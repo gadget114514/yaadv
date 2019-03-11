@@ -34,8 +34,7 @@ void SCClear::execute(cocos2d::Node *stage) {
   this->reader->nextScript();
 }
 
-SCCharacterSpeak::SCCharacterSpeak(ScriptReader *reader, std::string &name,
-                                   std::string &displayname, std::string &text,
+SCCharacterSpeak::SCCharacterSpeak(ScriptReader *reader, std::string &name, std::string &displayname, std::string &text,
                                    std::string &face)
     : cName(name), displayname(displayname), face(face), text(text) {
   this->reader = reader;
@@ -51,7 +50,6 @@ SCCharacterSpeak::~SCCharacterSpeak() {}
 
 namespace yaadv {
 void SCCharacterSpeak::execute(cocos2d::Node *stage) {
-
   Character *cha = CM->getCharacter(cName);
   std::string showName = cName;
   if (!cha) {
@@ -95,8 +93,7 @@ void SCGameOver::execute(cocos2d::Node *stage) { reader->returnToMenu(); }
 #include "../GameSystem.h"
 
 namespace yaadv {
-SCIf::SCIf(ScriptReader *reader, std::string expression, std::string trueTag,
-           std::string falseTag)
+SCIf::SCIf(ScriptReader *reader, std::string expression, std::string trueTag, std::string falseTag)
     : _expression(expression), _trueTag(trueTag), _falseTag(falseTag) {
   this->reader = reader;
   this->type = ScriptCommandType::If;
@@ -220,8 +217,7 @@ void SCIf::jump(std::string tag) {
   }
 }
 
-SCImg::SCImg(ScriptReader *reader, std::string &name, std::string &loc,
-             std::string &face)
+SCImg::SCImg(ScriptReader *reader, std::string &name, std::string &loc, std::string &face)
     : _name(name), _loc(loc), _face(face) {
   this->reader = reader;
   this->type = ScriptCommandType::Img;
@@ -234,8 +230,7 @@ void SCImg::execute(cocos2d::Node *stage) {
   reader->nextScript();
 }
 
-SCImgTween::SCImgTween(ScriptReader *reader, std::string &name,
-                       std::string &loc, float dur, std::string &ease,
+SCImgTween::SCImgTween(ScriptReader *reader, std::string &name, std::string &loc, float dur, std::string &ease,
                        std::string &face)
     : _name(name), _loc(loc), _duration(dur), _ease(ease), _face(face) {
   this->reader = reader;
@@ -352,8 +347,7 @@ void SCSelect::execute(Node *stage) {
 #include "../GameSystem.h"
 
 namespace yaadv {
-SCSet::SCSet(ScriptReader *reader, std::string &key, char mark, int value)
-    : _key(key), _mark(mark), _value(value) {
+SCSet::SCSet(ScriptReader *reader, std::string &key, char mark, int value) : _key(key), _mark(mark), _value(value) {
   this->reader = reader;
   this->type = ScriptCommandType::Set;
 }
@@ -378,20 +372,15 @@ void SCSet::execute(cocos2d::Node *stage) {
   reader->nextScript();
 }
 
-void SCSet::setDataValue(std::string key, int value) {
-  GameSystem::getInstance()->setDataValue(key, value);
-}
+void SCSet::setDataValue(std::string key, int value) { GameSystem::getInstance()->setDataValue(key, value); }
 
-int SCSet::getDataValue(std::string key) {
-  return GameSystem::getInstance()->getDataValue(key);
-}
+int SCSet::getDataValue(std::string key) { return GameSystem::getInstance()->getDataValue(key); }
 }  // namespace yaadv
 
 #include "CharacterManager.h"
 
 namespace yaadv {
-SCShowFg::SCShowFg(ScriptReader *reader, std::string &name, std::string &face)
-    : name(name), face(face) {
+SCShowFg::SCShowFg(ScriptReader *reader, std::string &name, std::string &face) : name(name), face(face) {
   this->reader = reader;
   this->type = ScriptCommandType::ShowFg;
 }

@@ -8,14 +8,14 @@ class Config {
   static Config *_instance;
 
  public:
-  std::string operator[](std::string &key) { 
-	if (vars.find(key) != vars.end()) {
-      return vars[key]; 
+  std::string operator[](std::string &key) {
+    if (vars.find(key) != vars.end()) {
+      return vars[key];
     }
     //    log(key.c_str());
-        return key;
+    return key;
   }
-  std::string operator[](char*key) {
+  std::string operator[](char *key) {
     std::string s(key);
     return (*this)[s];
   }

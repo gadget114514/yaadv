@@ -4,13 +4,10 @@ USING_NS_CC;
 using namespace yaadv;
 using namespace yaadv::rx;
 namespace yaadv {
-	namespace rx {
+namespace rx {
 
 RadioButton::RadioButton()
-    : _selectedNumber(0),
-      _tmpSelectedNumber(0),
-      _selectedButton(nullptr),
-      _tmpSelectedButton(nullptr) {
+    : _selectedNumber(0), _tmpSelectedNumber(0), _selectedButton(nullptr), _tmpSelectedButton(nullptr) {
   _radios = new std::vector<EasyButton *>;
   touchEvent = [=]() {};
   _eventTouch = EventListenerTouchOneByOne::create();
@@ -18,8 +15,7 @@ RadioButton::RadioButton()
   _eventTouch->onTouchBegan = [=](Touch *t, Event *e) {
     _tmpSelectedNumber = 0;
     for (auto it = _radios->begin(); it != _radios->end(); it++) {
-      if ((*it)->getNormal()->getBoundingBox().containsPoint(
-              (*it)->convertTouchToNodeSpace(t))) {
+      if ((*it)->getNormal()->getBoundingBox().containsPoint((*it)->convertTouchToNodeSpace(t))) {
         _tmpSelectedButton = (*it);
         if (_tmpSelectedButton == _selectedButton) return false;
         (*it)->onTouchBegan(t, e);
@@ -45,8 +41,7 @@ RadioButton::RadioButton()
 
   };
 
-  this->getEventDispatcher()->addEventListenerWithSceneGraphPriority(
-      _eventTouch, this);
+  this->getEventDispatcher()->addEventListenerWithSceneGraphPriority(_eventTouch, this);
 }
 
 RadioButton::~RadioButton() {
@@ -80,7 +75,6 @@ int RadioButton::getSelectedNumber() { return _selectedNumber; }
 
 void RadioButton::setSelectedNumber(int selectedNumber) {
   if (selectedNumber > _radios->size() - 1 || selectedNumber < 0) {
-
     return;
   }
   if (_selectedButton) _selectedButton->onTouchEnded(nullptr, nullptr, false);
@@ -90,7 +84,6 @@ void RadioButton::setSelectedNumber(int selectedNumber) {
 
   _selectedNumber = selectedNumber;
 }
-
 
 }  // namespace rx
 

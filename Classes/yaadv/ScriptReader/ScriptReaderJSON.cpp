@@ -1,10 +1,9 @@
 #include "ScriptReader.h"
 
-#include "CharacterManager.h"
 #include "../GameSystem.h"
 #include "../MainMenuScene.h"
+#include "CharacterManager.h"
 #include "SCX.h"
-
 
 USING_NS_CC;
 using namespace yaadv;
@@ -12,8 +11,7 @@ namespace yaadv {
 
 ScriptReaderJSON *ScriptReaderJSON::_instance = nullptr;
 
-ScriptReaderJSON::ScriptReaderJSON()
- {}
+ScriptReaderJSON::ScriptReaderJSON() {}
 
 ScriptReaderJSON::~ScriptReaderJSON() { clearScript(); }
 
@@ -109,7 +107,6 @@ void ScriptReaderJSON::loadScriptFile(std::string path) {
   _scripts.insert(
       std::pair<std::string, std::vector<ScriptCommand *> *>(currentSign, cms));
 #endif
-
 }
 
 void ScriptReaderJSON::jumpToSign(const std::string &sign) {
@@ -139,8 +136,7 @@ void ScriptReaderJSON::nextScript() {
 
   std::string readedSign = "readed_" + _currentSignName;
 
-  if (_currentCommandIndex >
-      GameSystem::getInstance()->getHaveRead(readedSign)) {
+  if (_currentCommandIndex > GameSystem::getInstance()->getHaveRead(readedSign)) {
     GameSystem::getInstance()->setHaveRead(readedSign, _currentCommandIndex);
     _isHaveRead = false;
   } else {
@@ -158,7 +154,6 @@ void ScriptReaderJSON::nextScript() {
   }
 
   auto cmd = cmdList->at(_currentCommandIndex - 1);
-
 
   switch (cmd->type) {
     case ScriptCommandType::CharacterSpeak:
@@ -206,9 +201,7 @@ std::string ScriptReaderJSON::getCurrentSignName() { return _currentSignName; }
 
 int ScriptReaderJSON::getCurrentCommandIndex() { return _currentCommandIndex; }
 
-void ScriptReaderJSON::setCurrentCommandIndex(int value) {
-  _currentCommandIndex = value;
-}
+void ScriptReaderJSON::setCurrentCommandIndex(int value) { _currentCommandIndex = value; }
 
 void ScriptReaderJSON::jumpToSign(const std::string &sign, int index) {
   if (sign.compare("") == 0) {
@@ -225,4 +218,4 @@ void ScriptReaderJSON::jumpToSign(const std::string &sign, int index) {
 
 bool ScriptReaderJSON::getIsHaveRead() { return _isHaveRead; }
 
-} //namespace yaadv
+}  // namespace yaadv

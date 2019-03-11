@@ -41,8 +41,7 @@ bool LoadScene::init() {
   stageLayer->addChild(backgroundLayer);
 
   auto backgroundWindow = Sprite::create(vars["yaadv/ui/sl/bg_load.jpg"]);
-  backgroundWindow->setPosition(Vec2(visibleSize.width / 2 + origin.x,
-                                     visibleSize.height / 2 + origin.y));
+  backgroundWindow->setPosition(Vec2(visibleSize.width / 2 + origin.x, visibleSize.height / 2 + origin.y));
   stageLayer->addChild(backgroundWindow);
 
   _savedataLayer = Node::create();
@@ -50,21 +49,19 @@ bool LoadScene::init() {
 
   loadList(_currentPage);
 
-  _buttonNext = MenuItemImage::create(vars["yaadv/ui/sl/btn_sl_next_normal.png"],
-                                      vars["yaadv/ui/sl/btn_sl_next_touch.png"],
-                                      CC_CALLBACK_0(LoadScene::nextPage, this));
+  _buttonNext =
+      MenuItemImage::create(vars["yaadv/ui/sl/btn_sl_next_normal.png"], vars["yaadv/ui/sl/btn_sl_next_touch.png"],
+                            CC_CALLBACK_0(LoadScene::nextPage, this));
   _buttonNext->setPosition(Vec2(1000, 70));
   _buttonFront =
-      MenuItemImage::create(vars["yaadv/ui/sl/btn_sl_front_normal.png"],
-                            vars["yaadv/ui/sl/btn_sl_front_touch.png"],
+      MenuItemImage::create(vars["yaadv/ui/sl/btn_sl_front_normal.png"], vars["yaadv/ui/sl/btn_sl_front_touch.png"],
                             CC_CALLBACK_0(LoadScene::frontPage, this));
   _buttonFront->setPosition(Vec2(1000, 170));
   auto pageMenu = Menu::create(_buttonNext, _buttonFront, NULL);
   pageMenu->setPosition(Vec2::ZERO);
   stageLayer->addChild(pageMenu);
 
-  auto buttonBack = MenuItemImage::create(vars["yaadv/ui/button_return.png"],
-                                          vars["yaadv/ui/button_return_down.png"],
+  auto buttonBack = MenuItemImage::create(vars["yaadv/ui/button_return.png"], vars["yaadv/ui/button_return_down.png"],
                                           CC_CALLBACK_0(LoadScene::back, this));
   buttonBack->setPosition(Vec2(175, 90));
   auto menu = Menu::create(buttonBack, NULL);
@@ -79,11 +76,9 @@ void LoadScene::back() { Director::getInstance()->popScene(); }
 
 void LoadScene::popup() {
   Config &vars = *Config::getInstance();
-  auto result =
-      GameSystem::getInstance()->loadGameSceneInfo(_currentSelectButton);
+  auto result = GameSystem::getInstance()->loadGameSceneInfo(_currentSelectButton);
   if (result) {
-    PopupLayer *popupDialog =
-        PopupLayer::create(vars["yaadv/ui/popupwindow/bg_popup.png"]);
+    PopupLayer *popupDialog = PopupLayer::create(vars["yaadv/ui/popupwindow/bg_popup.png"]);
     popupDialog->addLabelButton(vars["Yes"], CC_CALLBACK_0(LoadScene::apply, this));
     popupDialog->addLabelButton(vars["No"], CC_CALLBACK_0(LoadScene::cancel, this));
     popupDialog->setString(vars["Are you sure load this file?"]);
@@ -103,9 +98,7 @@ void LoadScene::apply() {
   }
 }
 
-void LoadScene::cancel() {
-  _currentSelectButton = -1;
-}
+void LoadScene::cancel() { _currentSelectButton = -1; }
 
 void LoadScene::loadList(int page) {
   Size visibleSize = Director::getInstance()->getVisibleSize();
@@ -114,29 +107,25 @@ void LoadScene::loadList(int page) {
   for (int i = 0; i < 4; i++) {
     dataButtons[i] = SaveData::create(4 * (page - 1) + i);
     dataButtons[i]->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
-    dataButtons[i]->setPosition(visibleSize.width / 2 + origin.x + 50,
-                                530 - 140 * i);
+    dataButtons[i]->setPosition(visibleSize.width / 2 + origin.x + 50, 530 - 140 * i);
     if (eventTouch[i] != nullptr) {
       this->getEventDispatcher()->removeEventListener(eventTouch[i]);
     }
     eventTouch[i] = EventListenerTouchOneByOne::create();
     eventTouch[i]->onTouchBegan = [=](Touch *t, Event *e) {
-      if (dataButtons[i]->getStageLayer()->getBoundingBox().containsPoint(
-              dataButtons[i]->convertTouchToNodeSpace(t))) {
+      if (dataButtons[i]->getStageLayer()->getBoundingBox().containsPoint(dataButtons[i]->convertTouchToNodeSpace(t))) {
         return true;
       }
       return false;
     };
     eventTouch[i]->onTouchEnded = [=](Touch *t, Event *e) {
-      if (dataButtons[i]->getStageLayer()->getBoundingBox().containsPoint(
-              dataButtons[i]->convertTouchToNodeSpace(t))) {
+      if (dataButtons[i]->getStageLayer()->getBoundingBox().containsPoint(dataButtons[i]->convertTouchToNodeSpace(t))) {
         _currentSelectButton = 4 * (page - 1) + i;
         popup();
       } else {
       }
     };
-    this->getEventDispatcher()->addEventListenerWithSceneGraphPriority(
-        eventTouch[i], this);
+    this->getEventDispatcher()->addEventListenerWithSceneGraphPriority(eventTouch[i], this);
     _savedataLayer->addChild(dataButtons[i]);
   }
 }

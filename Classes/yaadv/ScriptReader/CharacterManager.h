@@ -29,8 +29,8 @@ class Bamiri {
     angle = 0;
     fadetime = 0.5;
   }
-  Bamiri(float x, float y, float anchorx, float anchory, float scalex,
-	  float scaley, float angle, float fadetime, std::string action = "") {
+  Bamiri(float x, float y, float anchorx, float anchory, float scalex, float scaley, float angle, float fadetime,
+         std::string action = "") {
     this->x = x;
     this->y = y;
     this->scalex = scalex;
@@ -61,13 +61,7 @@ struct Character {
   CMPositionType currentPosition;
 
   Character()
-      : name("noname"),
-        color(Color3B::BLACK),
-        fgList(nullptr),
-        favor(0),
-        hate(0),
-        _sprite(nullptr),
-        currentFace("") {
+      : name("noname"), color(Color3B::BLACK), fgList(nullptr), favor(0), hate(0), _sprite(nullptr), currentFace("") {
     fgList = new std::map<std::string, char *>;
     bamiriList = new std::map<std::string, Bamiri *>;
   }
@@ -109,10 +103,8 @@ struct Character {
     }
   }
 
-
   void moveTo(CMPositionType pt, bool immediately = false) {
-    float width =
-        Director::getInstance()->getRunningScene()->getContentSize().width;
+    float width = Director::getInstance()->getRunningScene()->getContentSize().width;
     if (width == 0) {
       width = Director::getInstance()->getVisibleSize().width;
     }
@@ -138,9 +130,7 @@ struct Character {
         setAction(width * 3 / 4, immediately);
         break;
       }
-      default: {
-        break;
-      }
+      default: { break; }
     }
     currentPosition = pt;
   }
@@ -165,7 +155,6 @@ struct Character {
       currentFace = "";
       currentPosition = CMPositionType::EMPTY;
     } else {
-
     }
   }
 };
@@ -183,7 +172,6 @@ class CharacterManager {
   static void destoryInstance();
 
   Character *getCharacter(std::string &key);
-
 
   void addCharacter(std::string &key, Character *cha);
 };
@@ -210,13 +198,7 @@ struct YaImg {
   CMPositionType currentPosition;
 
   YaImg()
-      : name("NoName"),
-        color(Color3B::BLACK),
-        fgList(nullptr),
-        favor(0),
-        hate(0),
-        _sprite(nullptr),
-        currentFace("") {
+      : name("NoName"), color(Color3B::BLACK), fgList(nullptr), favor(0), hate(0), _sprite(nullptr), currentFace("") {
     fgList = new std::map<std::string, char *>;
   }
 
@@ -245,8 +227,7 @@ struct YaImg {
   }
 
   void moveToDefaultBamiri(CMPositionType pt, bool immediately = false) {
-    float width =
-        Director::getInstance()->getRunningScene()->getContentSize().width;
+    float width = Director::getInstance()->getRunningScene()->getContentSize().width;
     if (width == 0) {
       width = Director::getInstance()->getVisibleSize().width;
     }
@@ -272,17 +253,13 @@ struct YaImg {
         setAction(width * 3 / 4, immediately);
         break;
       }
-      default: {
-
-        break;
-      }
+      default: { break; }
     }
     currentPosition = pt;
   }
 
   void moveTo(CMPositionType pt, bool immediately = false) {
-    float width =
-        Director::getInstance()->getRunningScene()->getContentSize().width;
+    float width = Director::getInstance()->getRunningScene()->getContentSize().width;
     if (width == 0) {
       width = Director::getInstance()->getVisibleSize().width;
     }
@@ -308,17 +285,13 @@ struct YaImg {
         setAction(width * 3 / 4, immediately);
         break;
       }
-      default: {
-
-        break;
-      }
+      default: { break; }
     }
     currentPosition = pt;
   }
 
   void setAction(int distance, bool immediately) {
     if (!_sprite) {
-
     } else {
       if (immediately) {
         _sprite->setPosition(Point(distance, _sprite->getPositionY()));
@@ -330,13 +303,11 @@ struct YaImg {
 
   void leave() {
     if (_sprite) {
-
       _sprite->removeFromParent();
       _sprite = nullptr;
       currentFace = "";
       currentPosition = CMPositionType::EMPTY;
     } else {
-
     }
   }
 };

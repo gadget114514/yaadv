@@ -42,7 +42,7 @@ GameSystem::GameSystem() {
   BackgroundManager::getInstance();
   BackgroundMusicManager::getInstance();
   SoundManager::getInstance();
-  //ScriptReader::setInstance(ScriptReaderYASL::getInstance());
+  // ScriptReader::setInstance(ScriptReaderYASL::getInstance());
   ScriptReader::setInstance(ScriptReaderWREN::getInstance());
   ScriptReader::getInstance();
 
@@ -97,50 +97,32 @@ void GameSystem::setSoundVolume(float value) {
   cocos2d::UserDefault::getInstance()->setFloatForKey(SOUNDVOLUME, value);
 }
 
-void GameSystem::setTextSpeed(float value) {
-  cocos2d::UserDefault::getInstance()->setFloatForKey(TEXTSPEED, value);
-}
+void GameSystem::setTextSpeed(float value) { cocos2d::UserDefault::getInstance()->setFloatForKey(TEXTSPEED, value); }
 
-void GameSystem::setAutoSpeed(float value) {
-  cocos2d::UserDefault::getInstance()->setFloatForKey(AUTOSPEED, value);
-}
+void GameSystem::setAutoSpeed(float value) { cocos2d::UserDefault::getInstance()->setFloatForKey(AUTOSPEED, value); }
 
 void GameSystem::setHaveRead(const std::string &key, int value) {
   cocos2d::UserDefault::getInstance()->setIntegerForKey(key.c_str(), value);
   cocos2d::UserDefault::sharedUserDefault()->flush();
 }
 
-void GameSystem::setIsSkipAll(bool value) {
-  cocos2d::UserDefault::getInstance()->setBoolForKey(ISSKIPALL, value);
-}
+void GameSystem::setIsSkipAll(bool value) { cocos2d::UserDefault::getInstance()->setBoolForKey(ISSKIPALL, value); }
 
-float GameSystem::getSystemVolume() {
-  return cocos2d::UserDefault::getInstance()->getFloatForKey(SYSTEMVOLUME);
-}
+float GameSystem::getSystemVolume() { return cocos2d::UserDefault::getInstance()->getFloatForKey(SYSTEMVOLUME); }
 
-float GameSystem::getMusicVolume() {
-  return cocos2d::UserDefault::getInstance()->getFloatForKey(MUSICVOLUME);
-}
+float GameSystem::getMusicVolume() { return cocos2d::UserDefault::getInstance()->getFloatForKey(MUSICVOLUME); }
 
-float GameSystem::getSoundVolume() {
-  return cocos2d::UserDefault::getInstance()->getFloatForKey(SOUNDVOLUME);
-}
+float GameSystem::getSoundVolume() { return cocos2d::UserDefault::getInstance()->getFloatForKey(SOUNDVOLUME); }
 
-float GameSystem::getTextSpeed() {
-  return cocos2d::UserDefault::getInstance()->getFloatForKey(TEXTSPEED);
-}
+float GameSystem::getTextSpeed() { return cocos2d::UserDefault::getInstance()->getFloatForKey(TEXTSPEED); }
 
-float GameSystem::getAutoSpeed() {
-  return cocos2d::UserDefault::getInstance()->getFloatForKey(AUTOSPEED);
-}
+float GameSystem::getAutoSpeed() { return cocos2d::UserDefault::getInstance()->getFloatForKey(AUTOSPEED); }
 
 int GameSystem::getHaveRead(const std::string &key) {
   return cocos2d::UserDefault::getInstance()->getIntegerForKey(key.c_str());
 }
 
-bool GameSystem::getIsSkipAll() {
-  return cocos2d::UserDefault::getInstance()->getBoolForKey(ISSKIPALL);
-}
+bool GameSystem::getIsSkipAll() { return cocos2d::UserDefault::getInstance()->getBoolForKey(ISSKIPALL); }
 
 void GameSystem::setDataValue(std::string &key, int value) {
   auto result = _savedata[0].find(key);
@@ -153,7 +135,7 @@ void GameSystem::setDataValue(std::string &key, int value) {
 
 int GameSystem::getDataValue(std::string &key) {
   auto result = _savedata[0].find(key);
- 
+
   if (result != _savedata[0].end()) {
     return result->second;
   } else {
@@ -251,14 +233,12 @@ bool GameSystem::saveGameSceneInfo(int i) {
   char *ch = new char[13];
   sprintf(ch, "%d", i + 1);
   char *file = new char[500];
-  sprintf(file, "%s%s%s.sav",
-          FileUtils::getInstance()->getWritablePath().c_str(), path, ch);
+  sprintf(file, "%s%s%s.sav", FileUtils::getInstance()->getWritablePath().c_str(), path, ch);
   char *image = new char[100];
   snprintf(image, 100, "%s%d.jpg", path, i + 1);
   FILE *savedata = fopen(file, "wb");
   if (savedata) {
-    bool result = _screenShoot->saveToFile(
-        image, false, [&](RenderTexture *r, const std::string &s) {});
+    bool result = _screenShoot->saveToFile(image, false, [&](RenderTexture *r, const std::string &s) {});
     if (result) {
       char tmp[100];
 
@@ -274,16 +254,14 @@ bool GameSystem::saveGameSceneInfo(int i) {
     fwrite(tmp, sizeof(char), strlen(tmp), savedata);
     fputs("\r\n", savedata);
 
-    fwrite(_gameSceneInfo->currentText.c_str(), sizeof(char),
-           strlen(_gameSceneInfo->currentText.c_str()), savedata);
+    fwrite(_gameSceneInfo->currentText.c_str(), sizeof(char), strlen(_gameSceneInfo->currentText.c_str()), savedata);
     fputs("\r\n", savedata);
 
-    fwrite(_gameSceneInfo->currentName.c_str(), sizeof(char),
-           strlen(_gameSceneInfo->currentName.c_str()), savedata);
+    fwrite(_gameSceneInfo->currentName.c_str(), sizeof(char), strlen(_gameSceneInfo->currentName.c_str()), savedata);
     fputs("\r\n", savedata);
 
-    fwrite(_gameSceneInfo->backgroundKey.c_str(), sizeof(char),
-           strlen(_gameSceneInfo->backgroundKey.c_str()), savedata);
+    fwrite(_gameSceneInfo->backgroundKey.c_str(), sizeof(char), strlen(_gameSceneInfo->backgroundKey.c_str()),
+           savedata);
     fputs("\r\n", savedata);
 
     char cCharacterCount[2];
@@ -306,8 +284,7 @@ bool GameSystem::saveGameSceneInfo(int i) {
       fputs("\r\n", savedata);
     }
 
-    fwrite(_gameSceneInfo->bgmKey.c_str(), sizeof(char),
-           strlen(_gameSceneInfo->bgmKey.c_str()), savedata);
+    fwrite(_gameSceneInfo->bgmKey.c_str(), sizeof(char), strlen(_gameSceneInfo->bgmKey.c_str()), savedata);
     fputs("\r\n", savedata);
 
     char num[2];
@@ -315,13 +292,10 @@ bool GameSystem::saveGameSceneInfo(int i) {
     fwrite(num, sizeof(char), strlen(num), savedata);
     fputs("\r\n", savedata);
     if (_gameSceneInfo->optionsNumber) {
-      for (auto itr = _gameSceneInfo->options.begin();
-           itr != _gameSceneInfo->options.end(); itr++) {
-        fwrite(itr->first.c_str(), sizeof(char), strlen(itr->first.c_str()),
-               savedata);
+      for (auto itr = _gameSceneInfo->options.begin(); itr != _gameSceneInfo->options.end(); itr++) {
+        fwrite(itr->first.c_str(), sizeof(char), strlen(itr->first.c_str()), savedata);
         fputs("\r\n", savedata);
-        fwrite(itr->second.c_str(), sizeof(char), strlen(itr->second.c_str()),
-               savedata);
+        fwrite(itr->second.c_str(), sizeof(char), strlen(itr->second.c_str()), savedata);
         fputs("\r\n", savedata);
       }
     }
@@ -337,14 +311,12 @@ bool GameSystem::saveGameSceneInfo(int i) {
     fputs("\r\n", savedata);
 
     auto dataValueStr = dataValueToString();
-    fwrite(dataValueStr.c_str(), sizeof(char), strlen(dataValueStr.c_str()),
-           savedata);
+    fwrite(dataValueStr.c_str(), sizeof(char), strlen(dataValueStr.c_str()), savedata);
     fputs("\r\n", savedata);
 
     fclose(savedata);
 
-
-	ret = true;
+    ret = true;
   } else {
     ret = false;
     // save error: should be treated
@@ -392,9 +364,7 @@ bool GameSystem::createSavedata() {
   }
 }
 
-void GameSystem::setScreenShoot(RenderTexture *render) {
-  _screenShoot = render;
-}
+void GameSystem::setScreenShoot(RenderTexture *render) { _screenShoot = render; }
 
 RenderTexture *GameSystem::getScreenShoot() { return _screenShoot; }
 
@@ -403,8 +373,7 @@ bool GameSystem::updateGameSavedata(int i) {
   char ch[4];
   sprintf(ch, "%d", i + 1);
   char file[100];
-  sprintf(file, "%s%s%s%s", FileUtils::getInstance()->getWritablePath().c_str(),
-          path, ch, ".sav");
+  sprintf(file, "%s%s%s%s", FileUtils::getInstance()->getWritablePath().c_str(), path, ch, ".sav");
 
   std::string data = FileUtils::getInstance()->getStringFromFile(file);
   if (data.compare("") != 0) {
@@ -415,8 +384,7 @@ bool GameSystem::updateGameSavedata(int i) {
     ePos = data.find('\n', sPos);
     temp = data.substr(sPos, ePos - sPos - 1);
 
-    _savedataList[i].imageFile =
-        FileUtils::getInstance()->getWritablePath() + temp;
+    _savedataList[i].imageFile = FileUtils::getInstance()->getWritablePath() + temp;
     sPos = ePos + 1;
 
     ePos = data.find('\n', sPos);
@@ -439,8 +407,7 @@ bool GameSystem::loadGameSceneInfo(int i) {
   char ch[4];
   sprintf(ch, "%d", i + 1);
   char file[100];
-  sprintf(file, "%s%s%s%s", FileUtils::getInstance()->getWritablePath().c_str(),
-          path, ch, ".sav");
+  sprintf(file, "%s%s%s%s", FileUtils::getInstance()->getWritablePath().c_str(), path, ch, ".sav");
   std::string data = FileUtils::getInstance()->getStringFromFile(file);
 
   setGameSceneInfo(new GameData());
@@ -515,8 +482,7 @@ bool GameSystem::loadGameSceneInfo(int i) {
       ePos = data.find('\n', sPos);
       text = data.substr(sPos, ePos - sPos - 1);
       sPos = ePos + 1;
-      _gameSceneInfo->options.insert(
-          std::pair<std::string, std::string>(sign, text));
+      _gameSceneInfo->options.insert(std::pair<std::string, std::string>(sign, text));
     }
 
     ePos = data.find('\n', sPos);
@@ -534,10 +500,9 @@ bool GameSystem::loadGameSceneInfo(int i) {
     sPos = ePos + 1;
     stringToDataValue(temp);
 
-
     return true;
   } else {
- ;
+    ;
     return false;
   }
 }

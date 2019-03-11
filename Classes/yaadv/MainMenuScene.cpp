@@ -70,8 +70,7 @@ bool MainMenu::init() {
   auto backgroundLayer = LayerColor::create(Color4B::WHITE);
   auto backgroundjpg = Sprite::create(vars["yaadv/ui/title/bg_title.png"]);
   backgroundjpg->setAnchorPoint(Vec2::ANCHOR_MIDDLE_TOP);
-  backgroundjpg->setPosition(
-      Vec2(visibleSize.width / 2 + origin.x, visibleSize.height + origin.y));
+  backgroundjpg->setPosition(Vec2(visibleSize.width / 2 + origin.x, visibleSize.height + origin.y));
   backgroundLayer->addChild(backgroundjpg, 0);
 
   auto lastdayLogo = Sprite::create(vars["yaadv/ui/title/bg_title_logo.png"]);
@@ -85,24 +84,21 @@ bool MainMenu::init() {
 
   scheduleUpdate();
 
-  if (rain)
-  appendRain();
+  if (rain) appendRain();
 
-  auto buttonNew = MenuItemImage::create(
-      vars["yaadv/ui/title/btn_title_new_normal.png"], 
-	  vars["yaadv/ui/title/btn_title_new_touch.png"],
-      CC_CALLBACK_0(MainMenu::newgame, this));
+  auto buttonNew =
+      MenuItemImage::create(vars["yaadv/ui/title/btn_title_new_normal.png"],
+                            vars["yaadv/ui/title/btn_title_new_touch.png"], CC_CALLBACK_0(MainMenu::newgame, this));
   buttonNew->setPosition(Vec2(850, 400));
 
-  auto buttonLoad = MenuItemImage::create(vars["yaadv/ui/title/btn_title_load_normal.png"],
-                                          vars["yaadv/ui/title/btn_title_load_touch.png"],
-                                          CC_CALLBACK_0(MainMenu::load, this));
+  auto buttonLoad =
+      MenuItemImage::create(vars["yaadv/ui/title/btn_title_load_normal.png"],
+                            vars["yaadv/ui/title/btn_title_load_touch.png"], CC_CALLBACK_0(MainMenu::load, this));
   buttonLoad->setPosition(Vec2(850, 300));
 
   auto buttonConfig =
       MenuItemImage::create(vars["yaadv/ui/title/btn_title_config_normal.png"],
-                            vars["yaadv/ui/title/btn_title_config_touch.png"],
-                            CC_CALLBACK_0(MainMenu::config, this));
+                            vars["yaadv/ui/title/btn_title_config_touch.png"], CC_CALLBACK_0(MainMenu::config, this));
   buttonConfig->setPosition(Vec2(850, 200));
 
   auto menu = Menu::create(buttonNew, buttonLoad, buttonConfig, NULL);
@@ -115,8 +111,7 @@ bool MainMenu::init() {
 }
 
 void MainMenu::menuExit(Ref *pSender) {
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_WP8) || \
-    (CC_TARGET_PLATFORM == CC_PLATFORM_WINRT)
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_WP8) || (CC_TARGET_PLATFORM == CC_PLATFORM_WINRT)
   MessageBox(
       "You pressed the close button. Windows Store Apps do not implement a "
       "close button.",
@@ -137,63 +132,56 @@ void MainMenu::newgame() {
   Director::getInstance()->replaceScene(scene);
 }
 
-void MainMenu::config() {
-  Director::getInstance()->pushScene(SettingScene::createScene());
-}
+void MainMenu::config() { Director::getInstance()->pushScene(SettingScene::createScene()); }
 
-void MainMenu::load() {
-  Director::getInstance()->pushScene(LoadScene::createScene());
-}
+void MainMenu::load() { Director::getInstance()->pushScene(LoadScene::createScene()); }
 
 void MainMenu::update(float dt) {
   drawNode->clear();
 
   if (rain) {
-  
-  appendRain();
+    appendRain();
 
-  for (auto i = rainOvers.begin(); i != rainOvers.end();) {
-    auto o = *i;
-    drawNode->drawCircle(Vec2(o->x, o->y), o->r, 360, 100, false, 1.f, 0.4f,
-                         Color4F(1, 1, 1, o->alpha));
-    o->r += (RAIN_LEN_MAX - o->y) / RAIN_LEN_MAX * RAIN_OVER_RADIS * dt;
-    o->alpha -= dt;
-    if (o->alpha <= 0) {
-      i = rainOvers.erase(i);
-      delete (o);
-    } else {
-      i++;
-    }
-  }
-
-  for (auto i = rains.begin(); i != rains.end();) {
-    auto r = *i;
-    drawNode->drawLine(Vec2(r->x, r->y), Vec2(r->x, r->y + r->len),
-                       Color4F(1, 1, 1, r->alpha * 0.5f));
-    float s = RAIN_SPEED * dt;
-    if (r->y > (RAIN_LEN_MAX - r->len) / RAIN_LEN_MAX * RAIN_RANGE) {
-      r->y -= (r->landLen / RAIN_LEN_MAX) * s;
-      i++;
-    } else if (!r->isLand) {
-      i++;
-      r->isLand = true;
-
-      auto over = new RainOver();
-      over->x = r->x;
-      over->y = r->y;
-      over->alpha = r->len / RAIN_LEN_MAX * 0.5f + 0.3f;
-      over->r = 0;
-      rainOvers.push_back(over);
-    } else {
-      r->len -= (r->landLen / RAIN_LEN_MAX) * s;
-      if (r->len <= 0) {
-        i = rains.erase(i);
-        delete (r);
+    for (auto i = rainOvers.begin(); i != rainOvers.end();) {
+      auto o = *i;
+      drawNode->drawCircle(Vec2(o->x, o->y), o->r, 360, 100, false, 1.f, 0.4f, Color4F(1, 1, 1, o->alpha));
+      o->r += (RAIN_LEN_MAX - o->y) / RAIN_LEN_MAX * RAIN_OVER_RADIS * dt;
+      o->alpha -= dt;
+      if (o->alpha <= 0) {
+        i = rainOvers.erase(i);
+        delete (o);
       } else {
         i++;
       }
     }
-  }
+
+    for (auto i = rains.begin(); i != rains.end();) {
+      auto r = *i;
+      drawNode->drawLine(Vec2(r->x, r->y), Vec2(r->x, r->y + r->len), Color4F(1, 1, 1, r->alpha * 0.5f));
+      float s = RAIN_SPEED * dt;
+      if (r->y > (RAIN_LEN_MAX - r->len) / RAIN_LEN_MAX * RAIN_RANGE) {
+        r->y -= (r->landLen / RAIN_LEN_MAX) * s;
+        i++;
+      } else if (!r->isLand) {
+        i++;
+        r->isLand = true;
+
+        auto over = new RainOver();
+        over->x = r->x;
+        over->y = r->y;
+        over->alpha = r->len / RAIN_LEN_MAX * 0.5f + 0.3f;
+        over->r = 0;
+        rainOvers.push_back(over);
+      } else {
+        r->len -= (r->landLen / RAIN_LEN_MAX) * s;
+        if (r->len <= 0) {
+          i = rains.erase(i);
+          delete (r);
+        } else {
+          i++;
+        }
+      }
+    }
   }
 }
 
@@ -209,5 +197,4 @@ void MainMenu::appendRain() {
     rains.push_back(r);
   }
 }
-
 }

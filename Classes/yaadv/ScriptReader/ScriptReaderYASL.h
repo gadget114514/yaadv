@@ -12,8 +12,6 @@ struct Character;
 namespace yaadv {
 class ScriptReaderYASL : public ScriptReader {
  public:
-
-
   //  std::map<std::string, std::vector<ScriptCommand *> *> _scripts;
 
   //  std::map<std::string, int> _record;

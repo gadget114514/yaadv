@@ -21,8 +21,7 @@ struct fgCharacter {
   std::string face;
   int number;
   fgCharacter(){};
-  fgCharacter(std::string name, std::string face, int number)
-      : name(name), face(face), number(number){};
+  fgCharacter(std::string name, std::string face, int number) : name(name), face(face), number(number){};
 };
 
 struct GameData {
@@ -128,7 +127,7 @@ class GameSystem {
   void setGameScene(Scene *scene);
   Scene *getGameScene();
 
-//  float getPosition(CMPositionType pt);
+  //  float getPosition(CMPositionType pt);
 };
 };  // namespace yaadv
 

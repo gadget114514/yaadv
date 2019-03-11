@@ -1,13 +1,12 @@
-#include "yaadv.h"
 #include "HistoryScene.h"
 #include "ui/CocosGUI.h"
+#include "yaadv.h"
 
 USING_NS_CC;
 using namespace yaadv;
 
 namespace yaadv {
-HistoryMessage::HistoryMessage(std::string text, std::string name,
-                               Color4B color) {
+HistoryMessage::HistoryMessage(std::string text, std::string name, Color4B color) {
   float nameLabelHeight = 0;
   float textLabelHeight = 0;
 
@@ -70,13 +69,11 @@ bool HistoryScene::init() {
   auto stageLayer = Layer::create();
 
   auto bg = Sprite::create(vars["yaadv/ui/log/history_bg.png"]);
-  bg->setPosition(Vec2(visibleSize.width / 2 + origin.x,
-                       visibleSize.height / 2 + origin.y));
+  bg->setPosition(Vec2(visibleSize.width / 2 + origin.x, visibleSize.height / 2 + origin.y));
   stageLayer->addChild(bg);
 
   auto backgroundImage = Sprite::create(vars["yaadv/ui/log/history_dialog_box.png"]);
-  backgroundImage->setPosition(Vec2(visibleSize.width / 2 + origin.x,
-                                    visibleSize.height / 2 + origin.y));
+  backgroundImage->setPosition(Vec2(visibleSize.width / 2 + origin.x, visibleSize.height / 2 + origin.y));
   stageLayer->addChild(backgroundImage);
 
   auto historyList = Sprite::create();
@@ -91,11 +88,9 @@ bool HistoryScene::init() {
 
   historyListView->setBounceEnabled(true);
 
-  historyListView->setContentSize(
-      Size(visibleSize.width / 2, visibleSize.height / 2));
+  historyListView->setContentSize(Size(visibleSize.width / 2, visibleSize.height / 2));
   historyListView->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
-  historyListView->setPosition(Vec2(visibleSize.width / 2 + origin.x,
-                                    visibleSize.height / 2 + origin.y));
+  historyListView->setPosition(Vec2(visibleSize.width / 2 + origin.x, visibleSize.height / 2 + origin.y));
   int startY = 0;
   for (int i = 0; i < HistoryLogger::getInstance()->getLength(); i++) {
     auto record = HistoryLogger::getInstance()->getRecord(i);
@@ -105,24 +100,19 @@ bool HistoryScene::init() {
     startY -= hm->getHeight() + 13;
   }
 
-  historyListView->setInnerContainerSize(
-      Size(visibleSize.width / 2, abs(startY)));
+  historyListView->setInnerContainerSize(Size(visibleSize.width / 2, abs(startY)));
 
-  historyList->setPosition(
-      Vec2(0, historyListView->getInnerContainerSize().height));
+  historyList->setPosition(Vec2(0, historyListView->getInnerContainerSize().height));
   historyListView->addChild(historyList);
 
   stageLayer->addChild(historyListView);
 
   historyListView->jumpToBottom();
 
-  scheduleOnce([=](float) {
-    historyListView->jumpToBottom(); }, 0.01f, "XXX");
+  scheduleOnce([=](float) { historyListView->jumpToBottom(); }, 0.01f, "XXX");
 
-  auto buttonBack = MenuItemImage::create(
-      vars["yaadv/ui/button_return.png"], 
-	  vars["yaadv/ui/button_return_down.png"],
-      CC_CALLBACK_0(HistoryScene::back, this));
+  auto buttonBack = MenuItemImage::create(vars["yaadv/ui/button_return.png"], vars["yaadv/ui/button_return_down.png"],
+                                          CC_CALLBACK_0(HistoryScene::back, this));
   buttonBack->setPosition(Vec2(175 + origin.x, 90 + origin.y));
   auto menu = Menu::create(buttonBack, NULL);
   menu->setPosition(Vec2::ZERO);

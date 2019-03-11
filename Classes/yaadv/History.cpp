@@ -30,8 +30,7 @@ HistoryLogger *HistoryLogger::getInstance() {
 
 void HistoryLogger::destoryInstance() { CC_SAFE_DELETE(_instance); }
 
-record *HistoryLogger::createRecord(std::string type, std::string text,
-                                    std::string name, Color4B color) {
+record *HistoryLogger::createRecord(std::string type, std::string text, std::string name, Color4B color) {
   recordType tmpType;
   if (type.compare("null") == 0) {
     tmpType = recordType::null;
@@ -45,8 +44,7 @@ record *HistoryLogger::createRecord(std::string type, std::string text,
   return tmpRecord;
 }
 
-void HistoryLogger::addRecord(std::string type, std::string text,
-                              std::string name, Color4B color) {
+void HistoryLogger::addRecord(std::string type, std::string text, std::string name, Color4B color) {
   auto record = createRecord(type, text, name, color);
   addRecord(record);
 }
@@ -60,5 +58,4 @@ void HistoryLogger::addRecord(record *record) {
 int HistoryLogger::getLength() { return _currentLog; }
 
 record *HistoryLogger::getRecord(int i) { return _records[i]; }
-
 }

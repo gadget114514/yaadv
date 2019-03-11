@@ -21,8 +21,7 @@ class Slidebar : public Node {
  public:
   Slidebar(Sprite *backgroundSprite, Sprite *pointSprite);
   ~Slidebar();
-  static Slidebar *createSlidebar(std::string backgroundFile,
-                                  std::string pointFile);
+  static Slidebar *createSlidebar(std::string backgroundFile, std::string pointFile);
   void setLinkValue(int &value);
   void setMaxValue(float value);
   void setMinValue(float value);

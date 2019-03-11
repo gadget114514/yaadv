@@ -1,6 +1,6 @@
-#include "yaadv.h"
 #include "SaveData.h"
 #include "GameSystem.h"
+#include "yaadv.h"
 
 USING_NS_CC;
 using namespace yaadv;
@@ -9,11 +9,9 @@ using namespace yaadv;
 
 namespace yaadv {
 
-SaveData::SaveData(int number, std::string imageFile, std::string text,
-                   std::string date) {}
+SaveData::SaveData(int number, std::string imageFile, std::string text, std::string date) {}
 
-SaveData::SaveData(int i)
-    : _dataImage(nullptr), _dataDate(nullptr), _dataText(nullptr) {
+SaveData::SaveData(int i) : _dataImage(nullptr), _dataDate(nullptr), _dataText(nullptr) {
   Config &vars = *Config::getInstance();
 
   _stageLayer = Sprite::create(vars["yaadv/ui/sl/btn_button_normal.png"]);
@@ -37,8 +35,7 @@ SaveData::SaveData(int i)
   auto eventTouch = EventListenerTouchOneByOne::create();
 
   eventTouch->onTouchBegan = [=](Touch *t, Event *e) {
-    if (_stageLayer->getBoundingBox().containsPoint(
-            this->convertTouchToNodeSpace(t))) {
+    if (_stageLayer->getBoundingBox().containsPoint(this->convertTouchToNodeSpace(t))) {
       touchImage->setVisible(true);
       return true;
     }
@@ -47,15 +44,13 @@ SaveData::SaveData(int i)
 
   eventTouch->onTouchEnded = [=](Touch *t, Event *e) {
     touchImage->setVisible(false);
-    if (_stageLayer->getBoundingBox().containsPoint(
-            this->convertTouchToNodeSpace(t))) {
+    if (_stageLayer->getBoundingBox().containsPoint(this->convertTouchToNodeSpace(t))) {
       onTouchEnded(_number);
     } else {
     }
   };
 
-  this->getEventDispatcher()->addEventListenerWithSceneGraphPriority(eventTouch,
-                                                                     this);
+  this->getEventDispatcher()->addEventListenerWithSceneGraphPriority(eventTouch, this);
 
   this->addChild(_stageLayer);
 }
@@ -88,8 +83,7 @@ void SaveData::updataData(bool isNeedReloadImage) {
   if (savedata) {
     char numberInChar[3];
     sprintf(numberInChar, "%d", _number + 1);
-    auto dataNumber =
-        Label::createWithSystemFont((std::string)numberInChar, vars["arial"], 26);
+    auto dataNumber = Label::createWithSystemFont((std::string)numberInChar, vars["arial"], 26);
     dataNumber->setPosition(Vec2(25, 105));
     _stageLayer->addChild(dataNumber);
 
@@ -98,12 +92,11 @@ void SaveData::updataData(bool isNeedReloadImage) {
     _dataImage = Sprite::create(imageFile);
 
     if (isNeedReloadImage) {
-      _dataImage->runAction(Sequence::createWithTwoActions(
-          DelayTime::create(0.1f), CallFunc::create([=]() {
-            Director::getInstance()->getTextureCache()->reloadTexture(
-                imageFile);
-            _dataImage->setTexture(imageFile);
-          })));
+      _dataImage->runAction(Sequence::createWithTwoActions(DelayTime::create(0.1f), CallFunc::create([=]() {
+                                                             Director::getInstance()->getTextureCache()->reloadTexture(
+                                                                 imageFile);
+                                                             _dataImage->setTexture(imageFile);
+                                                           })));
     }
 
     if (_dataImage) {
@@ -148,8 +141,7 @@ void SaveData::updataData(bool isNeedReloadImage) {
   } else {
     char numberInChar[13];
     sprintf(numberInChar, "%d", _number + 1);
-    auto dataNumber =
-        Label::createWithSystemFont((std::string)numberInChar, vars["arial"], 26);
+    auto dataNumber = Label::createWithSystemFont((std::string)numberInChar, vars["arial"], 26);
     dataNumber->setPosition(Vec2(25, 105));
     _stageLayer->addChild(dataNumber);
 
@@ -168,4 +160,4 @@ void SaveData::updataData(bool isNeedReloadImage) {
 
 Sprite *SaveData::getStageLayer() { return _stageLayer; }
 
-} // namespace yaadv
+}  // namespace yaadv

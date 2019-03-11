@@ -9,9 +9,7 @@ namespace yaadv {
 const int Between::UNDEFINED_POSITION = -2048;
 const int Between::MAX_OPACITY = 255;
 
-cocos2d::Spawn* Between::to(Node* node, std::string to, float duration,
-                            Easing easing,
-	bool relative) {
+cocos2d::Spawn* Between::to(Node* node, std::string to, float duration, Easing easing, bool relative) {
   Vector<FiniteTimeAction*> spawn;
   Size visibleSize = Director::getInstance()->getVisibleSize();
 
@@ -37,7 +35,7 @@ cocos2d::Spawn* Between::to(Node* node, std::string to, float duration,
       continue;
     } else if (key == "y") {
       YVAL(toY, value);
-	  
+
       if (toX == UNDEFINED_POSITION) {
         action = MoveTo::create(duration, Point(node->getPositionX(), toY));
       } else {
@@ -65,27 +63,22 @@ cocos2d::Spawn* Between::to(Node* node, std::string to, float duration,
       CCLOG("[Between::to] invalid action");
       continue;
     }
-    spawn.pushBack(TargetedAction::create(
-        node, Between::getEasing(action, duration, easing)));
+    spawn.pushBack(TargetedAction::create(node, Between::getEasing(action, duration, easing)));
   }
   if (toX != UNDEFINED_POSITION) {
     auto action = MoveTo::create(duration, Point(toX, node->getPositionY()));
-    spawn.pushBack(TargetedAction::create(
-        node, Between::getEasing(action, duration, easing)));
+    spawn.pushBack(TargetedAction::create(node, Between::getEasing(action, duration, easing)));
   }
   if (byX != UNDEFINED_POSITION) {
     auto action = MoveTo::create(duration, Point(byX, 0));
-    spawn.pushBack(TargetedAction::create(
-        node, Between::getEasing(action, duration, easing)));
+    spawn.pushBack(TargetedAction::create(node, Between::getEasing(action, duration, easing)));
   }
   return Spawn::create(spawn);
 }
 
-Spawn* Between::from(Node* node, std::string from, float duration,
-                     Easing easing, bool relative) {
+Spawn* Between::from(Node* node, std::string from, float duration, Easing easing, bool relative) {
   Vector<FiniteTimeAction*> spawn;
   Size visibleSize = Director::getInstance()->getVisibleSize();
-
 
   float toX = UNDEFINED_POSITION;
   float byX = UNDEFINED_POSITION;
@@ -121,14 +114,13 @@ Spawn* Between::from(Node* node, std::string from, float duration,
       CCLOG("[Between::from] invalid action");
       continue;
     }
-    spawn.pushBack(TargetedAction::create(
-        node, Between::getEasing(action, duration, easing)));
+    spawn.pushBack(TargetedAction::create(node, Between::getEasing(action, duration, easing)));
   }
   return Spawn::create(spawn);
 }
 
-Spawn* Between::tween(cocos2d::Node* node, std::string to, std::string from,
-                      float duration, Easing easing, bool relative) {
+Spawn* Between::tween(cocos2d::Node* node, std::string to, std::string from, float duration, Easing easing,
+                      bool relative) {
   Vector<FiniteTimeAction*> spawn;
   Size visibleSize = Director::getInstance()->getVisibleSize();
 
@@ -162,8 +154,7 @@ Spawn* Between::tween(cocos2d::Node* node, std::string to, std::string from,
   return Between::to(node, to, duration, easing);
 }
 
-ActionInterval* Between::getEasing(ActionInterval* action, float duration,
-                                   Easing easing) {
+ActionInterval* Between::getEasing(ActionInterval* action, float duration, Easing easing) {
   switch (easing) {
     case Easing::QuadIn:
       return EaseQuadraticActionIn::create(action);
@@ -205,43 +196,26 @@ ActionInterval* Between::getEasing(ActionInterval* action, float duration,
   }
 }
 
-Easing Between::easing(std::string& s)
-{
+Easing Between::easing(std::string& s) {
+  if (s == "quadin") return Easing::QuadIn;
+  if (s == "quadout") return Easing::QuadOut;
+  if (s == "quadinout") return Easing::QuadInOut;
 
- if (s == "quadin") return Easing::QuadIn;
-  if (s == "quadout")  
-    return Easing::QuadOut;
- if (s == "quadinout") 
-    return Easing::QuadInOut;
+  if (s == "elasticin") return Easing::ElasticIn;
+  if (s == "elasticout") return Easing::ElasticOut;
+  if (s == "elasticinout") return Easing::ElasticInOut;
 
-  if (s == "elasticin") 
-    return Easing::ElasticIn;
- if (s == "elasticout") 
-    return Easing::ElasticOut;
-  if (s == "elasticinout") 
-    return Easing::ElasticInOut;
+  if (s == "expoin") return Easing::ExpoIn;
+  if (s == "expoout") return Easing::ExpoOut;
+  if (s == "expoinout") return Easing::ExpoInOut;
+  if (s == "backin") return Easing::BackIn;
+  if (s == "backout") return Easing::BackOut;
+  if (s == "backinout") return Easing::BackInOut;
 
-    if (s == "expoin") 
-    return Easing::ExpoIn;
-  if (s == "expoout") 
-    return Easing::ExpoOut;
-    if (s == "expoinout") 
-    return Easing::ExpoInOut;
-  if (s == "backin") 
-    return Easing::BackIn;
-    if (s == "backout") 
-    return Easing::BackOut;
-  if (s == "backinout") 
-    return Easing::BackInOut;
-
-    if (s == "bouncein") 
-    return Easing::BounceIn;
-  if (s == "bounceout") 
-    return Easing::BounceOut;
-    if (s == "bounceinout")  
-    return Easing::BounceInOut;
+  if (s == "bouncein") return Easing::BounceIn;
+  if (s == "bounceout") return Easing::BounceOut;
+  if (s == "bounceinout") return Easing::BounceInOut;
   return Easing::QuadIn;
 }
-
 
 }  // namespace yaadv
