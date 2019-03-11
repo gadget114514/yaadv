@@ -52,13 +52,13 @@ bool SettingScene::init() {
   textSpeedTxtPh->setPosition(Vec2(430 + origin.x, 510 + origin.y));
   stageLayer->addChild(textSpeedTxtPh);
   auto autoSpeedTxtPh = Sprite::create(vars["yaadv/ui/config/txt_autospeed.jpg"]);
-  autoSpeedTxtPh->setPosition(Vec2(325 + origin.x, 442 + origin.y));
+  autoSpeedTxtPh->setPosition(Vec2(430 + origin.x, 442 + origin.y));
   stageLayer->addChild(autoSpeedTxtPh);
   auto bgmvolTxtPh = Sprite::create(vars["yaadv/ui/config/txt_bgmvol.jpg"]);
-  bgmvolTxtPh->setPosition(Vec2(325 + origin.x, 374 + origin.y));
+  bgmvolTxtPh->setPosition(Vec2(430 + origin.x, 374 + origin.y));
   stageLayer->addChild(bgmvolTxtPh);
   auto sevolTxtPh = Sprite::create(vars["yaadv/ui/config/txt_sevol.jpg"]);
-  sevolTxtPh->setPosition(Vec2(325 + origin.x, 306 + origin.y));
+  sevolTxtPh->setPosition(Vec2(430 + origin.x, 306 + origin.y));
   stageLayer->addChild(sevolTxtPh);
   auto skipreadonlyTxtPh = Sprite::create(vars["yaadv/ui/config/txt_skipreadonly.jpg"]);
   skipreadonlyTxtPh->setPosition(Vec2(640 + origin.x, 212 + origin.y));

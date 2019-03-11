@@ -2238,7 +2238,7 @@ static void name(Compiler* compiler, bool canAssign)
     if (isLocalName(token->start))
     {
       char msg[256];
-      #if MSC_VER
+      #if _MSC_VER
       strncpy_s(msg, 256, token->start, token->length);
       #else
       strncpy(msg, token->start, token->length);
