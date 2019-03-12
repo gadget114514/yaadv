@@ -1,56 +1,151 @@
 [
-{"name":"ui/config/txt_textspeed","x":430,"y":510,"o":"o"}
-{"name":"ui/config/txt_autospeed", "x":430,"y":442,"o":"o"}
-{"name":"ui/config/txt_bgmvol", "x":430,"y":374,"o":"o"}
-{"name":"ui/config/txt_sevol", "x":430,"y":306,"o":"o"}
-{"name":"ui/config/txt_skipreadonly", "x":640,"y":212,"o":"o"}
-{"name":"ui/config/txt_skipall", "x":840,"y":212,"o":"o"}
-{"name":"ui/config/eb_skipreadonly", "x":740,"y":212,"o":"o"}
-{"name":"ui/config/eb_skipall", "x":940,"y":212,"o":"o"}
-{"name":"ui/config/txt_config", "x":170,"y":510,"o":"o"}
-{"name":"ui/config/btn_back", "x":175,"y":90,"o":"o"}
-{"name":"ui/config/slb_textspeed", "x":825,"y":510,"o":"o"}
-{"name":"ui/config/slb_autospeed", "x":825,"y":442,"o":"o"}
-{"name":"ui/config/slb_bgmvol", "x":825,"y":374,"o":"o"}
-{"name":"ui/config/slb_sevol", "x":825,"y":306,"o":"o"}
-{"name":"ui/dialog/btn_menu ", "x":"vw-50","y":"vh-50","a":"middle","o":"o"}
-{"name":"ui/dialog/dialog_auto", "x":"pw", "y":"ph+10", "a":"bottomright","opacity":0}
-{"name":"ui/dialog/menu", "x":0, "y":0, "z":13}
+{"name":"ui/config/txt_textspeed","x":430,"y":510,"o":"o"},
+{"name":"ui/config/txt_autospeed", "x":430,"y":442,"o":"o"},
+{"name":"ui/config/txt_bgmvol", "x":430,"y":374,"o":"o"},
+{"name":"ui/config/txt_sevol", "x":430,"y":306,"o":"o"},
+{"name":"ui/config/txt_skipreadonly", "x":640,"y":212,"o":"o"},
+{"name":"ui/config/txt_skipall", "x":840,"y":212,"o":"o"},
+{"name":"ui/config/eb_skipreadonly", "x":740,"y":212,"o":"o"},
+{"name":"ui/config/eb_skipall", "x":940,"y":212,"o":"o"},
+{"name":"ui/config/txt_config", "x":170,"y":510,"o":"o"},
+{"name":"ui/config/btn_back", "x":175,"y":90,"o":"o"},
+{"name":"ui/config/slb_textspeed", "x":825,"y":510,"o":"o"},
+{"name":"ui/config/slb_autospeed", "x":825,"y":442,"o":"o"},
+{"name":"ui/config/slb_bgmvol", "x":825,"y":374,"o":"o"},
+{"name":"ui/config/slb_sevol", "x":825,"y":306,"o":"o"},
+{"name":"ui/dialog/btn_menu ", "x":"vw-50","y":"vh-50","a":"middle","o":"o"},
+{"name":"ui/dialog/dialog_auto", "x":"pw", "y":"ph+10", "a":"bottomright","opacity":0},
+{"name":"ui/dialog/menu", "x":0, "y":0, "d":13},
+{"name":"ui/dialog/dialog_bg", "x":"vw/2","y":150,"d":10,"a":"middletop"},
+{"name":"ui/dialog/dialog_name", "x":170,"y":190},
+{"name":"ui/dialog/dialog_skip", "x":"pw", "y":"ph+10","a":"bottomright"},
+{"name":"ui/dialog_menu/bg_menu.png", "x":201,"y":485},
+{"name":"ui/dialog_menu/btn_menu_auto_normal.png, "x": 190,"y":65},
+{"name":"ui/dialog_menu/btn_menu_auto_touch.png, "x": 190,"y":65},
+{"name":"ui/dialog_menu/btn_menu_config_normal.png, "x": 190,"y":65},
+{"name":"ui/dialog_menu/btn_menu_config_touch.png, "x": 190,"y":65},
+{"name":"ui/dialog_menu/btn_menu_load_normal.png, "x": 190,"y":65},
+{"name":"ui/dialog_menu/btn_menu_load_touch.png, "x": 190,"y":65},
+{"name":"ui/dialog_menu/btn_menu_log_normal.png, "x": 190,"y":65},
+{"name":"ui/dialog_menu/btn_menu_log_touch.png, "x": 190,"y":65},
+{"name":"ui/dialog_menu/btn_menu_save_normal.png, "x": 190,"y":65},
+{"name":"ui/dialog_menu/btn_menu_save_touch.png, "x": 190,"y":65},
+{"name":"ui/dialog_menu/btn_menu_skip_normal.png, "x": 190,"y":65},
+{"name":"ui/dialog_menu/btn_menu_skip_touch.png, "x": 190,"y":65},
+{"name":"ui/dialog_menu/btn_menu_title_normal.png, "x": 190,"y":65},
+{"name":"ui/dialog_menu/btn_menu_title_touch.png, "x": 190,"y":65},
+{"name":"ui/dialog/wait_icon.png","x": 23,"y":12},
+{"name":"ui/log/history_bg.png","x": 1136,"y":640},
+{"name":"ui/log/history_dialog_box.png","x": 1136,"y":640},
+{"name":"ui/popupwindow/bg_popup.png","x": 479,"y":235},
+{"name":"ui/sl/txt_load","x": 170,"y":510},
+{"name":"ui/sl/txt_save","x": 170,"y":510},
+{"name":"ui/sl/btn_button_normal","x": 563,"y":129},
+{"name":"ui/sl/btn_sl_front","x": 1000,"y":170},
+{"name":"ui/sl/btn_sl_next","x": 1000,"y":70},
+{"name":"ui/sl/btn_return","x": 175,"y":90},
+{"name":"ui/savedata/lbl_num","x": 25,"y":105},
+{"name":"ui/savedata/img_pic","x": 70,"y":44, "a":"middleleft"}},
+{"name":"ui/savedata/lbl_date","x": 255,"y":95, "a":middleleft}},
+{"name":"ui/title/bg_title_logo","x": 130,"y":370}},
+{"name":"ui/title/btn_title_config","x": 850,"y":200}},
+{"name":"ui/title/btn_title_load","x": 850,"y":300}},
+{"name":"ui/title/btn_title_new","x": 850,"y":400}},
+]},
 
-{"name":"ui/dialog/dialog_bg", "x":"vw/2","y":150,"z":10,"a":"middletop"}
-{"name":"ui/dialog/dialog_name", "x":170x190
-{"name":"ui/dialog/dialog_skip", "x":{pw}x{ph+10}@bottomright
-{"name":"ui/dialog_menu/bg_menu.png", "x":201x485
-{"name":"ui/dialog_menu/btn_menu_auto_normal.png 190x65
-{"name":"ui/dialog_menu/btn_menu_auto_touch.png 190x65
-{"name":"ui/dialog_menu/btn_menu_config_normal.png 190x65
-{"name":"ui/dialog_menu/btn_menu_config_touch.png 190x65
-{"name":"ui/dialog_menu/btn_menu_load_normal.png 190x65
-{"name":"ui/dialog_menu/btn_menu_load_touch.png 190x65
-{"name":"ui/dialog_menu/btn_menu_log_normal.png 190x65
-{"name":"ui/dialog_menu/btn_menu_log_touch.png 190x65
-{"name":"ui/dialog_menu/btn_menu_save_normal.png 190x65
-{"name":"ui/dialog_menu/btn_menu_save_touch.png 190x65
-{"name":"ui/dialog_menu/btn_menu_skip_normal.png 190x65
-{"name":"ui/dialog_menu/btn_menu_skip_touch.png 190x65
-{"name":"ui/dialog_menu/btn_menu_title_normal.png 190x65
-{"name":"ui/dialog_menu/btn_menu_title_touch.png 190x65
-{"name":"ui/dialog/wait_icon.png 23x12
-{"name":"ui/log/history_bg.png 1136x640
-{"name":"ui/log/history_dialog_box.png 1136x640
-{"name":"ui/popupwindow/bg_popup.png 479x235
-{"name":"ui/sl/txt_load 170x510
-{"name":"ui/sl/txt_save 170x510
-{"name":"ui/sl/btn_button_normal.png 563x129
-{"name":"ui/sl/btn_button_touch.png 563x129
-{"name":"ui/sl/btn_sl_front 1000x170
-{"name":"ui/sl/btn_sl_next 1000x70
-{"name":"ui/sl/btn_return 175x90
-{"name":"ui/savedata/lbl_num 25x105
-{"name":"ui/savedata/img_pic 70x44@middleleft
-{"name":"ui/savedata/lbl_date 255x95@middleleft
-{"name":"ui/title/bg_title_logo 130x370
-{"name":"ui/title/btn_title_config 850x200
-{"name":"ui/title/btn_title_load 850x300
-{"name":"ui/title/btn_title_new 850x400
-]
+
+
+load(Node *nd, Node *parent, std::string key)
+{
+	json::JSON data = map[key];
+	int x = 0;
+	int y = 0;
+	int depth = -1;
+	Vec2 anchor(0,0);
+	float opacity = 1.0;
+	int fontsize = 20;
+	int textdimx = 20;
+	int textdimy = 24;
+	std::string rgb="#FFFFFF";
+	if (data.hasKey("x")) {
+		auto item = data["x"]	;
+		if (item.isString()) {
+		  x = (evalToInt(item.ToString()));
+		} else {
+		  x = (item.ToInt());
+		}
+	}
+	if (data.hasKey("y")) {
+		auto item = data["y"]	;
+		if (item.isString()) {
+		  y = (item.ToString()));
+		} else {
+		  y = (item.ToInt());
+		}
+	}
+	if (data.hasKey("w")) {
+		auto item = data["w"]	;
+		if (item.isString()) {
+		  w = (evalToInt(item.ToString()));
+		} else {
+		  w = (item.ToInt());
+		}
+	}
+	if (data.hasKey("h")) {
+		auto item = data["h"]	;
+		if (item.isString()) {
+		  h = (evalToInt(item.ToString()));
+		} else {
+		  h = (item.ToInt());
+		}
+	}
+	if (data.hasKey("d")) {
+		auto item = data["d"]	;
+		depth = item.ToInt();
+	}
+	if (data.hasKey("o")) {	
+		auto item =	data["o"]	;
+		x += origin.x;
+		y += origin.x;		
+	}
+	if (data.hasKey("a")) {	
+		auto item =	data["a"]	;
+		std::string v = item.ToString();
+		if (v.compare("middle")) {
+		   anchor = Vec2::ANCHOR_MIDDLE;
+		}
+		else	if (v.compare("middleright")) {
+		   anchor = Vec2::ANCHOR_MIDDLE_RIGHT;
+		}
+		else if (v.compare("middleleft")) {
+		   anchor = Vec2::ANCHOR_MIDDLE_LEFT;
+		}
+		else if (v.compare("middletop")) {
+		   anchor = Vec2::ANCHOR_MIDDLE_TOP;
+		}
+		else if (v.compare("middlebottom")) {
+		   anchor = Vec2::ANCHOR_MIDDLE_BOTTOM;
+		}
+		else if (v.compare("middle")) {
+		   anchor = Vec2::ANCHOR_MIDDLE;
+		}
+	}
+	if (data.hasKey("opacity")) {
+		auto item =	data["opacity"]	;
+		opacity = item.ToFloat();
+	}
+
+}
+
+
+setAndAdd(nd)
+{
+	nd->setPosition(Vec2(x,y));
+ 	nd->setAnchorPoint(anchor);
+	if (opacity != 1.0)
+		nd->setOpacity(opacity);
+	if (depth >=0)
+		parent->addChild(nd, depth);
+	else
+		parent->addChild(nd);
+}
