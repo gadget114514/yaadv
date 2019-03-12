@@ -33,7 +33,7 @@ SOFTWARE.
 #include <stdlib.h>
 #include <string.h>
 
-class yaadv {
+namespace yaadv {
 class Expr {
 
 public:
@@ -148,7 +148,7 @@ private:
     int compile(std::vector<int>& regs,
                 const char *& s, std::map<std::string, double>& vars, int level);
 
-}
+};
 }
 
 #endif

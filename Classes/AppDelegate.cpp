@@ -5,6 +5,7 @@
 
 #include "yaadv/GameSystem.h"
 #include "yaadv/MainMenuScene.h"
+#include "yaadv/ScriptReader/yaadvConfig.h"
 
 #include "AudioHelper.h"
 
@@ -46,15 +47,20 @@ void AppDelegate::initGLContextAttrs() {
 static int register_all_packages() { return 0; }
 
 bool AppDelegate::applicationDidFinishLaunching() {
+  auto config = yaadv::Config::getInstance();
+  config->init();
+  designResolutionSize = Size(config->designWidth, config->designHeight);
+  ResolutionPolicy policy = config->resolutionPolicy;
+
   auto director = Director::getInstance();
   auto glview = director->getOpenGLView();
   if (!glview) {
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32) || (CC_TARGET_PLATFORM == CC_PLATFORM_MAC) || \
     (CC_TARGET_PLATFORM == CC_PLATFORM_LINUX)
-    glview = GLViewImpl::createWithRect("YAADV",
+    glview = GLViewImpl::createWithRect(config->windowTitle,
                                         cocos2d::Rect(0, 0, designResolutionSize.width, designResolutionSize.height));
 #else
-    glview = GLViewImpl::create("YAADV");
+    glview = GLViewImpl::create(config->windowTitle);
 #endif
     director->setOpenGLView(glview);
   }
@@ -63,7 +69,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
 
   director->setAnimationInterval(1.0f / 60);
 
-  glview->setDesignResolutionSize(designResolutionSize.width, designResolutionSize.height, ResolutionPolicy::SHOW_ALL);
+  glview->setDesignResolutionSize(designResolutionSize.width, designResolutionSize.height, policy);
   auto frameSize = glview->getFrameSize();
 
   if (frameSize.height > mediumResolutionSize.height) {

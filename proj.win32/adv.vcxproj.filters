@@ -105,6 +105,12 @@
     <ClCompile Include="..\Classes\yaadv\ScriptReader\ScriptReaderJSON.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\yaadv\ScriptReader\json.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\yaadv\expr.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -195,6 +201,15 @@
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\yaadv\History.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\yaadv\ScriptReader\json.hpp">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\yaadv\expr.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\yaadv\ScriptReader\yaadvConfig.h">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>

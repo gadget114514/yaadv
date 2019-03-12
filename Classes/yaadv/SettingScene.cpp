@@ -45,7 +45,7 @@ bool SettingScene::init() {
   auto titletxt = Sprite::create(vars["yaadv/ui/config/txt_config.png"]);
   titletxt->setPosition(Vec2(
 	  origin.x + 170,
-	  visibleSize.height + origin.y - 90));
+	  origin.y + 510));
   stageLayer->addChild(titletxt);
 
   auto textSpeedTxtPh = Sprite::create(vars["yaadv/ui/config/txt_textspeed.jpg"]);

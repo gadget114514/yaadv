@@ -88,17 +88,20 @@ bool MainMenu::init() {
 
   auto buttonNew =
       MenuItemImage::create(vars["yaadv/ui/title/btn_title_new_normal.png"],
-                            vars["yaadv/ui/title/btn_title_new_touch.png"], CC_CALLBACK_0(MainMenu::newgame, this));
+                            vars["yaadv/ui/title/btn_title_new_touch.png"], 
+		  CC_CALLBACK_0(MainMenu::newgame, this));
   buttonNew->setPosition(Vec2(850, 400));
 
   auto buttonLoad =
       MenuItemImage::create(vars["yaadv/ui/title/btn_title_load_normal.png"],
-                            vars["yaadv/ui/title/btn_title_load_touch.png"], CC_CALLBACK_0(MainMenu::load, this));
+                            vars["yaadv/ui/title/btn_title_load_touch.png"], 
+		  CC_CALLBACK_0(MainMenu::load, this));
   buttonLoad->setPosition(Vec2(850, 300));
 
   auto buttonConfig =
       MenuItemImage::create(vars["yaadv/ui/title/btn_title_config_normal.png"],
-                            vars["yaadv/ui/title/btn_title_config_touch.png"], CC_CALLBACK_0(MainMenu::config, this));
+                            vars["yaadv/ui/title/btn_title_config_touch.png"], 
+		  CC_CALLBACK_0(MainMenu::config, this));
   buttonConfig->setPosition(Vec2(850, 200));
 
   auto menu = Menu::create(buttonNew, buttonLoad, buttonConfig, NULL);
@@ -198,3 +201,6 @@ void MainMenu::appendRain() {
   }
 }
 }
+
+#define DEFINEJSON 1
+#include "ScriptReader/json.hpp"

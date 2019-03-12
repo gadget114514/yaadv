@@ -162,6 +162,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="..\Classes\yaadv\Control\RadioButton.cpp" />
     <ClCompile Include="..\Classes\yaadv\Control\Slidebar.cpp" />
     <ClCompile Include="..\Classes\yaadv\Control\StringUtil.cpp" />
+    <ClCompile Include="..\Classes\yaadv\expr.cpp" />
     <ClCompile Include="..\Classes\yaadv\GameScene.cpp" />
     <ClCompile Include="..\Classes\yaadv\GameSystem.cpp" />
     <ClCompile Include="..\Classes\yaadv\History.cpp" />
@@ -174,6 +175,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="..\Classes\yaadv\ScriptReader\BackgroundMusicManager.cpp" />
     <ClCompile Include="..\Classes\yaadv\ScriptReader\CharacterManager.cpp" />
     <ClCompile Include="..\Classes\yaadv\ScriptReader\ini.c" />
+    <ClCompile Include="..\Classes\yaadv\ScriptReader\json.cpp" />
     <ClCompile Include="..\Classes\yaadv\ScriptReader\ScriptCommand.cpp" />
     <ClCompile Include="..\Classes\yaadv\ScriptReader\ScriptReader.cpp" />
     <ClCompile Include="..\Classes\yaadv\ScriptReader\ScriptReaderJSON.cpp" />
@@ -195,6 +197,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\Classes\yaadv\Control\RadioButton.h" />
     <ClInclude Include="..\Classes\yaadv\Control\Slidebar.h" />
     <ClInclude Include="..\Classes\yaadv\Control\StringUtil.h" />
+    <ClInclude Include="..\Classes\yaadv\expr.h" />
     <ClInclude Include="..\Classes\yaadv\GameScene.h" />
     <ClInclude Include="..\Classes\yaadv\GameSystem.h" />
     <ClInclude Include="..\Classes\yaadv\History.h" />
@@ -207,11 +210,13 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\Classes\yaadv\ScriptReader\BackgroundMusicManager.h" />
     <ClInclude Include="..\Classes\yaadv\ScriptReader\CharacterManager.h" />
     <ClInclude Include="..\Classes\yaadv\ScriptReader\ini.h" />
+    <ClInclude Include="..\Classes\yaadv\ScriptReader\json.hpp" />
     <ClInclude Include="..\Classes\yaadv\ScriptReader\ScriptCommand.h" />
     <ClInclude Include="..\Classes\yaadv\ScriptReader\ScriptReader.h" />
     <ClInclude Include="..\Classes\yaadv\ScriptReader\ScriptReaderWREN.h" />
     <ClInclude Include="..\Classes\yaadv\ScriptReader\SCX.h" />
     <ClInclude Include="..\Classes\yaadv\ScriptReader\SoundManager.h" />
+    <ClInclude Include="..\Classes\yaadv\ScriptReader\yaadvConfig.h" />
     <ClInclude Include="..\Classes\yaadv\SettingScene.h" />
     <ClInclude Include="..\Classes\yaadv\yaadv.h" />
     <ClInclude Include="main.h" />
