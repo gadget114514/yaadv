@@ -1,0 +1,56 @@
+[
+{"name":"ui/config/txt_textspeed","x":430,"y":510,"o":"o"}
+{"name":"ui/config/txt_autospeed", "x":430,"y":442,"o":"o"}
+{"name":"ui/config/txt_bgmvol", "x":430,"y":374,"o":"o"}
+{"name":"ui/config/txt_sevol", "x":430,"y":306,"o":"o"}
+{"name":"ui/config/txt_skipreadonly", "x":640,"y":212,"o":"o"}
+{"name":"ui/config/txt_skipall", "x":840,"y":212,"o":"o"}
+{"name":"ui/config/eb_skipreadonly", "x":740,"y":212,"o":"o"}
+{"name":"ui/config/eb_skipall", "x":940,"y":212,"o":"o"}
+{"name":"ui/config/txt_config", "x":170,"y":510,"o":"o"}
+{"name":"ui/config/btn_back", "x":175,"y":90,"o":"o"}
+{"name":"ui/config/slb_textspeed", "x":825,"y":510,"o":"o"}
+{"name":"ui/config/slb_autospeed", "x":825,"y":442,"o":"o"}
+{"name":"ui/config/slb_bgmvol", "x":825,"y":374,"o":"o"}
+{"name":"ui/config/slb_sevol", "x":825,"y":306,"o":"o"}
+{"name":"ui/dialog/btn_menu ", "x":"vw-50","y":"vh-50","a":"middle","o":"o"}
+{"name":"ui/dialog/dialog_auto", "x":"pw", "y":"ph+10", "a":"bottomright","opacity":0}
+{"name":"ui/dialog/menu", "x":0, "y":0, "z":13}
+
+{"name":"ui/dialog/dialog_bg", "x":"vw/2","y":150,"z":10,"a":"middletop"}
+{"name":"ui/dialog/dialog_name", "x":170x190
+{"name":"ui/dialog/dialog_skip", "x":{pw}x{ph+10}@bottomright
+{"name":"ui/dialog_menu/bg_menu.png", "x":201x485
+{"name":"ui/dialog_menu/btn_menu_auto_normal.png 190x65
+{"name":"ui/dialog_menu/btn_menu_auto_touch.png 190x65
+{"name":"ui/dialog_menu/btn_menu_config_normal.png 190x65
+{"name":"ui/dialog_menu/btn_menu_config_touch.png 190x65
+{"name":"ui/dialog_menu/btn_menu_load_normal.png 190x65
+{"name":"ui/dialog_menu/btn_menu_load_touch.png 190x65
+{"name":"ui/dialog_menu/btn_menu_log_normal.png 190x65
+{"name":"ui/dialog_menu/btn_menu_log_touch.png 190x65
+{"name":"ui/dialog_menu/btn_menu_save_normal.png 190x65
+{"name":"ui/dialog_menu/btn_menu_save_touch.png 190x65
+{"name":"ui/dialog_menu/btn_menu_skip_normal.png 190x65
+{"name":"ui/dialog_menu/btn_menu_skip_touch.png 190x65
+{"name":"ui/dialog_menu/btn_menu_title_normal.png 190x65
+{"name":"ui/dialog_menu/btn_menu_title_touch.png 190x65
+{"name":"ui/dialog/wait_icon.png 23x12
+{"name":"ui/log/history_bg.png 1136x640
+{"name":"ui/log/history_dialog_box.png 1136x640
+{"name":"ui/popupwindow/bg_popup.png 479x235
+{"name":"ui/sl/txt_load 170x510
+{"name":"ui/sl/txt_save 170x510
+{"name":"ui/sl/btn_button_normal.png 563x129
+{"name":"ui/sl/btn_button_touch.png 563x129
+{"name":"ui/sl/btn_sl_front 1000x170
+{"name":"ui/sl/btn_sl_next 1000x70
+{"name":"ui/sl/btn_return 175x90
+{"name":"ui/savedata/lbl_num 25x105
+{"name":"ui/savedata/img_pic 70x44@middleleft
+{"name":"ui/savedata/lbl_date 255x95@middleleft
+{"name":"ui/title/bg_title_logo 130x370
+{"name":"ui/title/btn_title_config 850x200
+{"name":"ui/title/btn_title_load 850x300
+{"name":"ui/title/btn_title_new 850x400
+]
